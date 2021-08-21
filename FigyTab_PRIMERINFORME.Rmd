@@ -1,0 +1,1625 @@
+---
+title: "FIGURAS Y TABLAS PRIMER INFORME ESTATUS Y CBA 2022 SARDINA AUSTRAL LOS LAGOS"
+output: pdf_document
+---
+
+# PRIMER PARTE: CORRE CÓDIGOS Y FUNCIONES
+```{r llama codigos, warning=F, include=T, message=F, echo=T}
+library(knitr) # para generar reporte Rmarkdown
+library(stringr)
+library(reshape) 
+library(dplyr) 
+library(ggplot2)
+library(ggthemes) # para ggplot
+library(patchwork) # para unir gráficos de ggplot
+library(strucchange) # libreria utilizada para análisis de quiebres
+
+dir.Fig     <-"Figuras/" # carpeta de las figuras utilizadas y generadas en este estudio
+fig         <-c("pdf") # formato de figuras generadas por este código
+dir.0       <-getwd() # directorio de trabajo 
+dir.1       <-paste(dir.0,"/codigos_admb",sep="") # carpeta de códigos ADMB 
+dir.2       <-paste(dir.0,"/Retrospectivobase",sep="") # carpeta de códigos ADMB 
+dir.3       <-paste(dir.0,"/Retrospectivoalternativo",sep="") # carpeta de códigos ADMB 
+dir.4       <-paste(dir.0,"/Verosimilitudalternativo",sep="") # carpeta de códigos ADMB 
+dir.5       <-paste(dir.0,"/Verosimilitudbase",sep="") # carpeta de códigos ADMB 
+
+dir.fun     <-paste(dir.0,"/funciones/",sep="") # carpeta de funciones utilizadas en este informe
+source(paste(dir.fun,"functions.R",sep="")) # funciones para leer .dat y .rep
+source(paste(dir.fun,"Fn_PBRs.R",sep="")) # funciones para leer .dat y .rep
+```
+
+```{r CORRE MODELO BASE NUEVO SEPTIEMBRE, eval=FALSE, echo=T, warning=FALSE,include=F}
+#Primer paso correr códigos 
+setwd(dir.1)
+system("~/admb-12.2/admb MAT0921")
+system("./MAT0921")
+```
+
+
+```{r datosMBASE_rep_std, warning=F, include=T, message=F, echo=T}
+setwd(dir.1)
+#Asesoría septiembre 2021 MODELO BASE NUEVO
+data.0   <- lisread(paste(dir.1,"MAT0921.dat", sep='/'));
+names(data.0)<-str_trim(names(data.0), side="right")
+rep0     <- reptoRlist("MAT0921.rep")                                               
+std0     <- read.table("MAT0921.std",header=T,sep="",na="NA",fill=T) 
+```
+
+
+
+## FUNCIÓN DE RETROSPECTIVO 
+
+
+```{r CARPETA RETROSPECTIVO BASE NUEVO SEPTIEMBRE, eval=FALSE, echo=T, warning=FALSE,include=F}
+source(paste(getwd(),"/funciones/Fn_Retrospectivo.R",sep="")) 
+Retrospectivoalternativo("MAT0921",
+                         dir.0,
+                         dir.1,
+                         "/RetrospectivoBaseN_sept",
+                         system="mac",
+                         Fase_dev_Rt=c(1,1,1,1,1)) 
+```
+
+
+## FUNCIÓN DE VEROSIMILITUD 
+
+
+```{r CARPETA VEROSIMILITUD BASE NUEVO SEPTIEMBRE, eval=FALSE, echo=T, warning=FALSE,include=F}
+source(paste(getwd(),"/funciones/Fn_Verosimilitud.R",sep="")) 
+l_log_Ro <- 154
+l_opt_Ro <- 151
+l_Fase_desRt_devNo <- 145
+
+Verosimilitudalternativo("MAT0921",
+                  dir.0,
+                  dir.1,
+                  "/VerosimilitudBaseN_sept",
+                  l_log_Ro,
+                  l_opt_Ro,
+                  l_Fase_desRt_devNo,
+                  system="mac") 
+
+```
+
+
+## FUNCIÓN DE CBA 
+
+```{r CARPETA Proyeccion_Asesoriasept2020, eval=FALSE, echo=T, warning=FALSE,include=F}
+source(paste(getwd(),"/funciones/Fn_CBA.R",sep="")) 
+admb<-"MAT0921"
+Carpeta<-"/cba_septiembre2021"
+system="mac"
+l_escRec=169
+CBA(admb,dir.0,dir.1,Carpeta,system,l_escRec)
+```
+
+
+### CÁLCULO DE TAMAÑO DE MUESTRA
+```{r tamaño de muestra,eval=F}
+#============================================================#
+# II. COMPOSICI?N EDAD DE LAS CAPTURAS                       #
+#============================================================#
+years  <- data.1$Ind[,1]                                                              
+nyears <- data.1$nanos                                              
+age  <-seq(5.5,20,0.5)                                            
+nage<-length(age)                                            
+#Proporci?n observada                                        
+pobsF<-rep1$Propfl_obs                                              
+pobsR<-rep1$Propcru_obs                                       
+                                
+#Proporci?n predicha                                         
+ppredF<-rep1$Propfl_pred                                          
+ppredR<-rep1$Propcru_pred                                   
+                                   
+#=================================================================#
+# M?TODO de Francis
+#=================================================================#
+Nf1 <-60
+Nr1 <-34
+#-------------------------------------------#
+#FLOTA
+fanos<-years
+fobs <-pobsF
+fpre <-ppredF 
+#RECLAS
+ranos<-years
+robs <-pobsR[rowSums(pobsR)>0,]
+rpre <-ppredR[rowSums(pobsR)>0,]
+#composicion de edad Flota
+Of  <- rep(0,length(fanos))
+Ef  <- rep(0,length(fanos))
+vf  <- rep(0,length(fanos))
+vNf <- rep(0,length(fanos))
+#composicion de edad crucero de verano reclas
+Or  <- rep(0,length(robs[,1]))
+Er  <- rep(0,length(robs[,1]))
+vr  <- rep(0,length(robs[,1]))
+vNr <- rep(0,length(robs[,1]))
+#-------------------------------------------#
+#composicion de edad Flota
+for(i in 1:length(fanos)){
+	Of[i]  <- sum(fobs[i,]*age)
+	Ef[i]  <- sum(fpre[i,]*age)
+	vf[i]  <- sum(fpre[i,]*age^2)-Ef[i]^2
+	vNf[i] <- vf[i]/Nf1}
+#composicion de edad crucero de verano reclas
+for(i in 1:length(robs[,1])){
+	Or[i]  <- sum(robs[i,]*age)
+	Er[i]  <- sum(rpre[i,]*age)
+	vr[i]  <- sum(rpre[i,]*age^2)-Er[i]^2
+	vNr[i] <- vr[i]/Nr1}
+#--------------------------------------------#
+wf  <- 1/var((Of-Ef)/sqrt(vNf)) #Flota
+wr  <- 1/var((Or-Er)/sqrt(vNr)) #Reclas
+Nf2 <- Nf1*wf                   # NM FLOTA
+Nr2 <- Nr1*wr                   # NM RECLAS
+
+#-----------------------------------------------------------------#
+#NM_Fran <- data.frame(nmF=c(Nf1,Nf2),nmR=c(Nr1,Nr2));NM_Fran
+#-----------------------------------------------------------------#
+#=================================================================#
+# M?todo de Ianelli 2002
+#=================================================================#
+#Composici?n de edad de la FLOTA
+Ofl <-ppredF[rowSums(pobsF)>0,]*(1-ppredF[rowSums(pobsF)>0,])
+Efl <-(pobsF[rowSums(pobsF)>0,]-ppredF[rowSums(pobsF)>0,])^2
+wfl <-rep(0,length(Ofl[,1]))
+for(i in 1:length(Ofl[,1])){
+	wfl[i] <-sum(Ofl[i,])/sum(Efl[i,])}
+
+nmf_ari <-mean(wfl)                      # MEDIA ARITMETICA
+nmf_geo <-exp(sum(log(wfl))/length(wfl)) # MEDIA GEOM?TRICA
+nmf_arm <-1/mean(1/wfl)                  # MEDIA ARM?NICA
+
+#------------------------------------------------------------
+#Composici?n de edad Crucero de verano RECLAS
+Ore <-ppredR[rowSums(pobsR)>0,]*(1-ppredR[rowSums(pobsR)>0,])
+Ere <-(pobsR[rowSums(pobsR)>0,]-ppredR[rowSums(pobsR)>0,])^2
+wre <-rep(0,length(Ore[,1]))
+for(i in 1:length(Ore[,1])){	
+	wre[i] <-sum(Ore[i,])/sum(Ere[i,])}
+nmr_ari <-mean(wre)                      # MEDIA ARITMETICA
+nmr_geo <-exp(sum(log(wre))/length(wre)) # MEDIA GEOM?TRICA
+nmr_arm <-1/mean(1/wre)                  # MEDIA ARM?NICA
+#------------------------------------------------------------
+#------------------------------------------------------------
+NM_Ian <- data.frame(nmF=c(nmf_ari,nmf_geo,nmf_arm),nmR=c(nmr_ari,nmr_geo,nmr_arm));NM_Ian
+#------------------------------------------------------------
+
+```
+
+\pagebreak
+# SEGUNDA PARTE: GENERA GRÁFICAS Y TABLAS
+
+
+## 1. Antecedentes
+
+```{r Fig2,warning=F, include=T, message=F,eval=T, echo=T,fig.height=3.5,fig.width=5,fig.align="center",fig.path="Figuras/",dev=fig}
+year<-seq(2006,2021,1)
+desemb<-c(39146,50506,45078,49225,20123,16429,19763,21888,22951,23643,18495,14134,8366,12565,14194,NA)
+cuota<-c(40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,12347)
+
+
+par(mfcol=c(1,1),mar=c(4,4,1,1))
+plot(year,desemb,type="h",lwd=15,ylab="Desembarques (t.)",xlab="Año",ylim=c(0,60000),xaxp=c(2000,2022,22),col="cadetblue4",cex.lab=0.8,cex.axis=0.8)
+lines(year,cuota,type="l",lwd=2,col=1)
+legend(2011,60000,c("Datos oficiales","Cuota"),lwd=c(10,2),col=c("cadetblue4",1),bty="n",cex=0.8)
+```
+
+
+```{r Fig3,eval=T,warning=F, include=T, message=F, echo=T,fig.height=7.5,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig}
+
+datafrec<-read.table(paste(getwd(),"/Tallasmensuales.txt",sep=""),header = FALSE, sep = "")
+
+tallas     <-seq(5.5,20,0.5)                                            
+ntallas    <-length(tallas)    
+etf_obs <- data.frame(datafrec[,3:32])
+yearf   <- datafrec[,1]
+nyearf  <-length(yearf)  
+month <- datafrec[,2]
+nmonth <-length(month)
+
+obs  <- as.data.frame(etf_obs) %>%
+  mutate(year=yearf) %>% 
+  mutate(mes=month) %>% 
+  melt(id.vars=c('year','mes'))%>%
+  mutate(talla = rep(tallas, each=nyearf)) 
+
+
+fig0 <-   ggplot(filter(obs,year==2017)) + 
+          geom_bar(aes(x = talla, y = value), stat="identity", fill='gray66', color = 'gray28') + 
+          facet_grid(mes~year) + 
+          labs(x = '', y = 'Proporción de tallas de la captura')  + 
+          theme(panel.background = element_rect(fill ="gray99"),axis.text.y = element_text(hjust = 1, size=6)) + 
+          theme(panel.grid=element_line(color=NA)) +
+          scale_x_continuous(breaks = seq(from = 2, to = 20, by = 2))+
+          scale_y_continuous(breaks = seq(from = 0, to = 0.3, by = 0.1))
+
+fig1 <-   ggplot(filter(obs,year==2018)) + 
+          geom_bar(aes(x = talla, y = value), stat="identity", fill='gray66', color = 'gray28') + 
+          facet_grid(mes~year) + 
+          labs(x = 'Tallas', y = 'Proporción de tallas de la captura')  + 
+          theme(panel.background = element_rect(fill ="gray99"),axis.text.y = element_text(hjust = 1, size=6)) + 
+          theme(panel.grid=element_line(color=NA)) + 
+          scale_x_continuous(breaks = seq(from = 2, to = 20, by = 2)) +
+          scale_y_continuous(breaks = seq(from = 0, to = 0.3, by = 0.1)) 
+          
+fig2 <-   ggplot(filter(obs,year==2019)) + 
+          geom_bar(aes(x = talla, y = value), stat="identity", fill='gray66', color = 'gray28') + 
+          facet_grid(mes~year) + 
+          labs(x = '', y = '')  + 
+          theme(panel.background = element_rect(fill ="gray99"),axis.text.y = element_text(hjust = 1, size=6)) + 
+          theme(panel.grid=element_line(color=NA)) +
+          scale_x_continuous(breaks = seq(from = 2, to = 20, by = 2))+
+          scale_y_continuous(breaks = seq(from = 0, to = 0.3, by = 0.1))  
+          
+fig3 <-   ggplot(filter(obs,year==2020)) + 
+          geom_bar(aes(x = talla, y = value), stat="identity", fill='gray66', color = 'gray28') + 
+          facet_grid(mes~year) + 
+          labs(x = 'Tallas', y = '')  + 
+          theme(panel.background = element_rect(fill ="gray99"),axis.text.y = element_text(hjust = 1, size=6)) + 
+          theme(panel.grid=element_line(color=NA)) +
+          scale_x_continuous(breaks = seq(from = 2, to = 20, by = 2))+
+          scale_y_continuous(breaks = seq(from = 0, to = 0.3, by = 0.1))
+
+
+
+fig0+fig2+fig1+fig3
+
+```
+
+
+
+
+\pagebreak
+## 2. Metodología 
+
+
+```{r Fig7,warning=F, include=T, message=F,eval=F, echo=T,fig.height=3,fig.width=6,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+dirb<-paste(dir.0,"/cba_septiembre2021",sep="")
+setwd(dirb)
+reps1b     <- reptoRlist("MAT0921s1.rep")  
+reps2b     <- reptoRlist("MAT0921s2.rep") 
+reps3b     <- reptoRlist("MAT0921s3.rep") 
+
+
+
+par(mfcol=c(1,1),mar=c(2,4,1,1)+0.5)
+
+# modelo base
+plot(reps1b$Years,reps1b$Reclutamiento,type="l",
+     ylab="Reclutamientos",xlab="",
+     main="Modelo base (Asesoría Septiembre 2020)",
+     cex.axis=0.6,cex.main=0.7,cex.lab=0.7)
+abline(h=c(exp(8.6053e+000),
+           reps2b$Reclutamiento[11],
+           reps3b$Reclutamiento[17]),col=c(1,3,2))
+text(2010,c(exp(8.6053e+000),
+            reps2b$Reclutamiento[11],
+            reps3b$Reclutamiento[17])+1000,
+            round(c(exp(8.6053e+000),
+                    reps2b$Reclutamiento[11],
+                    reps3b$Reclutamiento[17]),0),cex=0.7)
+
+
+```
+
+\pagebreak
+
+## 3. RESULTADOS OBJETIVO 1
+
+### 3.1. Descripción de los datos de entrada al modelo de evaluación de stock
+
+
+```{r Fig8,warning=F, include=T, message=F, echo=FALSE,fig.height=4,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig}
+year<-seq(2002,2021,1)
+desemb<-c(NA,NA,NA,NA,39146,50506,45078,49225,20123,16429,19763,21888,22951,23643,18495,14134,8366,12565,14194,NA)
+cuota<-c(NA,NA,NA,NA,40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,12347)
+comun_austral<-c(38974,32843,36545,52569,rep(NA,16))
+supuesto<-c(rep(NA,19),12347)
+
+par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
+plot(year,desemb,type="h",lwd=15,ylab="Desembarques (t.)",xlab="Año",ylim=c(0,60000),xaxp=c(2000,2021,21),col="cadetblue4")
+lines(year,comun_austral,type="h",lwd=15,col="dimgray")
+lines(year,supuesto,type="h",lwd=15,col="goldenrod3")
+lines(year,cuota,type="l",lwd=2,col=1)
+legend(2011,60000,c("datos oficiales","supuesto s.comun/s.austral","supuesto de captura 2021","Cuota"),lwd=c(10,10,10, 2),col=c("cadetblue4","dimgray","goldenrod3",1),bty="n",cex=0.8)
+```
+
+
+
+```{r Fig9,warning=F, include=T, message=F, echo=FALSE,fig.height=4,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig }
+
+d2006<-c(NA,	 8384,	7485,	2008,	 3410,	2760,	3286,	723,	367,	2885,	2822,	1831)
+d2007<-c(5740, 5101,	4181,	4651,	 7430,	4694,	3027,	3718,	17,	  1822,	4093, NA)
+d2008<-c(NA,   10122,	6489,	4329,	 4823,	951,	282,	13,	  34,	  7046,	5954,	5035)
+d2009<-c(NA,	 5,	    9488,	13247, 9750,	6553,	4407,	1514,	88,		NA,   1814,	2356)
+d2010<-c(164,	 1445,	6826,	3397,	 4686,	1564,	180,	56,	  143,  NA,		758,	1006)
+d2011<-c(623,  279, 	2887,	2785,  3744,	700, 	53, 	111,	21, 	14, 	2027,	3549)
+d2012<-c(NA,   3855,	3190,	2151,	 1193,	2160,	6521,	NA,   NA,		3,  	4,  	642)
+d2013<-c(826,  6454,	5252,	1976,	 300, 	637,	618,	737,	240,	220,	1776,	2715)
+d2014<-c(1087, 3299,	4284,	756, 	 1822,	1877,	2678,	354,	43,	  175,	2722,	3681)
+d2015<-c(9088, 5533,	4603,	8,	   116,	  665,	365,	65, 	42, 	59, 	66, 	3100)
+d2016<-c(2523, 6362,	739,	1715,	 569, 	1698,	871,	134,	37,	  62, 	86, 	3664)
+d2017<-c(531,  1280,	2858,	61, 	 2425,	1858,	947,	609,	91, 	103,	913,  2456)
+d2018<-c(126,  22,  	48, 	74,  	 495,	  870, 	955,	651,	688,	61, 	1122,	3244)
+d2019<-c(2456, 1524,	1218,	145,	 483,	  770,	1431,	520,	20,	  182,	1056,	1464)
+d2020<-c(1899, 2101,	1027,	15,	   326,	  110,	465,	337,	87,	  80, 	3064,	4683)
+d2021<-c(1162, 3103,	1845,	93,    29,    NA,   NA,   NA,   NA,   NA,   NA,   NA)
+
+par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
+plot(seq(1,12,1),d2017,type="o",ylab="Desembarques t",xlab="Meses",ylim=c(0,5000),xlim=c(1,12),col=4,lwd=2)
+lines(seq(1,12,1),d2018,type="o",col=3,lwd=2)
+lines(seq(1,12,1),d2019,type="o",col=2,lwd=2)
+lines(seq(1,12,1),d2020,type="o",col=1,lwd=2)
+legend(6,5000,c(2017,2018,2019,2020),col=c(4,3,2,1),lwd=2,bty="n")
+
+```
+
+
+
+```{r Fig10,warning=F, include=T, message=F, echo=FALSE,fig.height=4,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig}
+year<-seq(2007,2020,1)
+tweedie<-c(26.4,	25.9,	30.5,	20.2,	19.2,	13.6,	21.6,	29.5,	26.4,	21.6,	14.6,	10.1,	14.1,	28.9)
+tweedie_inter<-c(23.6,	21.6,	28.1,	19.1,	16.3,	13.7,	35.6,	27.7,	23.1,	24.0,	10.8,	10.2,	8.6,	41.4)
+
+
+par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
+plot(year,tweedie,type="o",lwd=1,ylab="CPUE Estandarizada (t/viaje)",xlab="Año",ylim=c(0,55),xaxp=c(2000,2021,21),col=4,pch=19)
+lines(year,tweedie_inter,type="o",lwd=1,col=1,pch=19)
+legend(2011,55,c("Tweedie interacciones","Tweedie"),lwd=c(1,1),pch=19,col=c(1,4),bty="n")
+```
+
+
+```{r Fig11, warning=F, include=T, message=F, echo=FALSE,fig.height=4,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig}
+
+years0  <-rep0$YRS
+nyears0 <- length(years0)
+
+year<-years0[5:nyears0]  
+cruceroX<-rep0$reclan[5:nyears0]/1000
+cruceroX[cruceroX==0] <- NA
+
+
+par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
+plot(year,cruceroX,type="p",ylab="Biomasa (miles t.)",xlab="Año",ylim=c(0,250),xaxp=c(2000,2022,22),col="black",bg="gray",pch=21,cex=1.5,main="Biomasa Crucero")
+points(years0[nyears0],cruceroX[nyears0-4],bg="red",pch=21,cex=2)
+```
+
+
+
+
+#### ESTRUCTURA DE TALLAS DE LA FLOTA
+\quad
+```{r Fig12,warning=F, include=T, message=F, echo=T,fig.height=6,fig.width=6,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+
+#######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+age     <-seq(5.5,20,0.5)                                            
+nage    <-length(age)  
+etf_obs_sept <- data.frame(rep0$pf_obs)
+
+
+yearf   <- rep0$YRS
+nyearf  <- length(yearf)  
+
+ obs       <- as.data.frame(etf_obs_sept) %>% 
+                            mutate(year=yearf) %>% 
+                            melt(id.vars='year') %>%
+                            mutate(edad = rep(age, each=nyearf)) %>% 
+                            mutate(type='obs')
+ 
+ mat  <- rbind(obs)
+ 
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+ fig1 <- ggplot(filter(mat, type=='obs')) + 
+         geom_bar(aes(x = edad, y = value), 
+                  stat="identity", fill='gray66', color = 'gray28') + 
+         facet_wrap(~year, dir = 'v', as.table = TRUE) + 
+         labs(x = 'Tallas', y = 'Proporción de tallas de la captura') + 
+         theme(panel.background = element_rect(fill ="gray99")) +
+         theme(panel.grid=element_line(color=NA))
+ fig1
+  
+```
+
+
+#### ESTRUCTURA DE TALLAS DEL CRUCERO
+\quad
+
+```{r Fig13,warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=7,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+
+#######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+age         <- seq(5.5,20,0.5)                                            
+nage        <- length(age)    
+etc_obs_jun <- data.frame(rep0$pobs_RECLAN)
+yearc       <- rep0$YRS
+nyearc      <- length(yearc)  
+
+ obs      <- as.data.frame(etc_obs_jun) %>% 
+                          mutate(year=yearc) %>% 
+                          melt(id.vars='year') %>%
+                          mutate(edad = rep(age, each=nyearc)) %>% 
+                          mutate(type='obs')
+ mat  <- rbind(obs)
+ 
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+ fig1 <- ggplot(filter(mat, type=='obs')) + 
+         geom_bar(aes(x = edad, y = value), 
+                  stat="identity", fill='gray66', color = 'gray28') + 
+         facet_wrap(~year, dir = 'v', as.table = TRUE) + 
+         labs(x = 'Tallas', y = 'Proporción de tallas del Crucero') + 
+         theme(panel.background = element_rect(fill ="gray99")) +
+         theme(panel.grid=element_line(color=NA))
+ fig1
+```
+
+
+### 3.2. Ajustes del modelo a los datos de índices
+
+```{r Fig19,warning=F, include=T, message=F, echo=T,fig.height=6.5,fig.width=5.5,fig.align="center",fig.path="Figuras/",dev=fig}
+
+#######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+
+library(patchwork)
+
+yrs   <- rep0$YRS
+nyrs  <- length(yrs)
+lasty <- yrs[nyrs]
+cvCB   <-data.0$Ind[,8]
+cvcpue <-data.0$Ind[,7]
+cvdes  <-data.0$Ind[,6]
+
+ind_obs  <- cbind(rep0$reclan,
+                  rep0$cpue,
+                  rep0$desemb); 
+ind_obs[ind_obs==0] <- NA
+colnames(ind_obs) <- c('Biomasa_Crucero', 
+                       'CPUE', 
+                       'Desembarques') 
+
+ind_sept <- cbind(c(rep0$reclan_pred), 
+                  c(rep0$cpue_pred), 
+                  c(rep0$desemb_pred))
+
+colnames(ind_sept) <- c('Biomasa_Crucero', 
+                        'CPUE', 
+                        'Desembarques') 
+
+ind     <- data.frame(ind_obs) %>% 
+           mutate(Asesoría='observado') %>% 
+           mutate (yrs= yrs) %>% 
+           melt(id.var=c('yrs', 'Asesoría'))  
+
+sept    <- data.frame(ind_sept) %>% 
+           mutate (Asesoría='septiembre_2021') %>%
+           mutate (yrs= yrs)  %>% 
+           melt(id.var=c('yrs', 'Asesoría'))
+
+base1 <- data.frame(rbind(ind, sept))  
+
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+
+f1 <- ggplot(base1 %>% filter(Asesoría!='observado', variable=='Biomasa_Crucero'), 
+        aes(yrs,value/1000000)) + 
+        geom_line(aes(colour=Asesoría), size=1) +
+        scale_colour_manual(values=c('black')) +
+        geom_point(data = base1 %>% filter(Asesoría=='observado', 
+                                           variable=='Biomasa_Crucero'),
+        aes(yrs,value/1000000), shape = 19, colour = 'gray30') +
+        geom_errorbar(data = base1 %>% filter(Asesoría=='observado',
+                                              variable=='Biomasa_Crucero'),
+        aes(ymin = value*exp(-1.96*cvCB)*10^-6, 
+            ymax = value*exp(1.96*cvCB)*10^-6), color = 'gray30') +
+        scale_x_continuous(breaks = seq(from = 1985, to = 2021, by = 5)) +
+        labs(title='Biomasa de Crucero', x = 'Año', y = 'Toneladas (millones)') +
+        theme_bw(base_size=9)
+
+f2 <- ggplot(base1 %>% filter(Asesoría!='observado', variable=='CPUE'), 
+            aes(yrs,value/1000000)) + 
+        geom_line(aes(colour=Asesoría), size=1) +
+        scale_colour_manual(values=c('black')) +
+        geom_point(data = base1 %>% filter(Asesoría=='observado', 
+                                           variable=='CPUE'),
+        aes(yrs,value/1000000), shape = 19, colour = 'gray30') +
+        geom_errorbar(data = base1 %>% filter(Asesoría=='observado',
+                                              variable=='CPUE'),
+        aes(ymin = value*exp(-1.96*cvcpue)*10^-6, 
+            ymax = value*exp(1.96*cvcpue)*10^-6), color = 'gray30') +
+        scale_x_continuous(breaks = seq(from = 1985, to = 2021, by = 5)) +
+        labs(title='CPUE', x = 'Año', y = 'toneladas/viaje') +
+        theme_bw(base_size=9)
+
+f3 <- ggplot(base1 %>% filter(Asesoría!='observado', variable=='Desembarques'), 
+        aes(yrs,value/1000)) + geom_line(aes(colour=Asesoría), size=1) +
+        scale_colour_manual(values=c('black')) +
+        geom_point(data = base1 %>% filter(Asesoría=='observado', 
+                                           variable=='Desembarques'),
+        aes(yrs,value/1000), shape = 19, colour = 'gray30') +
+        geom_errorbar(data = base1 %>% filter(Asesoría=='observado', 
+                                              variable=='Desembarques'),
+        aes(ymin = value*exp(-1.96*cvdes)*10^-3, 
+            ymax = value*exp(1.96*cvdes)*10^-3), color = 'gray30') +
+        scale_x_continuous(breaks = seq(from = 1985, to = 2021, by = 5)) +
+        labs(title='Desembarques', x = 'Año', y = 'Toneladas (miles)') +
+        theme_bw(base_size=9)
+
+f1/f2/f3 + plot_layout(guides="collect")
+
+
+```
+
+\pagebreak
+### 3.2. Análisis de Residuales de los índices
+
+```{r Fig20,warning=F, include=T, message=F, echo=T,eval=TRUE,fig.height=11,fig.width=9,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+#######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+
+Res_matt <- data.frame(log(ind_obs) - log(ind_sept)) %>% 
+            mutate(yrs = yrs) %>% 
+            mutate(Asesoría = 'Septiembre 2020')
+
+Res      <- rbind(Res_matt) %>%
+                  melt(id.vars= c('yrs','Asesoría'))
+pred     <- base1 %>% 
+            filter(Asesoría!='observado') %>% 
+            mutate (pred = log(value))
+
+predm    <- pred$pred
+
+Res2     <- cbind(Res,predm)
+  
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+r1 <- ggplot(Res, aes(yrs,value)) + 
+      geom_bar(aes(fill=Asesoría), stat='identity', position='dodge') +
+      scale_fill_manual(values=c("black"))+
+      geom_hline(yintercept = 0) +
+      facet_wrap(. ~ variable,  ncol = 1) + 
+      labs(x= 'Año', y = 'Residuales (escala log)') + 
+      theme_bw(base_size=12)
+
+r2 <- ggplot(Res2, aes(predm,value)) + 
+      geom_point(aes(colour=Asesoría), size = 1.5) +
+      scale_colour_manual(values=c("black")) +
+      geom_hline(yintercept = 0) +
+      facet_wrap(. ~ variable, ncol = 1) +
+      labs(x= 'Predicho (log)', y = 'Residuales') +
+      theme_bw(base_size=12)
+
+r3 <- ggplot(Res, aes(value, colour=Asesoría)) + 
+      geom_histogram(fill='white', position  = 'dodge') +
+      facet_wrap(. ~ variable, ncol = 1) + 
+      labs(x= 'Residuales', y ='Histograma de Residuos (Frecuencia)') +
+      theme_bw(base_size=12)
+
+r4 <- ggplot(Res, aes(sample = value, colour = Asesoría)) + 
+      stat_qq() + 
+      stat_qq_line() +
+      scale_colour_manual(values=c("black")) +
+      facet_wrap(. ~ variable, ncol = 1) + 
+      labs(x= 'Sample Quantiles', y ='Theoretical') +
+      theme_bw(base_size=12)
+
+ r1+r4 + plot_layout(guides="collect")
+
+```
+
+\pagebreak
+### 3.3. Ajustes del modelo a los datos de Composiciones de tallas
+
+#### FLOTA
+\quad
+```{r Fig21,warning=F, include=T, message=F, echo=T,fig.height=6,fig.width=6,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+
+#######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+age     <-seq(5.5,20,0.5)                                            
+nage    <-length(age)  
+
+etf_obs_sept <- data.frame(rbind(rep0$pf_obs))
+etf_pre_sept <- data.frame(rbind(rep0$pf_pred))
+
+yearf   <- rep0$YRS
+nyearf  <- length(yearf)  
+
+ obs       <- as.data.frame(etf_obs_sept) %>%
+                            mutate(year=yearf) %>% 
+                            melt(id.vars='year') %>%
+                            mutate(edad = rep(age, each=nyearf)) %>% 
+                            mutate(type='obs')
+ 
+ 
+ pred_sept <- as.data.frame(etf_pre_sept) %>%
+                            mutate(year=yearf) %>% 
+                            melt(id.vars='year') %>%
+                            mutate(edad = rep(age, each=nyearf)) %>% 
+                            mutate(type='pred_sept')
+  
+ mat  <- rbind(obs,pred_sept)
+ 
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+ fig1 <- ggplot(filter(mat, type=='obs')) + 
+         geom_bar(aes(x = edad, y = value), 
+                  stat="identity", fill='gray66', color = 'gray28') + 
+         facet_wrap(~year, dir = 'v', as.table = TRUE) + 
+         labs(x = 'Tallas', y = 'Proporción de tallas de la captura') + 
+         geom_line(data = filter(mat, type=='pred_sept'), 
+                   aes(x = edad, y = value), color = 'black', size = 1) + 
+         theme(panel.background = element_rect(fill ="gray99")) +
+         theme(panel.grid=element_line(color=NA))
+ fig1
+  
+```
+
+\pagebreak
+#### CRUCERO
+\quad
+
+```{r Fig22,warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=7,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+
+#######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+age     <-seq(5.5,20,0.5)                                            
+nage    <-length(age)    
+
+etc_obs_sept <- data.frame(rbind(rep0$pobs_RECLAN))
+etc_pre_sept <- data.frame(rbind(rep0$ppred_RECLAN))
+
+yearc   <- rep0$YRS
+nyearc  <-length(yearc)  
+
+ obs      <- as.data.frame(etc_obs_sept) %>%
+                          mutate(year=yearc) %>% 
+                          melt(id.vars='year') %>%
+                          mutate(edad = rep(age, each=nyearc)) %>% 
+                          mutate(type='obs')
+ 
+ pred_sept <- as.data.frame(etc_pre_sept) %>% 
+                          mutate(year=yearc) %>% 
+                          melt(id.vars='year') %>%
+                          mutate(edad = rep(age, each=nyearf)) %>%
+                          mutate(type='pred_sept')
+ 
+ mat  <- rbind(obs,pred_sept)
+ 
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+ fig1 <- ggplot(filter(mat, type=='obs')) + 
+         geom_bar(aes(x = edad, y = value), 
+                  stat="identity", fill='gray66', color = 'gray28') + 
+         facet_wrap(~year, dir = 'v', as.table = TRUE) + 
+         labs(x = 'Tallas', y = 'Proporción de tallas del Crucero') + 
+         geom_line(data = filter(mat, type=='pred_sept'), 
+                   aes(x = edad, y = value),color = 'black', size = 1) + 
+         theme(panel.background = element_rect(fill ="gray99")) +
+         theme(panel.grid=element_line(color=NA))
+ fig1
+```
+
+\pagebreak
+### 3.4. Análisis de Residuales de Composiciones de tallas
+
+```{r Fig23, warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=8,fig.align="center",fig.path="Figuras/",dev=fig}
+par(mfcol=c(1,2))
+#Flota
+cx<-0.7
+#######################################################################################
+# Residuales Flota
+#######################################################################################
+anos        <-rep0$YRS
+obsF_alt    <-rep0$pf_obs
+preF_alt    <-rep0$pf_pred
+resF_alt    <-obsF_alt-preF_alt
+
+rng <-range(resF_alt,na.rm=T)
+dd  <-dim(resF_alt)
+est <-matrix(NA,nrow=dd[1],ncol=dd[2])
+
+for(j in 1:dd[1]){for(k in 1:dd[2]){val<-resF_alt[j,k]
+if(val>0){est[j,k]<-val/rng[2]}
+else{est[j,k]<-val/rng[1]*-1}}}
+
+par(mar=c(5.4,6.7,2,1),cex.axis=cx,cex.lab=cx)
+image(age,anos,t(est),col=0,yaxt="n",xlab="",ylab="")
+ee  <-dim(est)
+for(n in 1:ee[1]){for(m in 1:ee[2]){vol<-est[n,m]
+if(is.na(vol)==FALSE){
+	if(vol>0){points(age[m],anos[n],pch=19,cex=2*sqrt(vol),col=1)}
+	if(vol<0){points(age[m],anos[n],pch=1,cex=2*sqrt(vol*-1),col=1)}
+}}}
+mtext("Flota - Septiembre 2021",side=3,cex=cx)
+mtext("Tallas (cm)",side=1,line=3.2,cex=cx);posi<-seq(1,57,by=4)
+axis(2,at=anos,labels=anos,las=2,cex=cx)
+mtext("Años",side=2,line=4.7,cex=cx)
+box()
+#######################################################################################
+# Residuales Cruceros
+#######################################################################################
+obsB_alt <-rep0$pobs_RECLAN
+preB_alt <-rep0$ppred_RECLAN
+resB_alt <-obsB_alt-preB_alt
+
+rng <-range(resB_alt,na.rm=T)
+dd  <-dim(resB_alt)
+est <-matrix(NA,nrow=dd[1],ncol=dd[2])
+
+for(j in 1:dd[1]){for(k in 1:dd[2]){val<-resB_alt[j,k]
+if(val>0){est[j,k]<-val/rng[2]}
+else{est[j,k]<-val/rng[1]*-1}}}
+
+par(mar=c(5.4,6.7,2,1),cex.axis=cx,cex.lab=cx)
+image(age,anos,t(est),col=0,yaxt="n",xlab="",ylab="")
+ee  <-dim(est)
+for(n in 1:ee[1]){for(m in 1:ee[2]){vol<-est[n,m]
+if(is.na(vol)==FALSE){
+	if(vol>0){points(age[m],anos[n],pch=19,cex=2*sqrt(vol),col=1)}
+	if(vol<0){points(age[m],anos[n],pch=1,cex=2*sqrt(vol*-1),col=1)}
+}}}
+mtext("Crucero Acústico - Septiembre 2021",side=3,cex=cx)
+mtext("Tallas (cm)",side=1,line=3.2,cex=cx);posi<-seq(1,57,by=4)
+axis(2,at=anos,labels=anos,las=2,cex=cx)
+mtext("Años",side=2,line=4.7,cex=cx)
+box()
+```
+
+\pagebreak
+
+
+\pagebreak
+
+### 6.5. Análisis retrospectivo modelo alternativo
+
+```{r VariablesBase_std, echo=F,message=FALSE, warning=FALSE, include=T}
+
+years<-rep0$YRS
+nyears<-length(years)
+
+Rt0      <- subset(std0,name=="Reclutas")$value 
+Rt0std   <- subset(std0,name=="Reclutas")$std
+BT0      <- subset(std0,name=="BT")$value   
+BT0std   <- subset(std0,name=="BT")$std
+BD0      <- subset(std0,name=="BD")$value   
+BD0std   <- subset(std0,name=="BD")$std
+Ft0      <- subset(std0,name=="log_F")$value   
+Ft0std   <- subset(std0,name=="log_F")$std
+
+VarPob<- data.frame(x=years, 
+                    Rt0=Rt0,
+                    BT0=BT0,
+                    BD0=BD0,
+                    Ft0=exp(Ft0), 
+         lowerRt0 = (Rt0 -1.96*Rt0std), 
+         upperRt0 = (Rt0 +1.96*Rt0std),
+         lowerBT0 = (BT0 -1.96*BT0std),
+         upperBT0 = (BT0 +1.96*BT0std),
+         lowerBD0 = (BD0 -1.96*BD0std), 
+         upperBD0 = (BD0 +1.96*BD0std),
+         lowerFt0 = exp(Ft0 -1.96*Ft0std), 
+         upperFt0 = exp(Ft0 +1.96*Ft0std))
+
+```
+
+```{r Dat_RetrospectivoBase, echo=F, message=FALSE, warning=FALSE, include=T}
+dir<-paste(dir.0,"/RetrospectivoBaseN_sept",sep="")
+setwd(dir)
+admb<-"MAT0921"
+
+years<-rep0$YRS
+nyears<-length(years)
+retros<-seq(1,4)
+nretros<-length(retros)
+year_retros<-as.factor(years[(nyears-(nretros-1)):nyears])
+                      
+retroR      <- matrix(0,nrow=nyears,ncol=nretros+1)
+retroBD     <- matrix(0,nrow=nyears,ncol=nretros+1)
+retroF      <- matrix(0,nrow=nyears,ncol=nretros+1)
+
+for(i in 1:length(retros)){
+  rep<- reptoRlist(paste(admb,"s",i,".rep",sep=""))
+  retroR[,i+1] <- c(rep$Reclutas,rep(NA,i-1))
+  retroBD[,i+1] <- c(rep$BD,rep(NA,i-1))
+  retroF[,i+1]  <- c(rep$F,rep(NA,i-1)) }
+
+
+# retrospectivo relativo (cálculo)
+    mohn.r       <- rep(NA, nretros)
+    rel.diff.r   <- matrix(NA, nrow=nyears, ncol=(nretros))
+    mohn.ssb     <- rep(NA, nretros)
+    rel.diff.ssb <- matrix(NA, nrow=nyears, ncol=(nretros))
+    mohn.f       <- rep(NA, nretros)
+    rel.diff.f   <- matrix(NA, nrow=nyears, ncol=(nretros))
+
+    for(j in 1:nretros){
+      rel.diff.r[,j] <- (retroR[,(j+1)]-retroR[,2])/retroR[,2]
+      mohn.r[j]      <- rel.diff.r[(nyears-j),j]
+      rel.diff.ssb[,j] <- (retroBD[,(j+1)]-retroBD[,2])/retroBD[,2]
+      mohn.ssb[j]      <- rel.diff.ssb[(nyears-j),j]
+      rel.diff.f[,j]   <- (retroF[,(j+1)]-retroF[,2])/retroF[,2]
+      mohn.f[j]        <- rel.diff.f[(nyears-j),j]}
+    
+    ave.mohn.r    <- mean(mohn.r)
+    ave.mohn.ssb  <- mean(mohn.ssb)
+    ave.mohn.f    <- mean(mohn.f)
+    
+ # Arreglo datos
+
+#Para retrospectivo tradicional
+Rt_retro<- data.frame(x=years, 
+                      y1=retroR[,2],
+                      y2=retroR[,3],
+                      y3=retroR[,4],
+                      y4=retroR[,5],
+                      lower = (Rt0 -1.96*Rt0std), 
+                      upper = (Rt0 +1.96*Rt0std))
+BD_retro<- data.frame(x=years,
+                      y1=retroBD[,2],
+                      y2=retroBD[,3],
+                      y3=retroBD[,4],
+                      y4=retroBD[,5],
+                      lower = (BD0 -1.96*BD0std),
+                      upper = (BD0 +1.96*BD0std))
+Ft_retro<- data.frame(x=years, 
+                      y1=retroF[,2],
+                      y2=retroF[,3],
+                      y3=retroF[,4],
+                      y4=retroF[,5],
+                      lower = exp(Ft0 -1.96*Ft0std),
+                      upper = exp(Ft0 +1.96*Ft0std))
+
+#Para restrospectivo relativo
+Rt_retroRel<- data.frame(x=years,
+                         y1=rel.diff.r[,1],
+                         y2=rel.diff.r[,2],
+                         y3=rel.diff.r[,3],
+                         y4=rel.diff.r[,4])
+BD_retroRel<- data.frame(x=years,
+                         y1=rel.diff.ssb[,1],
+                         y2=rel.diff.ssb[,2],
+                         y3=rel.diff.ssb[,3],
+                         y4=rel.diff.ssb[,4])
+Ft_retroRel<- data.frame(x=years,
+                         y1=rel.diff.f[,1],
+                         y2=rel.diff.f[,2],
+                         y3=rel.diff.f[,3],
+                         y4=rel.diff.f[,4])
+
+```
+
+```{r Fig24, echo=FALSE, message=FALSE, warning=FALSE, include=T, fig.align="center", fig.height=10, fig.width=8,fig.path=dir.Fig,dev=fig}
+
+#Retrospectivo tradicional
+Rt <- ggplot(Rt_retro) + 
+    geom_ribbon(aes(ymin=lower, ymax=upper, x=x, fill = "IC asintótico"), alpha = 0.2)+
+    geom_line(aes(y=y1, x=x, colour = year_retros[nretros]), size=0.5)+
+    geom_line(aes(y=y2, x=x, colour = year_retros[nretros-1]), size=0.5)+
+    geom_line(aes(y=y3, x=x, colour = year_retros[nretros-2]), size=0.5)+
+    geom_line(aes(y=y4, x=x, colour = year_retros[nretros-3]), size=0.5)+
+    #geom_line(aes(y=y5, x=x, colour = year_retros[nretros-4]), size=0.5)+
+    labs(x = '', y = 'Reclutamientos ',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1995, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("green","blue","red","black"))+
+    scale_fill_manual("",values=c("grey30"))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="top")
+
+BD <- ggplot(BD_retro) + 
+     geom_ribbon(aes(ymin=lower, ymax=upper, x=x, fill = ""), alpha = 0.2)+
+     geom_line(aes(y=y1, x=x, colour = year_retros[nretros]), size=0.5)+
+    geom_line(aes(y=y2, x=x, colour = year_retros[nretros-1]), size=0.5)+
+    geom_line(aes(y=y3, x=x, colour = year_retros[nretros-2]), size=0.5)+
+    geom_line(aes(y=y4, x=x, colour = year_retros[nretros-3]), size=0.5)+
+   # geom_line(aes(y=y5, x=x, colour = year_retros[nretros-4]), size=0.5)+
+    labs(x = '', y = 'Biomasa desovante (t)',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1995, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("green","blue","red","black"))+
+    scale_fill_manual("",values=c("grey30"))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+Ft <- ggplot(Ft_retro) + 
+    geom_ribbon(aes(ymin=lower, ymax=upper, x=x, fill = ""), alpha = 0.2)+
+    geom_line(aes(y=y1, x=x, colour = year_retros[nretros]), size=0.5)+
+    geom_line(aes(y=y2, x=x, colour = year_retros[nretros-1]), size=0.5)+
+    geom_line(aes(y=y3, x=x, colour = year_retros[nretros-2]), size=0.5)+
+    geom_line(aes(y=y4, x=x, colour = year_retros[nretros-3]), size=0.5)+
+   # geom_line(aes(y=y5, x=x, colour = year_retros[nretros-4]), size=0.5)+
+    labs(x = '', y = 'Mortalidad por pesca (F)',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1995, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("green","blue","red","black"))+
+    scale_fill_manual("",values=c("grey30"))+
+    theme_bw(base_size=8) +
+    ggtitle('')+
+    theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+#Retrospectivo relativo
+Rtrel <- ggplot(Rt_retroRel) + lims(y=c(-1,1)) +
+    geom_line(aes(y=y1, x=x, colour = year_retros[nretros]), size=0.5)+
+    geom_line(aes(y=y2, x=x, colour = year_retros[nretros-1]), size=0.5)+
+    geom_line(aes(y=y3, x=x, colour = year_retros[nretros-2]), size=0.5)+
+    geom_line(aes(y=y4, x=x, colour = year_retros[nretros-3]), size=0.5)+
+   # geom_line(aes(y=y5, x=x, colour = year_retros[nretros-4]), size=0.5)+
+   annotate("text", x=2004, y=0.75,label=paste("Rho =",round(ave.mohn.r,2))) +
+    labs(x = '', y = 'Diferencia porcentual del último año',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1995, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("green","blue","red","black"))+
+    scale_fill_manual("",values=c("grey30"))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+BDrel <- ggplot(BD_retroRel) + lims(y=c(-1,1)) +
+     geom_line(aes(y=y1, x=x, colour = year_retros[nretros]), size=0.5)+
+    geom_line(aes(y=y2, x=x, colour = year_retros[nretros-1]), size=0.5)+
+    geom_line(aes(y=y3, x=x, colour = year_retros[nretros-2]), size=0.5)+
+    geom_line(aes(y=y4, x=x, colour = year_retros[nretros-3]), size=0.5)+
+    #geom_line(aes(y=y5, x=x, colour = year_retros[nretros-4]), size=0.5)+
+   annotate("text", x=2004, y=0.75,label=paste("Rho =",round(ave.mohn.ssb,2))) +
+    labs(x = '', y = 'Diferencia porcentual del último año',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1995, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("green","blue","red","black"))+
+    scale_fill_manual("",values=c("grey30"))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+Ftrel <- ggplot(Ft_retroRel) + lims(y=c(-1,1)) +
+    geom_line(aes(y=y1, x=x, colour = year_retros[nretros]), size=0.5)+
+    geom_line(aes(y=y2, x=x, colour = year_retros[nretros-1]), size=0.5)+
+    geom_line(aes(y=y3, x=x, colour = year_retros[nretros-2]), size=0.5)+
+    geom_line(aes(y=y4, x=x, colour = year_retros[nretros-3]), size=0.5)+
+    #geom_line(aes(y=y5, x=x, colour = year_retros[nretros-4]), size=0.5)+
+   annotate("text", x=2004, y=0.75,label=paste("Rho =",round(ave.mohn.f,2))) +
+    labs(x = '', y = 'Diferencia porcentual del último año',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1995, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("green","blue","red","black"))+
+    scale_fill_manual("",values=c("grey30"))+
+    theme_bw(base_size=8) +
+    ggtitle('')+
+    theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+Rt/BD/Ft |Rtrel/BDrel/Ftrel
+
+```
+
+\pagebreak
+### 3.7. Perfil de verosimilitud
+```{r Fig26, eval=T, echo=T, message=FALSE, warning=FALSE, include=T, fig.align="center", fig.height=4, fig.width=5,fig.path=dir.Fig,dev=fig}
+######################################################################################
+# AREGLOS DE DATOS
+#######################################################################################
+admb<-"MAT0921"
+dir<-paste(dir.0,"/VerosimilitudBaseN_sept",sep="")
+setwd(dir)
+#######################################################################################
+  casos <-36
+  logRo    <- rep(0,casos)
+  likeval  <- matrix(ncol=9,nrow=casos)
+  slikeval <- matrix(ncol=10,nrow=casos)
+  
+  for(i in 1:casos){
+    rep         <- reptoRlist(paste(admb,"s",i,".rep",sep=""))
+    data        <- readLines(paste(admb,"s",i,".dat", sep=''),encoding="UTF-8")
+    logRo[i]    <- as.numeric(data[154])
+    likeval[i,] <- rep$likeval}
+  #======================================================================================
+  # SEXTO PASO: ESTANDARIZAR VEROSIMILITUD
+  #======================================================================================
+  like    <- data.frame(round(likeval,3),Total=apply(likeval,1,sum))
+  minLik  <- apply(like,2,min)                         # busca el minimo
+  for(i in 1:10){slikeval[,i]<-like[,i]-minLik[i]}    # Estandarizacin
+  #======================================================================================
+  # ULTIMO PASO: GUARDAR TABLAS Y FIGURA
+  #======================================================================================
+  names<-c("Ro","cpue",	"cru", "desemb",	"proflo",	"procru",	
+           "desvRo",	"desNo",	"Lo", "","Total")
+  # Tabla verosimilitud
+  TLk1 <- data.frame(exp(logRo),like);
+  colnames(TLk1)<-names
+  # Tabla estandarizada
+  TLk2 <- data.frame(exp(logRo),slikeval);
+  colnames(TLk2)<-names
+  
+#######################################################################################
+# GRAFICAS
+#######################################################################################
+  par(mar=c(4,4,1,1)+0.5)
+  plot(TLk2$Ro,TLk2$Total,type="l",lwd=3,ylim=c(0,4),xlim=c(2500,8000), 
+       xaxs= "i",yaxs= "i", ylab="L-min(L)",xlab="Ro", las=1,
+       main="Asesoría Septiembre 2021",cex.main=0.7,cex.axis=0.7,cex.lab=0.7)
+  abline(h=2,col=1,lty=2)
+   for(i in 2:6){
+  lines(TLk2$Ro,TLk2[,i],col=i,lty=2,lwd=2)}
+  legend(6000,4,names[c(11,2:6)],col=1:7,lty=c(1,rep(2,6)),
+          lwd=2,bty="n",cex=0.8)
+```
+
+
+
+\pagebreak
+### 3.8. Sensibilidad a la actualización de datos
+
+\pagebreak
+## 4. RESULTADOS OBJETIVO 2
+### 4.1. Indicadores del stock
+
+```{r Variables_sept, echo=F,message=FALSE, warning=FALSE, include=T}
+
+years0   <- rep0$YRS
+nyears0  <- length(years0)
+
+Ro0      <- subset(std0,name=="log_Rmed")$value
+Rt0      <- c(subset(std0,name=="Reclutas")$value) 
+Rt0std   <- c(subset(std0,name=="Reclutas")$std)
+BT0      <- c(subset(std0,name=="BT")$value)   
+BT0std   <- c(subset(std0,name=="BT")$std)
+BD0      <- c(subset(std0,name=="BD")$value)   
+BD0std   <- c(subset(std0,name=="BD")$std)
+Ft0      <- c(subset(std0,name=="log_F")$value)   
+Ft0std   <- c(subset(std0,name=="log_F")$std)
+
+VarPobSep<- data.frame(x=years0,
+                       Rt0=Rt0,
+                       BT0=BT0,
+                       BD0=BD0,
+                       Ft0=exp(Ft0), 
+         lowerRt0 = (Rt0 -1.96*Rt0std),
+         upperRt0 = (Rt0 +1.96*Rt0std),
+         lowerBT0 = (BT0 -1.96*BT0std),
+         upperBT0 = (BT0 +1.96*BT0std),
+         lowerBD0 = (BD0 -1.96*BD0std),
+         upperBD0 = (BD0 +1.96*BD0std),
+         lowerFt0 = exp(Ft0 -1.96*Ft0std),
+         upperFt0 = exp(Ft0 +1.96*Ft0std))
+```
+
+\pagebreak
+
+```{r Fig27, echo=FALSE, message=FALSE, warning=FALSE, include=T, fig.align="center", fig.height=6, fig.width=8,fig.path=dir.Fig,dev=fig}
+
+
+Rt <- ggplot() + 
+    geom_line(data=VarPobSep,aes(y=Rt0, x=x, colour = "septiembre 2020"), size=0.5)+
+    geom_ribbon(data=VarPobSep,aes(ymin=lowerRt0, ymax=upperRt0, x=x, fill = ""), alpha = 0.2)+
+    geom_hline(yintercept = mean(VarPobSep$Rt0),colour='black',lty=2) +
+     annotate("text", x=2005, y=mean(VarPobSep$Rt0),label=expression("R"[promedio])) +
+    labs(x = '', y = 'Reclutamientos',colour='Asesorías')  +
+     scale_x_continuous(breaks = seq(from = 1960, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("black"))+
+    scale_fill_manual("",values=c('gray75'))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="top")
+
+BT <- ggplot() + 
+     geom_line(data=VarPobSep,aes(y=BT0, x=x, colour = "septiembre 2020"), size=0.5)+
+     geom_ribbon(data=VarPobSep,aes(ymin=lowerBT0, ymax=upperBT0, x=x, fill = ""), alpha = 0.2)+
+     geom_hline(data=VarPobSep,yintercept = mean(BT0),colour='black',lty=2) +
+     annotate("text", x=2005, y=mean(BT0),label=expression("BT"[promedio])) +
+    labs(x = '', y = 'Biomasa total (t)',colour='Asesorías')  +
+     scale_x_continuous(breaks = seq(from = 1960, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("black"))+
+    scale_fill_manual("",values=c('gray75'))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+BD <- ggplot() + 
+     geom_line(data=VarPobSep,aes(y=BD0, x=x, colour = "septiembre 2020"), size=0.5)+
+     geom_ribbon(data=VarPobSep,aes(ymin=lowerBD0, ymax=upperBD0, x=x, fill = ""), alpha = 0.2)+
+     geom_hline(data=VarPobSep,yintercept = mean(BD0),colour='black',lty=2) +
+     annotate("text", x=2005, y=mean(BD0),label=expression("BD"[promedio])) +
+     labs(x = '', y = 'Biomasa desovante (t)',colour='Asesorías')  +
+     scale_x_continuous(breaks = seq(from = 1960, to = 2021, by = 2)) +
+     scale_colour_manual("",values=c("black"))+
+     scale_fill_manual("",values=c('gray75'))+
+     theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="top")
+
+Ft <- ggplot() + 
+    geom_line(data=VarPobSep,aes(y=Ft0, x=x, colour = "septiembre 2020"), size=0.5)+
+    geom_ribbon(data=VarPobSep,aes(ymin=lowerFt0, ymax=upperFt0, x=x, fill = ""), alpha = 0.2)+
+     geom_hline(yintercept = median(VarPobSep$Ft0),colour='black',lty=2) +
+     annotate("text", x=2012, y=median(VarPobSep$Ft0),label=expression("F"[mediana])) +
+    labs(x = '', y = 'Mortalidad por pesca (F)',colour='Asesorías')  +
+    scale_x_continuous(breaks = seq(from = 1960, to = 2021, by = 2)) +
+    scale_colour_manual("",values=c("black"))+
+    scale_fill_manual("",values=c('gray75'))+
+    theme_bw(base_size=8) +
+     ggtitle('')+
+     theme(plot.title = element_text(hjust = 0.5),legend.position="none")
+
+Rt/BT | (BD/Ft)
+
+```
+
+```{r}
+Rt0_mean<-mean(VarPobSep$Rt0)
+BT0_mean<-mean(VarPobSep$BT0)
+BD0_mean<-mean(VarPobSep$BD0)
+
+R15_18 <-mean(VarPobSep$Rt0[14:17])
+BT16_18 <-mean(VarPobSep$BT0[15:17])
+BT19_20 <-mean(VarPobSep$BT0[18:19])
+
+rbind(Rt0_mean,BT0_mean,BD0_mean,R15_18,BT16_18,BT19_20)
+
+```
+
+\pagebreak
+
+```{r Fig28,warning=F, include=T, message=F, echo=T,fig.height=5,fig.width=10,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+par(mfrow=c(1,2),mar=c(4,4,1,1)+0.5)
+
+plot(data.0$Edades,rep0$Sflo_age[1,],type="l",las=1,col=4,ylim=c(0,1.1),
+     ylab="Selectividad Flota",xlab="Edades",main="FLOTA")
+lines(data.0$Edades,rep0$Sflo_age[9,],type="l",col=3)
+lines(data.0$Edades,rep0$Sflo_age[nyears0,],type="l",col=2)
+legend(4,0.3,c("sel_2002-2009","sel_2010-2012","sel_2013-2020"),
+       col=c(4,3,2),lwd=c(1,1,1),cex=0.8,bty="n")
+
+
+plot(data.0$Edades,rep0$Scru_age[1,],type="l",las=1,col=4,ylim=c(0,1.1),
+     ylab="Selectividad Crucero",xlab="Edades",main="CRUCEROS")
+lines(data.0$Edades,rep0$Scru_age[nyears0,],type="l",col=2)
+legend(4,0.3,c("sel_2002-2012","sel_2013-2020"),
+       col=c(4,2),lwd=c(1,1),cex=0.8,bty="n")
+
+```
+
+\pagebreak
+
+```{=tex}
+\small
+\begin{center} 
+\textbf{Tabla 13.}
+\end{center}
+\begin{center} 
+\vspace{-0.2cm} Indicadores poblacionales de sardina austral en aguas interiores de Chiloé. Tabla comparativa entre los resultados de la evaluación de septiembre (primer hito) y junio (segundo hito).
+\end{center}
+```
+```{r VariablesPoblacionales,warning=F, include=T, message=F, echo=T}
+
+VarPobl0<- cbind(anos=rep0$YRS,
+                 "BD_sep"=c(BD0),
+                 "BT_sep"=c(BT0),
+                 "R_sep"=c(round(Rt0,0)),
+                 "F_sep"=c(round(exp(Ft0),2))
+                 )
+kable(VarPobl0)
+
+write.csv(VarPobl0, file="Tablas/TablaVarpob.csv")
+
+```
+
+
+\pagebreak
+
+### 4.2. Estados de explotación
+
+
+
+```{r Fspr_alternativoS1,warning=F, include=T, message=F, echo=T}
+#PBRs Modelo alternativo
+BDo0    <- rep0$Bo
+BRMS0   <- BDo0*0.55
+BDlim0  <- BDo0*0.275
+FRMS0   <- exp(subset(std0,name=="log_Fref")$value[3])
+```
+
+```{r Fig29,warning=F, include=T, message=F,eval=F, echo=T,fig.height=4,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+par(mfcol=c(1,2),mar=c(4,4,1,1)+0.5)
+plot(rep0$Tallas,rep0$Selflo_talla[1,],type="l",las=1,col=4,
+     ylab="Selectividad",xlab="Tallas (cm)")
+lines(rep0$Tallas,rep0$Selflo_talla[9,],type="l",col=3)
+lines(rep0$Tallas,rep0$Selflo_talla[nyears1,],type="l",col=2)
+lines(rep0$Tallas,data.0$Madurez,lwd=2)
+legend(13,0.3,c("bloque_sel1","bloque_sel2","bloque_sel3","Madurez"),
+       col=c(4,3,2,1),lwd=c(1,1,1,2),cex=0.8,bty="n")
+
+plot(PBRsb1[,1],PBRsb1[,4],type="l",ylab="%BDPR",xlab="Mortalidad por pesca (F)",lwd=1,las=1,col=4)
+lines(PBRsb2[,1],PBRsb2[,4],col=3,lwd=1)
+lines(PBRsb3[,1],PBRsb3[,4],col=2,lwd=1)
+abline(h=0.6,col=1,lty=1)
+abline(v=c(FRMSb1,FRMSb2,FRMSb3),col=c(4,3,2),lty=2)
+	text(1.5,c(0.55,0.50,0.45),c("F60_sel1=0,33", "F60_sel2=0,26","F60_sel3=0,31"),cex=0.8,col=c(4,3,2))
+
+```
+
+
+```{r estatus,warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=9,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+
+yrs     <- rep0$YRS
+nyrs    <- length(yrs)
+tallas  <- seq(5,19.5,0.5)
+ntallas <- length(tallas)
+age     <- seq(0,4,1)
+nage    <- length(age)
+
+x  <-c(yrs,rev(yrs))
+x1 <-c(yrs[1],yrs[nyrs]+1,nyrs+1/2) #xaxp
+x2 <-c(yrs[1]-1,yrs[nyrs]+1) #xlim
+years0    <-rep0$YRS
+
+
+################################################
+#modelo alternativo
+################################################
+Rpr0     <-subset(std0,name=="RPRrms")$value
+Rpr0std  <-subset(std0,name=="RPRrms")$std
+Frpr0    <-subset(std0,name=="Frpr")$value
+Frpr0std <-subset(std0,name=="Frpr")$std
+
+rpr0     <-c((Rpr0-1.96*Rpr0std),
+          rev((Rpr0+1.96*Rpr0std))); 
+frpr0    <-c((Frpr0-1.96*Frpr0std),
+          rev((Frpr0+1.96*Frpr0std)))
+
+
+#######################################################################################
+### *MODELO BASE*
+#######################################################################################
+# biomasa desovante vs BDrms
+#######################################################################################
+xbs1 <- rnorm(1000, mean = Rpr0[length(years0)], 
+                      sd = Rpr0std[length(years0)])
+
+xbs  <- seq(min(xbs1),
+           max(xbs1),0.005)
+
+ybs  <- dnorm(xbs, mean = Rpr0[length(years0)], 
+                     sd = Rpr0std[length(years0)])
+
+icbs <- qnorm(c(0.05,0.95,0.5),
+             Rpr0[length(years0)],
+             Rpr0std[length(years0)])
+
+xxbs <- c(xbs[xbs>=icbs[1]&xbs<=icbs[2]],
+      rev(xbs[xbs>=icbs[1]&xbs<=icbs[2]]))
+
+yybs <- c(ybs[xbs>=icbs[1]&xbs<=icbs[2]],
+      rep(0,length(ybs[xbs>=icbs[1]&xbs<=icbs[2]])))
+
+#######################################################################################
+# mortalidad por pesca vs Frms
+#######################################################################################
+xfs1 <-rnorm(1000, mean = Frpr0[length(years0)], 
+                     sd = Frpr0std[length(years0)])
+
+xfs  <-seq(min(xfs1),
+           max(xfs1),0.005)
+
+yfs  <-dnorm(xfs, mean = Frpr0[length(years0)], 
+                    sd = Frpr0std[length(years0)])
+
+icfs <-qnorm(c(0.05,0.95,0.5),
+             Frpr0[length(years0)],
+             Frpr0std[length(years0)])
+
+xxfs <-c(xfs[xfs>=icfs[1]&xfs<=icfs[2]],
+     rev(xfs[xfs>=icfs[1]&xfs<=icfs[2]]))
+
+yyfs <-c(yfs[xfs>=icfs[1]&xfs<=icfs[2]],
+     rep(0,length(yfs[xfs>=icfs[1]&xfs<=icfs[2]])))
+
+#######################################################################################
+### *Probabilidad de estar bajo BRMS* 
+#######################################################################################
+# MALTERNATIVO
+pa0<-pnorm(1,Rpr0[length(years0)],
+             Rpr0std[length(years0)],
+             lower.tail = TRUE,log.p = F)
+
+#######################################################################################
+### *Probabilidad de estar bajo FRMS*
+#######################################################################################
+# MALTERNATIVO
+pb0<-1-pnorm(1,Frpr0[length(years0)],
+               Frpr0std[length(years0)],
+               lower.tail = TRUE,log.p = F)
+
+#######################################################################################
+### *Probabilidad de estar en zona de sobreexplotacion*
+#######################################################################################
+# MALTERNATIVO
+pc0<-pnorm(0.9,Rpr0[length(years0)],
+               Rpr0std[length(years0)],
+               lower.tail = TRUE,log.p = F)
+
+#######################################################################################
+### *Probabilidad de estar en zona de colapso*
+#######################################################################################
+# MALTERNATIVO
+pd0<-pnorm(0.5,Rpr0[length(years0)],
+               Rpr0std[length(years0)],
+               lower.tail = TRUE,log.p = F)
+
+#######################################################################################
+### *Probailidad de sobrepesca*
+#######################################################################################
+# MALTERNATIVO
+pe0<-1-pnorm(1.1,Frpr0[length(years0)],
+                 Frpr0std[length(years0)],
+                 lower.tail = TRUE,log.p = F)
+
+
+```
+
+
+
+```{r tabla PBRs, echo=T,eval=TRUE}
+
+PBRs<-round(rbind("BD~0~"=c(BDo0)/1000,
+                  "BD~RMS~"=c(BRMS0)/1000,
+                  "BD~LIM~"=c(BDlim0)/1000,
+                  "F~RMS~"=c(FRMS0),
+                  "p(BD~2021~<BD~RMS)~"=round(c(pa0),2),
+                  "p(F~2021~>F~RMS~)"=round(c(pb0),2),
+                  "*p(sobreexplotación)*"=round(c(pc0),2),
+                  "*p(agotado/colapsado)*"=round(c(pd0),2),
+                  "*p(sobrepesca)*"=round(c(pe0),2)),3)
+
+colnames(PBRs)<-c("Septiembre")
+kable(PBRs)
+
+write.csv(PBRs, file="Tablas/PBRs.csv")
+
+```
+
+
+```{r Fig30,warning=F, include=T, message=F,eval=T, echo=FALSE,fig.height=6,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+############################################
+# Gráfico
+###########################################
+par(mfcol=c(2,2),mar=c(2,4,1,1)+0.5)
+	plot(x, rpr0,type="n",ylim=c(0,4),cex.axis=0.8,xaxs="i",yaxs="i",
+xlim=c(2001,2022),xaxp=x1,ylab=expression("BD/BD"[RMS]),
+	     las=1,xlab="Año",cex.lab=1.1)
+polygon(x,rpr0, col=gray(.5,0.5),border="gray80")
+lines(years0,Rpr0,lwd=1,col=1,lty=1)#base
+abline(h=c(0.5,1),lty=2,col=c("red","green3"))
+text(c(2006,2006),c(0.5,1)+0.05,c(expression("BD"[LIM]),expression("BD"[RMS])),cex=1.2)
+legend(2008,4,c("Asesoría septiembre 2021"),
+       lty=c(1,1),col=c("black"),bty="n",lwd=1,cex=0.8)
+box()
+
+plot(x,frpr0,type="n",ylim=c(0,5),cex.axis=0.8,xaxs="i",yaxs="i",
+     xlim=c(2001,2022),xaxp=x1, ylab=expression("F/F"[RMS]),
+     las=1,xlab="Año",cex.lab=1.1)                
+polygon(x,frpr0,col=gray(.5,0.5), border="gray80")
+lines(years0,Frpr0,lwd=1,col=1,lty=1)   #base
+abline(h=1,lty=2,col="green3")
+text(2009,1+0.2,expression("F"[RMS]),cex=1.2)
+box()
+
+plot(xbs,ybs,type="l",ylab="Densidad de probabilidad",xaxs="i",
+	xlab=expression("BD"[last]*"/BD"[RMS]),las=1,yaxs= "i",ylim=c(0,2.8),xlim=c(0.2,2.2))
+polygon(xxbs,yybs,col=gray(0.5,0.5),border="gray80")
+lines(xbs,ybs,lwd=1,lty=1)
+legend(0.4,2.8,c(paste("Sept2021_IC95% = [",round(icbs[1],3),"-",round(icbs[2],3),"]",sep=" ")), lty=c(1,1),col=c("black"),bty="n",lwd=1,cex=0.8)
+box()
+
+plot(xfs,yfs,type="n",ylab="Densidad de probabilidad",xaxs="i",
+	xlab=expression("F"[last]*"/F"[RMS]),las=1,yaxs= "i",ylim=c(0,3.5),xlim=c(0,1.5))
+polygon(xxfs,yyfs,col=gray(0.5,0.5),border="gray80")
+lines(xfs,yfs,lwd=1,lty=1)
+legend(0.1,3.4,c(paste("Sept2021_IC95% = [",round(icfs[1],3),"-",round(icfs[2],3),"]",sep=" ")), lty=c(1,1),col=c("black"),bty="n",lwd=1,cex=0.8)
+box()
+```
+
+```{=tex}
+\small
+\begin{center} 
+\textbf{Tabla 15.}
+\end{center}
+\begin{center} 
+\vspace{-0.2cm} Variación interanual de F respecto de FRMS (F/F~RMS~), BD respecto de BDRMS (BD/BD~RMS~), y de las tasas de explotación referidos a la biomasa total (Y/BT) en la pesquería de sardina austral. Comparación entre las Estimaciones de la evaluación de stock actual (sept 2018) y anterior (jun 2018).
+\end{center}
+```
+```{r IndicadoresStock,warning=F, include=T, message=F, echo=T}
+
+VarPobl0<- cbind(anos=rep0$YRS,
+                 "F/F~RMS~**S**"=c(round(exp(Ft0)/FRMS0,3)),
+                 "BD/BD~RMS~**S**"=c(round(BD0/BRMS0,3)),
+                 "Y/BT_**S**"=c(round(rep0$desemb_pred/BT0,3)))
+kable(VarPobl0)
+
+write.csv(VarPobl0, file="Tablas/Estatus.csv")
+
+```
+
+\pagebreak
+
+### Diagramas de Fase
+
+```{r Fig31, warning=F, include=T, message=F,eval=T, echo=T,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
+
+source(paste(getwd(),"/funciones/Fn_DiagramaFase.R",sep="")) 
+name0<-"Modelo alternativo Asesoría Septiembre 2021"
+
+years0<-rep0$YRS
+SSBt0         <- subset(std0,name=="BD")$value
+SSBt0std      <- subset(std0,name=="BD")$std
+Ft0           <- subset(std0,name=="log_F")$value
+Ft0std        <- subset(std0,name=="log_F")$std
+BDo0    <- rep0$Bo
+BRMS0   <- BDo0*0.55
+FRMS0   <- exp(subset(std0,name=="log_Fref")$value[3])
+
+DiagramaFase(name0,FRMS0,BRMS0,SSBt0,SSBt0std,Ft0,Ft0std,years0)
+#cruz del año previo
+lastB0    <- SSBt0[nyears0-1]/BRMS0
+lastB    <- SSBt0[nyears0-1]
+lastF    <- exp(Ft0[nyears0-1])/FRMS0
+# Calculate confidence intervals
+Qmult    <- -qnorm((1-(80/100))/2.0)
+sbSE     <- SSBt0std[nyears0-1]
+sb95     <- c(lastB-Qmult*sbSE,lastB+Qmult*sbSE)
+B95      <- sb95/BRMS0
+FvSE     <- Ft0std[nyears0-1]
+F95      <- c(lastF*exp(-Qmult*FvSE),lastF*exp(Qmult*FvSE))
+
+arrows(x0=B95[1],
+       y0=lastF,
+       x1=B95[2],
+       y1=lastF,
+       length=0.05,angle=90,col=4,lwd=1,code=3)
+arrows(x0=lastB0,
+       y0=F95[1],
+       x1=lastB0,
+       y1=F95[2],
+       length=0.05,angle=90,col=4,lwd=1,code=3)
+
+points(lastB0,lastF,pch=19,col=4)
+text(lastB0,lastF-0.1,years0[nyears0-1],cex=0.8) 
+
+
+```
+
+
+
+
+\pagebreak
+## 5. RESULTADOS OBJETIVO 3
+
+
+```{r Fig23_anexoIII,warning=F, include=T, message=F, echo=T,fig.height=4,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+##########################################################
+dira<-paste(dir.0,"/cba_septiembre2021",sep="")
+setwd(dira)
+reps1a     <- reptoRlist("MAT0921s1.rep")  
+reps2a     <- reptoRlist("MAT0921s2.rep") 
+reps3a     <- reptoRlist("MAT0921s3.rep") 
+
+# modelo alternativo
+plot(reps1a$YRS,reps1a$Reclutas,type="l",ylab="Reclutamientos",xlab="Años",main="Escenarios de reclutamiento - CBA 2022",cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
+abline(h=c(reps1a$Rproy,reps2a$Rproy,reps3a$Rproy),col=c(1,2,3))
+text(2010,c(reps1a$Rproy,reps2a$Rproy,reps3a$Rproy)+1000,round(c(reps1a$Rproy,reps2a$Rproy,reps3a$Rproy),0),cex=0.7)
+
+
+
+```
+
+```{r cba2021_modeloalternativo,warning=F, include=T, message=F, echo=T,eval=TRUE }
+
+dir<-paste(dir.0,"/cba_septiembre2021",sep="")
+admb<-"/MAT0921"
+
+stds1a     <- read.table(paste(dir,admb,"s1.std", sep=''),header=T,sep="",na="NA",fill=T)
+stds2a     <- read.table(paste(dir,admb,"s2.std", sep=''),header=T,sep="",na="NA",fill=T)
+stds3a     <- read.table(paste(dir,admb,"s3.std", sep=''),header=T,sep="",na="NA",fill=T) 
+
+cbas1a     <- subset(stds1a ,name=="CBAp")$value[3] 
+cbas1astd  <- subset(stds1a ,name=="CBAp")$std[3] #reclutamiento medios
+cbas2a     <- subset(stds2a ,name=="CBAp")$value[3] 
+cbas2astd  <- subset(stds2a ,name=="CBAp")$std[3] #reclutamiento medios
+cbas3a     <- subset(stds3a ,name=="CBAp")$value[3] 
+cbas3astd  <- subset(stds3a ,name=="CBAp")$std[3] #reclutamiento medios
+
+q       <- seq(0.1,0.5,0.1)  # niveles de riesgo (cuantiles)                            
+nq      <- length(q)                                                                                   
+CBAs1a     <- rep(0,nq)
+CBAs2a     <- rep(0,nq)
+CBAs3a   <- rep(0,nq)
+buffer1a   <- rep(0,nq)
+buffer2a   <- rep(0,nq)
+buffer3a   <- rep(0,nq)
+
+for(j in 1:nq){
+  CBAs1a[j]<-qnorm(q[j],cbas1a,cbas1astd )
+  CBAs2a[j]<-qnorm(q[j],cbas2a,cbas2astd )
+  CBAs3a[j]<-qnorm(q[j],cbas3a,cbas3astd )
+  }
+for(j in 1:nq){
+    buffer1a[j] <-round(1-CBAs1a[j]/CBAs1a[5],2)
+    buffer2a[j] <-round(1-CBAs2a[j]/CBAs2a[5],2)
+    buffer3a[j] <-round(1-CBAs3a[j]/CBAs3a[5],2)
+  }
+
+tCBA1<-cbind(percentil=c(seq(10,50,10)),CBA_Rmed=round(CBAs1a,0),CBA_Ralto=round(CBAs2a,0),CBA_Rbajo=round(CBAs3a,0))
+#kable((tCBA1))
+tCBA2<-cbind(percentil=c(seq(10,50,10)),CBA_Ralto=round(CBAs2a,0),Resguardo=buffer2a)
+#kable((tCBA2))
+tCBA3<-cbind(percentil=c(seq(10,50,10)),CBA_Rbajo=round(CBAs3a,0),Resguardo=buffer3a)
+#kable((tCBA3))
+```
+
+
+```{r Fig26_anexoIII,warning=F, include=T, message=F, echo=T,fig.height=5,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+
+dira<-paste(dir.0,"/cba_septiembre2021",sep="")
+setwd(dira)
+reps1a     <- reptoRlist("MAT0921s1.rep")  
+reps2a     <- reptoRlist("MAT0921s2.rep") 
+reps3a     <- reptoRlist("MAT0921s3.rep") 
+
+
+par(mfcol=c(2,1),mar=c(4,4,1,1)+0.5)
+
+plot(tallas,reps1a$CTPp,type="l",ylim=c(0,3000),main="CBA 2022 a la talla ",
+     ylab="CBA proyectada (t)",xlab="Tallas (cm)",cex.axis=0.8,cex.main=0.8,cex.lab=0.8)
+lines(tallas,reps2a$CTPp,col=2)
+lines(tallas,reps3a$CTPp,col=3)
+
+plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA toneladas",xlab="Percentil de probabilidad de captura",main="CBA 2022",ylim=c(1000,19000),cex.axis=0.8,cex.main=0.8,cex.lab=0.8)
+lines(seq(10,50,10),CBAs1a,type="o",col=1)
+lines(seq(10,50,10),CBAs2a,type="o",col=2)
+lines(seq(10,50,10),CBAs3a,type="o",col=3)
+legend(12,18000,c("Rmed","Ralto","Rbajo"),col=c(1,2,3),lwd=1,bty="n",cex=0.8)
+
+
+
+```
+
+
+```{r Fig27_anexoIII,warning=F, include=T, message=F, echo=T,fig.height=3,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+
+### *modelo altarnativo*
+xca1 <-rnorm(1000, mean = cbas1a, sd = cbas1astd)
+xca  <-seq(min(xca1),max(xca1),0.5)
+yca  <-dnorm(xca, mean = cbas1a, sd =cbas1astd)
+icca <-qnorm(c(0.05,0.95,0.5),cbas1a,cbas1astd)
+xxca <-c(xca[xca>=icca[1]&xca<=icca[2]],rev(xca[xca>=icca[1]&xca<=icca[2]]))
+yyca <-c(yca[xca>=icca[1]&xca<=icca[2]],rep(0,length(yca[xca>=icca[1]&xca<=icca[2]])))
+
+par(mfcol=c(1,2),mar=c(4,4,1,1)+0.5)
+plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(0,0.00019),xlim=c(1000,25000),xlab="CBA 2021 (toneladas)",main="Escenario Rmed 2021", cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
+polygon(xxca,yyca,col=gray(0.8,0.7),border="gray80")
+lines(xca,yca,lwd=1,col="red2",lty=1)
+legend(2000,0.00019,c(paste("alternativo_IC95% = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" ")), lty=c(1,1),col=c("black","red2"),bty="n",lwd=1,cex=0.7)
+box()
+
+plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA toneladas",xlab="Percentil de probabilidad de captura",main="Escenario Rmed 2021",ylim=c(1000,19000),cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
+legend(12,18000,c("modelo alternativo"),col=c(1,2),lwd=1,bty="n",cex=0.6)
+
+```
