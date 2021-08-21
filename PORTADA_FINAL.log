@@ -1,0 +1,814 @@
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.8.16)  20 AUG 2021 20:50
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**/Users/mariajosezunigabasualto/MJZ/CTP2022/SARDINAAUSTRAL_LAGOS/PRIMER_INFORM
+E/PORTADA_FINAL.tex
+
+(/Users/mariajosezunigabasualto/MJZ/CTP2022/SARDINAAUSTRAL_LAGOS/PRIMER_INFORME
+/PORTADA_FINAL.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-07-12>
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/base/artic
+le.cls
+Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/base/size1
+2.clo
+File: size12.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count178
+\c@section=\count179
+\c@subsection=\count180
+\c@subsubsection=\count181
+\c@paragraph=\count182
+\c@subparagraph=\count183
+\c@figure=\count184
+\c@table=\count185
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/geometry/g
+eometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics/k
+eyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/iftex/if
+vtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/iftex/if
+tex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+\Gm@cnth=\count186
+\Gm@cntv=\count187
+\c@Gm@tempcnt=\count188
+\Gm@bindingoffset=\dimen139
+\Gm@wd@mp=\dimen140
+\Gm@odd@mp=\dimen141
+\Gm@even@mp=\dimen142
+\Gm@layoutwidth=\dimen143
+\Gm@layoutheight=\dimen144
+\Gm@layouthoffset=\dimen145
+\Gm@layoutvoffset=\dimen146
+\Gm@dimlist=\toks17
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xco
+lor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 225.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics-d
+ef/xetex.def
+File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ava
+nt.sty
+Package: avant 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/mat
+hptmx.sty
+Package: mathptmx 2020/03/25 PSNFSS-v9.3 Times w/ Math, improved (SPQR, WaS) 
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
+LaTeX Info: Redefining \hbar on input line 50.
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/microtype/
+microtype.sty
+Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
+\MT@toks=\toks18
+\MT@count=\count189
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen147
+LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
+\MT@listname@count=\count190
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/microtype/
+microtype-xetex.def
+File: microtype-xetex.def 2021/03/14 v2.8c Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 254.
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/microtype/
+microtype.cfg
+File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/base/input
+enc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks19
+\inpenc@posthook=\toks20
+
+Package inputenc Warning: inputenc package ignored with utf8 based engines.
+
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/base/fonte
+nc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 11
+2.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/t1p
+tm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/titlesec/t
+itlesec.sty
+Package: titlesec 2021/07/05 v2.14 Sectioning titles
+\ttl@box=\box50
+\beforetitleunit=\skip49
+\aftertitleunit=\skip50
+\ttl@plus=\dimen148
+\ttl@minus=\dimen149
+\ttl@toksa=\toks21
+\titlewidth=\dimen150
+\titlewidthlast=\dimen151
+\titlewidthfirst=\dimen152
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics/g
+raphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics/g
+raphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics/t
+rig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/graphics-c
+fg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+)
+\Gin@req@height=\dimen153
+\Gin@req@width=\dimen154
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/fronte
+ndlayer/tikz.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/basicl
+ayer/pgf.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/utilit
+ies/pgfrcs.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfutil-common.tex
+\pgfutil@everybye=\toks22
+\pgfutil@tempdima=\dimen155
+\pgfutil@tempdimb=\dimen156
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfutil-common-lists.tex))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfutil-latex.def
+\pgfutil@abb=\box51
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfrcs.code.tex
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/pgf.
+revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/basicl
+ayer/pgfcore.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/system
+layer/pgfsys.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks25
+))
+\pgf@x=\dimen157
+\pgf@y=\dimen158
+\pgf@xa=\dimen159
+\pgf@ya=\dimen160
+\pgf@xb=\dimen161
+\pgf@yb=\dimen162
+\pgf@xc=\dimen163
+\pgf@yc=\dimen164
+\pgf@xd=\dimen165
+\pgf@yd=\dimen166
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count191
+\c@pgf@countb=\count192
+\c@pgf@countc=\count193
+\c@pgf@countd=\count194
+\t@pgf@toka=\toks26
+\t@pgf@tokb=\toks27
+\t@pgf@tokc=\toks28
+\pgf@sys@id@count=\count195
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-xetex.def
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgfsys-xetex.def
+File: pgfsys-xetex.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgfsys-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+)
+\pgfsys@objnum=\count196
+)))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count197
+\pgfsyssoftpath@bigbuffer@items=\count198
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/syst
+emlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmath.code.tex
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathcalc.code.tex
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathutil.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen167
+\pgfmath@count=\count199
+\pgfmath@box=\box52
+\pgfmath@toks=\toks29
+\pgfmath@stack@operand=\toks30
+\pgfmath@stack@operation=\toks31
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.code.tex
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.basic.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.trigonometric.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.random.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.comparison.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.base.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.round.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.misc.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfunctions.integerarithmetics.code.tex)))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count266
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfint.code.tex)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen168
+\pgf@picmaxx=\dimen169
+\pgf@picminy=\dimen170
+\pgf@picmaxy=\dimen171
+\pgf@pathminx=\dimen172
+\pgf@pathmaxx=\dimen173
+\pgf@pathminy=\dimen174
+\pgf@pathmaxy=\dimen175
+\pgf@xx=\dimen176
+\pgf@xy=\dimen177
+\pgf@yx=\dimen178
+\pgf@yy=\dimen179
+\pgf@zx=\dimen180
+\pgf@zy=\dimen181
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen182
+\pgf@path@lasty=\dimen183
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen184
+\pgf@shorten@start@additional=\dimen185
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box53
+\pgf@hbox=\box54
+\pgf@layerbox@main=\box55
+\pgf@picture@serial@count=\count267
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen186
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen187
+\pgf@pt@y=\dimen188
+\pgf@pt@temp=\dimen189
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen190
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen191
+\pgf@sys@shading@range@num=\count268
+\pgf@shadingcount=\count269
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box56
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/basi
+clayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/modu
+les/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box57
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/modu
+les/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/compat
+ibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen192
+\pgf@nodesepend=\dimen193
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/compat
+ibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/utilit
+ies/pgffor.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/utilit
+ies/pgfkeys.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgfkeys.code.tex))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/pgf/math/p
+gfmath.sty
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmath.code.tex))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/util
+ities/pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/math
+/pgfmath.code.tex)
+\pgffor@iter=\dimen194
+\pgffor@skip=\dimen195
+\pgffor@stack=\toks32
+\pgffor@toks=\toks33
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/fron
+tendlayer/tikz/tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/libr
+aries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count270
+\pgfplotmarksize=\dimen196
+)
+\tikz@lastx=\dimen197
+\tikz@lasty=\dimen198
+\tikz@lastxsaved=\dimen199
+\tikz@lastysaved=\dimen256
+\tikz@lastmovetox=\dimen257
+\tikz@lastmovetoy=\dimen258
+\tikzleveldistance=\dimen259
+\tikzsiblingdistance=\dimen260
+\tikz@figbox=\box58
+\tikz@figbox@bg=\box59
+\tikz@tempbox=\box60
+\tikz@tempbox@bg=\box61
+\tikztreelevel=\count271
+\tikznumberofchildren=\count272
+\tikznumberofcurrentchild=\count273
+\tikz@fig@count=\count274
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/modu
+les/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count275
+\pgfmatrixcurrentcolumn=\count276
+\pgf@matrix@numberofcolumns=\count277
+)
+\tikz@expandcount=\count278
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/pgf/fron
+tendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/babel/ba
+bel.sty
+Package: babel 2021/07/22 3.63 The Babel package
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/babel/ba
+bel.def
+File: babel.def 2021/07/22 3.63 Babel common definitions
+\babel@savecnt=\count279
+\U@D=\dimen261
+\l@unhyphenated=\language4
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/babel/xe
+babel.def
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/babel/tx
+tbabel.def))
+\bbl@readstream=\read3
+)
+\bbl@dirlevel=\count280
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/generic/babel-sp
+anish/spanish.ldf
+Language: spanish.ldf 2021/05/27 v5.0q Spanish support from the babel system
+\es@quottoks=\toks34
+\es@quotdepth=\count281
+Package babel Info: Making " an active character on input line 570.
+Package babel Info: Making . an active character on input line 675.
+Package babel Info: Making < an active character on input line 722.
+Package babel Info: Making > an active character on input line 722.
+))
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/enumitem/e
+numitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip51
+\enit@outerparindent=\dimen262
+\enit@toks=\toks35
+\enit@inbox=\box62
+\enit@count@id=\count282
+\enitdp@description=\count283
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/booktabs/b
+ooktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen263
+\lightrulewidth=\dimen264
+\cmidrulewidth=\dimen265
+\belowrulesep=\dimen266
+\belowbottomsep=\dimen267
+\aboverulesep=\dimen268
+\abovetopsep=\dimen269
+\cmidrulesep=\dimen270
+\cmidrulekern=\dimen271
+\defaultaddspace=\dimen272
+\@cmidla=\count284
+\@cmidlb=\count285
+\@aboverulesep=\dimen273
+\@belowrulesep=\dimen274
+\@thisruleclass=\count286
+\@lastruleclass=\count287
+\@thisrulewidth=\dimen275
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/eso-pic/es
+o-pic.sty
+Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
+\ESO@tempdima=\dimen276
+\ESO@tempdimb=\dimen277
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/url/url.st
+y
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/hel
+vet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/fancyhdr/f
+ancyhdr.sty
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip52
+\f@nch@O@elh=\skip53
+\f@nch@O@erh=\skip54
+\f@nch@O@olh=\skip55
+\f@nch@O@orh=\skip56
+\f@nch@O@elf=\skip57
+\f@nch@O@erf=\skip58
+\f@nch@O@olf=\skip59
+\f@nch@O@orf=\skip60
+)
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 38
+.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/t1p
+hv.fd
+File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
+)
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/l3backend/
+l3backend-xetex.def
+File: l3backend-xetex.def 2021-08-04 L3 backend support: XeTeX
+(|extractbb --version)
+\c__kernel_sys_dvipdfmx_version_int=\count288
+\l__color_backend_stack_int=\count289
+\g__color_backend_stack_int=\count290
+\g__graphics_track_int=\count291
+\l__pdf_internal_box=\box63
+\g__pdf_backend_object_int=\count292
+\g__pdf_backend_annotation_int=\count293
+\g__pdf_backend_link_int=\count294
+) (./PORTADA_FINAL.aux
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
+)
+\openout1 = `PORTADA_FINAL.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
+8.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/base/ts1cm
+r.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(91.04872pt, 432.19756pt, 91.04872pt)
+* v-part:(T,H,B)=(42.67912pt, 666.9326pt, 85.35826pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=432.19756pt
+* \textheight=666.9326pt
+* \oddsidemargin=18.77873pt
+* \evensidemargin=18.77873pt
+* \topmargin=-51.59087pt
+* \headheight=12.0pt
+* \headsep=10.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\big@size=\dimen278
+LaTeX Info: Redefining \microtypecontext on input line 38.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `phv' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
+File: Figuras/Portada1_Final.jpg Graphic file (type bmp)
+<Figuras/Portada1_Final.jpg>
+
+Overfull \hbox (86.43819pt too wide) in paragraph at lines 67--68
+[][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
+ 68.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ot1
+ztmcm.fd
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `ztmcm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
+ 68.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/oml
+ztmcm.fd
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
+ 68.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/oms
+ztmcm.fd
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
+ 68.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/omx
+ztmcm.fd
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 6
+8.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ot1
+ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
+
+(/Users/mariajosezunigabasualto/Library/TinyTeX/texmf-dist/tex/latex/microtype/
+mt-ptm.cfg
+File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
+
+Overfull \hbox (56.9055pt too wide) in paragraph at lines 53--69
+[]$[]$ 
+ []
+
+[1
+
+]
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 472.03123pt, 71.13188pt)
+* v-part:(T,H,B)=(0.0pt, 766.51724pt, 28.45274pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=472.03123pt
+* \textheight=766.51724pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-94.26999pt
+* \headheight=12.0pt
+* \headsep=10.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+File: Figuras/Portada_Final.jpg Graphic file (type bmp)
+<Figuras/Portada_Final.jpg>
+[1
+
+] (./PORTADA_FINAL.aux
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
+) ) 
+Here is how much of TeX's memory you used:
+ 15944 strings out of 478461
+ 318597 string characters out of 5856260
+ 629270 words of memory out of 5000000
+ 35984 multiletter control sequences out of 15000+600000
+ 418317 words of font info for 50 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 84i,8n,83p,540b,317s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on PORTADA_FINAL.pdf (2 pages).
