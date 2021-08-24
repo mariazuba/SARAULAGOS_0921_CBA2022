@@ -84,7 +84,7 @@ Verosimilitudalternativo("MAT0921",
 
 ## FUNCIÓN DE CBA 
 
-```{r CARPETA Proyeccion_Asesoriasept2020, eval=FALSE, echo=T, warning=FALSE,include=F}
+```{r CARPETA Proyeccion_Asesoriasept2021, eval=FALSE, echo=T, warning=FALSE,include=F}
 source(paste(getwd(),"/funciones/Fn_CBA.R",sep="")) 
 admb<-"MAT0921"
 Carpeta<-"/cba_septiembre2021"
@@ -99,17 +99,17 @@ CBA(admb,dir.0,dir.1,Carpeta,system,l_escRec)
 #============================================================#
 # II. COMPOSICI?N EDAD DE LAS CAPTURAS                       #
 #============================================================#
-years  <- data.1$Ind[,1]                                                              
-nyears <- data.1$nanos                                              
+years  <- data.0$Ind[,1]                                                              
+nyears <- data.0$nanos                                              
 age  <-seq(5.5,20,0.5)                                            
 nage<-length(age)                                            
 #Proporci?n observada                                        
-pobsF<-rep1$Propfl_obs                                              
-pobsR<-rep1$Propcru_obs                                       
+pobsF<-rep0$pf_obs                                              
+pobsR<-rep0$pobs_RECLAN                                       
                                 
 #Proporci?n predicha                                         
-ppredF<-rep1$Propfl_pred                                          
-ppredR<-rep1$Propcru_pred                                   
+ppredF<-rep0$pf_pred                                          
+ppredR<-rep0$ppred_RECLAN                                   
                                    
 #=================================================================#
 # M?TODO de Francis
@@ -197,7 +197,7 @@ NM_Ian <- data.frame(nmF=c(nmf_ari,nmf_geo,nmf_arm),nmR=c(nmr_ari,nmr_geo,nmr_ar
 ```{r Fig2,warning=F, include=T, message=F,eval=T, echo=T,fig.height=3.5,fig.width=5,fig.align="center",fig.path="Figuras/",dev=fig}
 year<-seq(2006,2021,1)
 desemb<-c(39146,50506,45078,49225,20123,16429,19763,21888,22951,23643,18495,14134,8366,12565,14194,NA)
-cuota<-c(40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,12347)
+cuota<-c(40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,15765)
 
 
 par(mfcol=c(1,1),mar=c(4,4,1,1))
@@ -207,7 +207,7 @@ legend(2011,60000,c("Datos oficiales","Cuota"),lwd=c(10,2),col=c("cadetblue4",1)
 ```
 
 
-```{r Fig3,eval=T,warning=F, include=T, message=F, echo=T,fig.height=7.5,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig3,eval=T,warning=F, include=T, message=F, echo=T,fig.height=9.5,fig.width=7,fig.align="center",fig.path="Figuras/",dev=fig}
 
 datafrec<-read.table(paste(getwd(),"/Tallasmensuales.txt",sep=""),header = FALSE, sep = "")
 
@@ -263,8 +263,16 @@ fig3 <-   ggplot(filter(obs,year==2020)) +
           scale_y_continuous(breaks = seq(from = 0, to = 0.3, by = 0.1))
 
 
+fig4 <-   ggplot(filter(obs,year==2021)) + 
+          geom_bar(aes(x = talla, y = value), stat="identity", fill='gray66', color = 'gray28') + 
+          facet_grid(mes~year) + 
+          labs(x = 'Tallas', y = '')  + 
+          theme(panel.background = element_rect(fill ="gray99"),axis.text.y = element_text(hjust = 1, size=6)) + 
+          theme(panel.grid=element_line(color=NA)) +
+          scale_x_continuous(breaks = seq(from = 2, to = 20, by = 2))+
+          scale_y_continuous(breaks = seq(from = 0, to = 0.3, by = 0.1))
 
-fig0+fig2+fig1+fig3
+fig0+fig2+fig4+fig1+fig3
 
 ```
 
@@ -315,9 +323,9 @@ text(2010,c(exp(8.6053e+000),
 ```{r Fig8,warning=F, include=T, message=F, echo=FALSE,fig.height=4,fig.width=6,fig.align="center",fig.path="Figuras/",dev=fig}
 year<-seq(2002,2021,1)
 desemb<-c(NA,NA,NA,NA,39146,50506,45078,49225,20123,16429,19763,21888,22951,23643,18495,14134,8366,12565,14194,NA)
-cuota<-c(NA,NA,NA,NA,40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,12347)
+cuota<-c(NA,NA,NA,NA,40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,15765)
 comun_austral<-c(38974,32843,36545,52569,rep(NA,16))
-supuesto<-c(rep(NA,19),12347)
+supuesto<-c(rep(NA,19),15765)
 
 par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
 plot(year,desemb,type="h",lwd=15,ylab="Desembarques (t.)",xlab="Año",ylim=c(0,60000),xaxp=c(2000,2021,21),col="cadetblue4")
@@ -346,14 +354,15 @@ d2017<-c(531,  1280,	2858,	61, 	 2425,	1858,	947,	609,	91, 	103,	913,  2456)
 d2018<-c(126,  22,  	48, 	74,  	 495,	  870, 	955,	651,	688,	61, 	1122,	3244)
 d2019<-c(2456, 1524,	1218,	145,	 483,	  770,	1431,	520,	20,	  182,	1056,	1464)
 d2020<-c(1899, 2101,	1027,	15,	   326,	  110,	465,	337,	87,	  80, 	3064,	4683)
-d2021<-c(1162, 3103,	1845,	93,    29,    NA,   NA,   NA,   NA,   NA,   NA,   NA)
+d2021<-c(705,  3446,	1959,	93,    222,   631,  327,  123,   NA,   NA,   NA,   NA)
 
 par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
-plot(seq(1,12,1),d2017,type="o",ylab="Desembarques t",xlab="Meses",ylim=c(0,5000),xlim=c(1,12),col=4,lwd=2)
-lines(seq(1,12,1),d2018,type="o",col=3,lwd=2)
-lines(seq(1,12,1),d2019,type="o",col=2,lwd=2)
-lines(seq(1,12,1),d2020,type="o",col=1,lwd=2)
-legend(6,5000,c(2017,2018,2019,2020),col=c(4,3,2,1),lwd=2,bty="n")
+plot(seq(1,12,1),d2017,type="o",ylab="Desembarques (t)",xlab="Meses",ylim=c(0,5000),xlim=c(1,12),col=5,lwd=2)
+lines(seq(1,12,1),d2018,type="o",col=4,lwd=2)
+lines(seq(1,12,1),d2019,type="o",col=3,lwd=2)
+lines(seq(1,12,1),d2020,type="o",col=2,lwd=2)
+lines(seq(1,12,1),d2021,type="o",col=1,lwd=2)
+legend(6,5000,c(2017,2018,2019,2020,2021),col=c(5,4,3,2,1),lwd=2,bty="n")
 
 ```
 
@@ -572,7 +581,7 @@ f1/f2/f3 + plot_layout(guides="collect")
 
 Res_matt <- data.frame(log(ind_obs) - log(ind_sept)) %>% 
             mutate(yrs = yrs) %>% 
-            mutate(Asesoría = 'Septiembre 2020')
+            mutate(Asesoría = 'Septiembre 2021')
 
 Res      <- rbind(Res_matt) %>%
                   melt(id.vars= c('yrs','Asesoría'))
@@ -1102,7 +1111,7 @@ VarPobSep<- data.frame(x=years0,
 
 
 Rt <- ggplot() + 
-    geom_line(data=VarPobSep,aes(y=Rt0, x=x, colour = "septiembre 2020"), size=0.5)+
+    geom_line(data=VarPobSep,aes(y=Rt0, x=x, colour = "septiembre 2021"), size=0.5)+
     geom_ribbon(data=VarPobSep,aes(ymin=lowerRt0, ymax=upperRt0, x=x, fill = ""), alpha = 0.2)+
     geom_hline(yintercept = mean(VarPobSep$Rt0),colour='black',lty=2) +
      annotate("text", x=2005, y=mean(VarPobSep$Rt0),label=expression("R"[promedio])) +
@@ -1115,7 +1124,7 @@ Rt <- ggplot() +
      theme(plot.title = element_text(hjust = 0.5),legend.position="top")
 
 BT <- ggplot() + 
-     geom_line(data=VarPobSep,aes(y=BT0, x=x, colour = "septiembre 2020"), size=0.5)+
+     geom_line(data=VarPobSep,aes(y=BT0, x=x, colour = "septiembre 2021"), size=0.5)+
      geom_ribbon(data=VarPobSep,aes(ymin=lowerBT0, ymax=upperBT0, x=x, fill = ""), alpha = 0.2)+
      geom_hline(data=VarPobSep,yintercept = mean(BT0),colour='black',lty=2) +
      annotate("text", x=2005, y=mean(BT0),label=expression("BT"[promedio])) +
@@ -1128,7 +1137,7 @@ BT <- ggplot() +
      theme(plot.title = element_text(hjust = 0.5),legend.position="none")
 
 BD <- ggplot() + 
-     geom_line(data=VarPobSep,aes(y=BD0, x=x, colour = "septiembre 2020"), size=0.5)+
+     geom_line(data=VarPobSep,aes(y=BD0, x=x, colour = "septiembre 2021"), size=0.5)+
      geom_ribbon(data=VarPobSep,aes(ymin=lowerBD0, ymax=upperBD0, x=x, fill = ""), alpha = 0.2)+
      geom_hline(data=VarPobSep,yintercept = mean(BD0),colour='black',lty=2) +
      annotate("text", x=2005, y=mean(BD0),label=expression("BD"[promedio])) +
@@ -1141,7 +1150,7 @@ BD <- ggplot() +
      theme(plot.title = element_text(hjust = 0.5),legend.position="top")
 
 Ft <- ggplot() + 
-    geom_line(data=VarPobSep,aes(y=Ft0, x=x, colour = "septiembre 2020"), size=0.5)+
+    geom_line(data=VarPobSep,aes(y=Ft0, x=x, colour = "septiembre 2021"), size=0.5)+
     geom_ribbon(data=VarPobSep,aes(ymin=lowerFt0, ymax=upperFt0, x=x, fill = ""), alpha = 0.2)+
      geom_hline(yintercept = median(VarPobSep$Ft0),colour='black',lty=2) +
      annotate("text", x=2012, y=median(VarPobSep$Ft0),label=expression("F"[mediana])) +
@@ -1398,7 +1407,7 @@ write.csv(PBRs, file="Tablas/PBRs.csv")
 ############################################
 # Gráfico
 ###########################################
-par(mfcol=c(2,2),mar=c(2,4,1,1)+0.5)
+par(mfcol=c(2,2),mar=c(4,4,1,1)+0.5)
 	plot(x, rpr0,type="n",ylim=c(0,4),cex.axis=0.8,xaxs="i",yaxs="i",
 xlim=c(2001,2022),xaxp=x1,ylab=expression("BD/BD"[RMS]),
 	     las=1,xlab="Año",cex.lab=1.1)
@@ -1420,17 +1429,17 @@ text(2009,1+0.2,expression("F"[RMS]),cex=1.2)
 box()
 
 plot(xbs,ybs,type="l",ylab="Densidad de probabilidad",xaxs="i",
-	xlab=expression("BD"[last]*"/BD"[RMS]),las=1,yaxs= "i",ylim=c(0,2.8),xlim=c(0.2,2.2))
+	xlab=expression("BD"[2021]*"/BD"[RMS]),las=1,yaxs= "i",ylim=c(0,2.8),xlim=c(0.2,1.8))
 polygon(xxbs,yybs,col=gray(0.5,0.5),border="gray80")
 lines(xbs,ybs,lwd=1,lty=1)
 legend(0.4,2.8,c(paste("Sept2021_IC95% = [",round(icbs[1],3),"-",round(icbs[2],3),"]",sep=" ")), lty=c(1,1),col=c("black"),bty="n",lwd=1,cex=0.8)
 box()
 
 plot(xfs,yfs,type="n",ylab="Densidad de probabilidad",xaxs="i",
-	xlab=expression("F"[last]*"/F"[RMS]),las=1,yaxs= "i",ylim=c(0,3.5),xlim=c(0,1.5))
+	xlab=expression("F"[2021]*"/F"[RMS]),las=1,yaxs= "i",ylim=c(0,1.9),xlim=c(0,2.3))
 polygon(xxfs,yyfs,col=gray(0.5,0.5),border="gray80")
 lines(xfs,yfs,lwd=1,lty=1)
-legend(0.1,3.4,c(paste("Sept2021_IC95% = [",round(icfs[1],3),"-",round(icfs[2],3),"]",sep=" ")), lty=c(1,1),col=c("black"),bty="n",lwd=1,cex=0.8)
+legend(0.1,1.85,c(paste("Sept2021_IC95% = [",round(icfs[1],3),"-",round(icfs[2],3),"]",sep=" ")), lty=c(1,1),col=c("black"),bty="n",lwd=1,cex=0.8)
 box()
 ```
 
@@ -1462,7 +1471,7 @@ write.csv(VarPobl0, file="Tablas/Estatus.csv")
 ```{r Fig31, warning=F, include=T, message=F,eval=T, echo=T,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
 
 source(paste(getwd(),"/funciones/Fn_DiagramaFase.R",sep="")) 
-name0<-"Modelo alternativo Asesoría Septiembre 2021"
+name0<-"Asesoría Septiembre 2021"
 
 years0<-rep0$YRS
 SSBt0         <- subset(std0,name=="BD")$value
