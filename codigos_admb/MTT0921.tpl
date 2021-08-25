@@ -117,7 +117,7 @@ DATA_SECTION
  
  init_int    opt_F
  init_int    opt_devRt
- init_int    opt_devNo//Condicion inicial (Si no estima significa poblaciónen equilibrio)
+ init_int    opt_devNo//Condicion inicial (Si no estima significa poblaci?nen equilibrio)
  init_int    opt_bpow //hiperestabilidad
 
  init_int    npbr
@@ -154,7 +154,7 @@ INITIALIZATION_SECTION
 PARAMETER_SECTION
 
 //========================================================================
-// selectividad paramétrica a la talla común
+// selectividad param?trica a la talla com?n
 // init_bounded_vector log_L50f(1,nbloques1,-5,8,opt1_fase)  
  init_vector log_L50(1,nbloques1,opt1_fase)  
  init_vector log_sigma1(1,nbloques1,opt1_fase)
@@ -349,7 +349,7 @@ PRELIMINARY_CALCS_SECTION
  h=Par_bio(7);
 
  Unos_tallas=1;// lo uso en operaciones matriciales con tallas
- Unos_year=1;// lo uso en operaciones matriciales con el año
+ Unos_year=1;// lo uso en operaciones matriciales con el a?o
 
 //========================================================================
 
@@ -501,7 +501,7 @@ FUNCTION Eval_abundancia
   pre=exp(-0.5*square((Tallas-Lr)/sr));
   pre/=sum(pre);
 
-// genero una estructura inicial en torno a Z del primer año;
+// genero una estructura inicial en torno a Z del primer a?o;
   Reclutas=mfexp(log_Rmed+log_desv_Rt);
 
 // genero la poblacion en equilibrio virginal de LP;
@@ -515,10 +515,10 @@ FUNCTION Eval_abundancia
   alfa_sr = 4*h*exp(log_Rmed+0.5*square(sigmaR))/(5*h-1);//
   beta_sr = (1-h)*SSBo/(5*h-1);// Reclutamiento
 
-// -----------------primer año
+// -----------------primer a?o
   Reclutas(1) = mfexp(log_Rmed+log_desv_Rt(1));
   Rpred(1)    = Reclutas(1);
-// genero una estructura inicial en torno a Z del primer año;
+// genero una estructura inicial en torno a Z del primer a?o;
   Neq=pre*Reclutas(1);
   for (j=1;j<=nedades;j++){
   Neq    = elem_prod(Neq,exp(-1.*Z(1)))*T+pre*exp(log_Rmed+log_desv_No(j));}
@@ -575,13 +575,13 @@ FUNCTION Eval_capturas_predichas
 
 //========================================================================
 
-// matrices de capturas predichas por edad y año
+// matrices de capturas predichas por edad y a?o
  pred_Ctot=elem_prod(elem_div(F,Z),elem_prod(1.-S,N));
 
-// vectores de desembarques predichos por año
+// vectores de desembarques predichos por a?o
  pred_Desemb=Wmed*trans(pred_Ctot);
 
-// matrices de proporcion de capturas por talla y año
+// matrices de proporcion de capturas por talla y a?o
  pobs=elem_div(Ctot,outer_prod(rowsum(Ctot+1e-10),Unos_tallas));
  ppred=elem_div(pred_Ctot,outer_prod(rowsum(pred_Ctot+1e-10),Unos_tallas));
 
@@ -714,7 +714,7 @@ FUNCTION  Eval_CTP
   CTP     = elem_prod(NV,Wmed);
   Yact(i) = sum(CTP);
 
-  for (int j=1;j<=ntime_sim;j++){ // ciclo de años
+  for (int j=1;j<=ntime_sim;j++){ // ciclo de a?os
 
   if(j<=minedad){
  // Np=(elem_prod(Np,Sp))*T+pre*(alfa_sr*BD(ntime-minedad+1)/(beta_sr+BD(ntime-minedad+1)));} // Estima CTP con R_last
@@ -859,7 +859,7 @@ REPORT_SECTION
  report << Bp << endl;
  report << "Capt_proy" << endl; // Capturas proyectadas para cada Fpbr
  report << Yp << endl;
- report << "Captura_act" << endl;  //Captura proyectadas año en curso
+ report << "Captura_act" << endl;  //Captura proyectadas a?o en curso
  report << Yact << endl;
  report<<"Likeval CPUE_BCru_Bmph_Desemb_pfFlota_pfCru_dev_R_devNo_LR"<<endl;
  report << likeval << endl;
@@ -867,9 +867,9 @@ REPORT_SECTION
  report << penalty << endl;
  report << "Rec_proy" << endl; //Reclutamientos proyectadas para cada Fpbr
  report << Rpp << endl;
- report << "N_actual" << endl; // abundancia del ultimo año
+ report << "N_actual" << endl; // abundancia del ultimo a?o
  report << Npact << endl;
- report << "N_proyect" << endl; // abundancia del ultimo año
+ report << "N_proyect" << endl; // abundancia del ultimo a?o
  report << Np << endl;
  report << "Rproy1" << endl; //Rec
  report << mfexp(log_Rmed) << endl;

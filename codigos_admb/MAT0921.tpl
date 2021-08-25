@@ -206,7 +206,7 @@ DATA_SECTION
 INITIALIZATION_SECTION
  	
 //#########################################################
-  log_Ro           8.5
+  log_Ro           8.8
   log_Linf         log_Linfprior
   log_k            log_kprior
   log_Lo           log_Loprior
@@ -417,6 +417,7 @@ PARAMETER_SECTION
  vector NVp(1,nedades)
  vector NVptallas(1,ntallas)
  vector CTPp(1,ntallas)
+
  matrix YTPp(1,ntime_sim,1,npbr) 
  sdreport_vector CBAp(1,npbr)
  
@@ -891,16 +892,23 @@ FUNCTION Eval_CTP
 
 // re-calcula la CBA para el ?ltimo a?o dado los PBR entregados
 
- for (int j=1;j<=npbr;j++){
+// HITO 2 - CBA MISMO AÑO
+
+ for (int j=1;j<=npbr;j++)
+   {
      Fpbr   = Sel_f(ntime)*mfexp((log_Fref(j)));//
      Zpbr   = Fpbr+M;
+     
 	   NV     = elem_prod(elem_div(Fpbr,Zpbr),elem_prod(1.-exp(-1.*Zpbr),N(ntime)));
 	   NVtallas=NV*Prob_talla;
+	   
      CTP    = elem_prod(NVtallas,Wmed);
      YTP(j) = sum(CTP);
-     }
+    }
 
- for (int j=1;j<=npbr;j++){
+ // HITO 1 - PROYECCIÓN 
+ for (int j=1;j<=npbr;j++)
+   {
 
  Np   = N(ntime);
  Sp   = S(ntime);
@@ -921,44 +929,60 @@ FUNCTION Eval_CTP
 //*****************************************************************************
 // ESTIMACI?N DEL RECLUTAMIENTO
 //*****************************************************************************
-   if(oprec==1){
-      Np(1)=(mfexp(log_Ro));} // Estima CTP con R_alto (2012)
+   if(oprec==0)  // sin reclutas
+   {
+     Np(1)=0;
+   }   
+
+   if(oprec==1)  // Estima CTP con R_alto (2012)
+     {
+      Np(1)=(mfexp(log_Ro));
+     }
 	  
-   if(oprec==2){
-      Np(1)=(Reclutas(11));} // Estima CTP con R_alto (2012)
+   if(oprec==2) // Estima CTP con R_alto (2012)
+     {
+      Np(1)=(Reclutas(11));
+     } 
 	  
-   if(oprec==3){
-      Np(1)=(Reclutas(17));}     // Estima CTP con R_bajo (2018)
-	  
-   if(oprec==4){                // reclutamiento para proyecci?n seg?n relaci?n stock-recluta o no
-      if(opt_Reclu==1){ //Beverton Y Holt
-       Np(1)=pR*alfa*BDp/(beta+BDp)*mfexp(0.5*square(cvar(1)));}
-      if(opt_Reclu==2){ //Ricker
-       Np(1)=pR*BDp*mfexp(alfa-1.0*beta*BDp)*mfexp(0.5*square(cvar(1)));}
-      if(opt_Reclu==3){ //sin relaci?n stock-recluta
-       Np(1)=pR*mfexp(log_Ro+0.5*square(cvar(1)));}}	  
+   if(oprec==3)  // Estima CTP con R_bajo (2018)
+     {
+      Np(1)=(Reclutas(17));
+     }   
+   
+   // reclutamiento para proyecci?n seg?n relaci?n stock-recluta o no
+   if(oprec==4)
+     {               
+      if(opt_Reclu==1) //Beverton Y Holt
+        { 
+       Np(1)=pR*alfa*BDp/(beta+BDp)*mfexp(0.5*square(cvar(1)));
+        }
+      if(opt_Reclu==2) //Ricker
+        { 
+       Np(1)=pR*BDp*mfexp(alfa-1.0*beta*BDp)*mfexp(0.5*square(cvar(1)));
+        }
+      if(opt_Reclu==3) //sin relaci?n stock-recluta
+        { 
+       Np(1)=pR*mfexp(log_Ro+0.5*square(cvar(1)));
+        }
+      }	  
 	
 //*****************************************************************************
 
   Fpbr = Sel_f(ntime)*mfexp((log_Fref(j)));//
   Zpbr = Fpbr+M;
-  Sp=exp(-1.*Zpbr);
+  Sp   = exp(-1.*Zpbr);
   
-  NVp  = elem_prod(elem_div(Fpbr,Zpbr),elem_prod(Np,(1-Sp)));
-  NVptallas=NVp*Prob_talla;
+  NVp       = elem_prod(elem_div(Fpbr,Zpbr),elem_prod(Np,(1-Sp)));
+  NVptallas = NVp*Prob_talla;
+  CTPp       = elem_prod(NVptallas,Wmed);
+  YTPp(i,j)  = sum(CTPp);
   
-  CTPp = elem_prod(NVptallas,Wmed);
-  YTPp(i,j)=sum(CTPp);
-  
-  
-  Bp=sum(elem_prod(Np*Prob_talla,Wmed));
+  Bp   = sum(elem_prod(Np*Prob_talla,Wmed));
   NMDp = elem_prod(Np,mfexp(-dt(1)*(Zpbr)))*Prob_talla;
   BDp  = sum(elem_prod(elem_prod(NMDp,msex),Wmed));
   
-
-  
-  SSBp(i,j)=BDp;
-  BTp(i,j)=Bp;
+  SSBp(i,j) = BDp;
+  BTp(i,j)  = Bp;
 
  }
 
