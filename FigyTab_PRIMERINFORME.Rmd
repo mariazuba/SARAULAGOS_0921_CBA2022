@@ -89,7 +89,7 @@ source(paste(getwd(),"/funciones/Fn_CBA.R",sep=""))
 admb<-"MAT0921"
 Carpeta<-"/cba_septiembre2021"
 system="mac"
-l_escRec=169
+l_escRec=172
 CBA(admb,dir.0,dir.1,Carpeta,system,l_escRec)
 ```
 
@@ -1518,8 +1518,11 @@ text(lastB0,lastF-0.1,years0[nyears0-1],cex=0.8)
 \pagebreak
 ## 5. RESULTADOS OBJETIVO 3
 
+*"Determinar niveles de Captura Biológicamente Aceptable (CBA) que lleven y/o mantenga la pesquería en torno al Rendimiento Máximo Sostenible (RMS), a partir de un análisis de riesgo en condiciones de incertidumbre de no alcanzar los objetivos de conservación y sostenibilidad conforme lo establece la LGPA y contenidos en el Plan de Manejo y/o en el Programa de Recuperación respectivo, según corresponda."* \vspace{0.5cm}
 
-```{r Fig23_anexoIII,warning=F, include=T, message=F, echo=T,fig.height=4,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+### 1. Escenarios de reclutamiento para proyección
+```{r Fig23_anexoIII,warning=F, include=T, message=F, echo=F,fig.height=4,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 ##########################################################
 dira<-paste(dir.0,"/cba_septiembre2021",sep="")
@@ -1530,22 +1533,57 @@ reps3a     <- reptoRlist("MAT0921s3.rep")
 
 # modelo alternativo
 plot(reps1a$YRS,reps1a$Reclutas,type="l",ylab="Reclutamientos",xlab="Años",main="Escenarios de reclutamiento - CBA 2022",cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
-abline(h=c(reps1a$Rproy,reps2a$Rproy,reps3a$Rproy),col=c(1,2,3))
-text(2010,c(reps1a$Rproy,reps2a$Rproy,reps3a$Rproy)+1000,round(c(reps1a$Rproy,reps2a$Rproy,reps3a$Rproy),0),cex=0.7)
+
+abline(h=c(reps1a$Rproy,
+           reps2a$Rproy,
+           reps3a$Rproy),
+       col=c(1,2,3))
+
+text(2010,c(reps1a$Rproy,
+            reps2a$Rproy,
+            reps3a$Rproy)+1000,
+     round(c(reps1a$Rproy,
+             reps2a$Rproy,
+             reps3a$Rproy),0),cex=0.7)
 
 
 
 ```
 
-```{r cba2021_modeloalternativo,warning=F, include=T, message=F, echo=T,eval=TRUE }
+
+```{r Fig26_anexoIII,warning=F, include=T, message=F,eval=F, echo=F,fig.height=3.5,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+dira<-paste(dir.0,"/cba_septiembre2021",sep="")
+setwd(dira)
+reps1a     <- reptoRlist("MAT0921s1.rep")  
+reps2a     <- reptoRlist("MAT0921s2.rep") 
+reps3a     <- reptoRlist("MAT0921s3.rep") 
+
+par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
+
+plot(tallas,reps1a$CTPp,type="l",ylim=c(0,1000),main="Captura a la talla por escenario de reclutamiento",
+     ylab="Captura 2022 (t)",xlab="Tallas (cm)",cex.axis=0.8,cex.main=0.8,cex.lab=0.8)
+lines(tallas,reps2a$CTPp,col=2)
+lines(tallas,reps3a$CTPp,col=3)
+
+```
+
+
+\pagebreak
+### 2. Tablas de decisión CBA para cada escenario de reclutamiento, percentil de captura y resguardo
+
+```{r cba2021_modeloalternativo,warning=F, include=T, message=F, echo=F,eval=TRUE }
 
 dir<-paste(dir.0,"/cba_septiembre2021",sep="")
 admb<-"/MAT0921"
 
+stds0a     <- read.table(paste(dir,admb,"s0.std", sep=''),header=T,sep="",na="NA",fill=T)
 stds1a     <- read.table(paste(dir,admb,"s1.std", sep=''),header=T,sep="",na="NA",fill=T)
 stds2a     <- read.table(paste(dir,admb,"s2.std", sep=''),header=T,sep="",na="NA",fill=T)
 stds3a     <- read.table(paste(dir,admb,"s3.std", sep=''),header=T,sep="",na="NA",fill=T) 
 
+cbas0a     <- subset(stds0a ,name=="CBAp")$value[3] 
+cbas0astd  <- subset(stds0a ,name=="CBAp")$std[3] #sin reclutas
 cbas1a     <- subset(stds1a ,name=="CBAp")$value[3] 
 cbas1astd  <- subset(stds1a ,name=="CBAp")$std[3] #reclutamiento medios
 cbas2a     <- subset(stds2a ,name=="CBAp")$value[3] 
@@ -1554,7 +1592,9 @@ cbas3a     <- subset(stds3a ,name=="CBAp")$value[3]
 cbas3astd  <- subset(stds3a ,name=="CBAp")$std[3] #reclutamiento medios
 
 q       <- seq(0.1,0.5,0.1)  # niveles de riesgo (cuantiles)                            
-nq      <- length(q)                                                                                   
+nq      <- length(q)    
+
+CBAs0a     <- rep(0,nq)
 CBAs1a     <- rep(0,nq)
 CBAs2a     <- rep(0,nq)
 CBAs3a   <- rep(0,nq)
@@ -1562,28 +1602,51 @@ buffer1a   <- rep(0,nq)
 buffer2a   <- rep(0,nq)
 buffer3a   <- rep(0,nq)
 
+aporteR1a <- rep(0,nq)
+aporteR2a <- rep(0,nq)
+aporteR3a <- rep(0,nq)
+
 for(j in 1:nq){
+  CBAs0a[j]<-qnorm(q[j],cbas0a,cbas0astd )
   CBAs1a[j]<-qnorm(q[j],cbas1a,cbas1astd )
   CBAs2a[j]<-qnorm(q[j],cbas2a,cbas2astd )
   CBAs3a[j]<-qnorm(q[j],cbas3a,cbas3astd )
   }
 for(j in 1:nq){
+    aporteR1a[j] <-round((CBAs1a[j]-CBAs0a[j])/CBAs1a[j],2)
+    aporteR2a[j] <-round((CBAs2a[j]-CBAs0a[j])/CBAs2a[j],2)
+    aporteR3a[j] <-round((CBAs3a[j]-CBAs0a[j])/CBAs3a[j],2)
+  }
+
+for(j in 1:nq){
     buffer1a[j] <-round(1-CBAs1a[j]/CBAs1a[5],2)
     buffer2a[j] <-round(1-CBAs2a[j]/CBAs2a[5],2)
     buffer3a[j] <-round(1-CBAs3a[j]/CBAs3a[5],2)
-  }
+}
 
-tCBA1<-cbind(percentil=c(seq(10,50,10)),CBA_Rmed=round(CBAs1a,0),CBA_Ralto=round(CBAs2a,0),CBA_Rbajo=round(CBAs3a,0))
-#kable((tCBA1))
-tCBA2<-cbind(percentil=c(seq(10,50,10)),CBA_Ralto=round(CBAs2a,0),Resguardo=buffer2a)
-#kable((tCBA2))
-tCBA3<-cbind(percentil=c(seq(10,50,10)),CBA_Rbajo=round(CBAs3a,0),Resguardo=buffer3a)
-#kable((tCBA3))
+
+tCBA1<-cbind(percentil=c(seq(10,50,10)),
+             CBA_Rmed=round(CBAs1a,0),
+             CBA_Ralto=round(CBAs2a,0),
+             CBA_Rbajo=round(CBAs3a,0))
+kable((tCBA1))
+
+tCBA2<-cbind(percentil=c(seq(10,50,10)),
+             Resguardo_Rmed=buffer1a,
+             Resguardo_Ralto=buffer2a,
+             Resguardo_Rbajo=buffer3a)
+kable((tCBA2))
+
+tCBA3<-cbind(percentil=c(seq(10,50,10)),
+             Aporte_Rmed=aporteR1a,
+             Aporte_Ralto=aporteR2a,
+             Aporte_Rbajo=aporteR3a)
+kable((tCBA3))
+
 ```
 
 
-```{r Fig26_anexoIII,warning=F, include=T, message=F, echo=T,fig.height=5,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
-
+```{r Fig27_anexoIII,warning=F, include=T, message=F, echo=F,fig.height=8,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 dira<-paste(dir.0,"/cba_septiembre2021",sep="")
 setwd(dira)
@@ -1591,44 +1654,89 @@ reps1a     <- reptoRlist("MAT0921s1.rep")
 reps2a     <- reptoRlist("MAT0921s2.rep") 
 reps3a     <- reptoRlist("MAT0921s3.rep") 
 
-
-par(mfcol=c(2,1),mar=c(4,4,1,1)+0.5)
-
-plot(tallas,reps1a$CTPp,type="l",ylim=c(0,3000),main="CBA 2022 a la talla ",
-     ylab="CBA proyectada (t)",xlab="Tallas (cm)",cex.axis=0.8,cex.main=0.8,cex.lab=0.8)
-lines(tallas,reps2a$CTPp,col=2)
-lines(tallas,reps3a$CTPp,col=3)
-
-plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA toneladas",xlab="Percentil de probabilidad de captura",main="CBA 2022",ylim=c(1000,19000),cex.axis=0.8,cex.main=0.8,cex.lab=0.8)
-lines(seq(10,50,10),CBAs1a,type="o",col=1)
-lines(seq(10,50,10),CBAs2a,type="o",col=2)
-lines(seq(10,50,10),CBAs3a,type="o",col=3)
-legend(12,18000,c("Rmed","Ralto","Rbajo"),col=c(1,2,3),lwd=1,bty="n",cex=0.8)
-
-
-
-```
-
-
-```{r Fig27_anexoIII,warning=F, include=T, message=F, echo=T,fig.height=3,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
-
-
 ### *modelo altarnativo*
-xca1 <-rnorm(1000, mean = cbas1a, sd = cbas1astd)
+# escenario 1
+xca1 <-rnorm(1000, mean = cbas1a, 
+                   sd   = cbas1astd)
+
 xca  <-seq(min(xca1),max(xca1),0.5)
-yca  <-dnorm(xca, mean = cbas1a, sd =cbas1astd)
-icca <-qnorm(c(0.05,0.95,0.5),cbas1a,cbas1astd)
+
+yca  <-dnorm(xca, mean = cbas1a,
+                  sd   = cbas1astd)
+
+icca <-qnorm(c(0.1,0.5,0.5),cbas1a,cbas1astd)
+
 xxca <-c(xca[xca>=icca[1]&xca<=icca[2]],rev(xca[xca>=icca[1]&xca<=icca[2]]))
 yyca <-c(yca[xca>=icca[1]&xca<=icca[2]],rep(0,length(yca[xca>=icca[1]&xca<=icca[2]])))
 
-par(mfcol=c(1,2),mar=c(4,4,1,1)+0.5)
-plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(0,0.00019),xlim=c(1000,25000),xlab="CBA 2021 (toneladas)",main="Escenario Rmed 2021", cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
+# escenario 2
+xcb1 <-rnorm(1000, mean = cbas2a, 
+                   sd   = cbas2astd)
+
+xcb  <-seq(min(xcb1),max(xcb1),0.5)
+
+ycb  <-dnorm(xcb, mean = cbas2a, 
+                  sd   = cbas2astd)
+
+iccb <-qnorm(c(0.1,0.5,0.5),cbas2a,cbas2astd)
+
+xxcb <-c(xcb[xcb>=iccb[1]&xcb<=iccb[2]],rev(xcb[xcb>=iccb[1]&xcb<=iccb[2]]))
+yycb <-c(ycb[xcb>=iccb[1]&xcb<=iccb[2]],rep(0,length(ycb[xcb>=iccb[1]&xcb<=iccb[2]])))
+
+# escenario 3
+xcc1 <-rnorm(1000, mean = cbas3a, 
+                   sd   = cbas3astd)
+
+xcc  <-seq(min(xcc1),max(xcc1),0.5)
+
+ycc  <-dnorm(xcc, mean = cbas3a, 
+                  sd   = cbas3astd)
+
+iccc <-qnorm(c(0.1,0.5,0.5),cbas3a,cbas3astd)
+
+xxcc <-c(xcc[xcc>=iccc[1]&xcc<=iccc[2]],rev(xcc[xcc>=iccc[1]&xcc<=iccc[2]]))
+yycc <-c(ycc[xcc>=iccc[1]&xcc<=iccc[2]],rep(0,length(ycc[xcc>=iccc[1]&xcc<=iccc[2]])))
+
+
+par(mfrow=c(2,2),mar=c(4,4,1,1)+0.5)
+#===============================================================================================================
+# plot captura a la talla
+plot(tallas,reps1a$CTPp,type="l",ylim=c(0,900),main="",
+     ylab="Captura 2022 a la talla (t)",xlab="Tallas (cm)",cex.axis=1,cex.main=1,cex.lab=1,col='blue2')
+lines(tallas,reps2a$CTPp,col='red2')
+lines(tallas,reps3a$CTPp,col='green2')
+text(rep(9.5,3),c(reps1a$CTPp[10],reps2a$CTPp[10],reps3a$CTPp[10])+10,c('8%','18%','5%'))
+#===============================================================================================================
+# plot densidad de probabilidad CBA
+plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(0,0.00022),xlim=c(1000,21000),xlab="CBA 2022 (toneladas)",main="", cex.axis=1,cex.main=1,cex.lab=1)
+
 polygon(xxca,yyca,col=gray(0.8,0.7),border="gray80")
-lines(xca,yca,lwd=1,col="red2",lty=1)
-legend(2000,0.00019,c(paste("alternativo_IC95% = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" ")), lty=c(1,1),col=c("black","red2"),bty="n",lwd=1,cex=0.7)
+lines(xca,yca,lwd=1,col="blue2",lty=1)
+
+polygon(xxcb,yycb,col=gray(0.8,0.7),border="gray80")
+lines(xcb,ycb,lwd=1,col="red2",lty=1)
+
+polygon(xxcc,yycc,col=gray(0.8,0.7),border="gray80")
+lines(xcc,ycc,lwd=1,col="green2",lty=1)
+
+legend(2000,0.00021,
+       c(paste("CBA2022_Hito1_Rmed = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_Ralto = [",round(iccb[1],0),"-",round(iccb[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_Rbajo = [",round(iccc[1],0),"-",round(iccc[2],0),"]",sep=" ")), lty=c(1,1,1),col=c('blue2',"red2","green2"),bty="n",lwd=1,cex=0.8)
 box()
 
-plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA toneladas",xlab="Percentil de probabilidad de captura",main="Escenario Rmed 2021",ylim=c(1000,19000),cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
-legend(12,18000,c("modelo alternativo"),col=c(1,2),lwd=1,bty="n",cex=0.6)
+#===============================================================================================================
+# plot percentiles de captura
+plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,13000),cex.axis=1,cex.main=1,cex.lab=1,col="blue2")
+lines(seq(10,50,10),CBAs2a,type="o",col="red2")
+lines(seq(10,50,10),CBAs3a,type="o",col="green2")
 
+legend(12,13000,c("Rmed","Ralto","Rbajo"),col=c(4,2,3),pch=c(19,19,19),lwd=1,bty="n",cex=0.8)
+
+#===============================================================================================================
+# plot resguardo
+
+plot(seq(10,50,10),buffer1a,type="o",ylim=c(0,0.35), ylab="Resguardo = (1-CBA/Crms)",xlab="Percentil de Captura (*P)",main="",lwd=2,lty=1,col='blue2')
+lines(seq(10,50,10),buffer2a,type="o",col='red2')
+lines(seq(10,50,10),buffer3a,type="o",col='green2')
 ```
