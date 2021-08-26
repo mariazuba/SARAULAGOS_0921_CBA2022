@@ -95,7 +95,7 @@ CBA(admb,dir.0,dir.1,Carpeta,system,l_escRec)
 
 
 ### CÁLCULO DE TAMAÑO DE MUESTRA
-```{r tamaño de muestra,eval=F}
+```{r tamaño de muestra,eval=F,echo=F}
 #============================================================#
 # II. COMPOSICI?N EDAD DE LAS CAPTURAS                       #
 #============================================================#
@@ -194,7 +194,7 @@ NM_Ian <- data.frame(nmF=c(nmf_ari,nmf_geo,nmf_arm),nmR=c(nmr_ari,nmr_geo,nmr_ar
 
 ## 1. Antecedentes
 
-```{r Fig2,warning=F, include=T, message=F,eval=T, echo=T,fig.height=3.5,fig.width=5,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig2,warning=F, include=T, message=F,eval=T, echo=F,fig.height=3.5,fig.width=5,fig.align="center",fig.path="Figuras/",dev=fig}
 year<-seq(2006,2021,1)
 desemb<-c(39146,50506,45078,49225,20123,16429,19763,21888,22951,23643,18495,14134,8366,12565,14194,NA)
 cuota<-c(40522,50872,41904,58481,30966,17693,14500,21670,18276,23848,18380,20000,18897,11137,15471,15765)
@@ -204,10 +204,12 @@ par(mfcol=c(1,1),mar=c(4,4,1,1))
 plot(year,desemb,type="h",lwd=15,ylab="Desembarques (t.)",xlab="Año",ylim=c(0,60000),xaxp=c(2000,2022,22),col="cadetblue4",cex.lab=0.8,cex.axis=0.8)
 lines(year,cuota,type="l",lwd=2,col=1)
 legend(2011,60000,c("Datos oficiales","Cuota"),lwd=c(10,2),col=c("cadetblue4",1),bty="n",cex=0.8)
+
+kable(data.frame(year,desemb,cuota))
 ```
 
 
-```{r Fig3,eval=T,warning=F, include=T, message=F, echo=T,fig.height=9.5,fig.width=7,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig3,eval=T,warning=F, include=T, message=F, echo=F,fig.height=9.5,fig.width=7,fig.align="center",fig.path="Figuras/",dev=fig}
 
 datafrec<-read.table(paste(getwd(),"/Tallasmensuales.txt",sep=""),header = FALSE, sep = "")
 
@@ -280,10 +282,10 @@ fig0+fig2+fig4+fig1+fig3
 
 
 \pagebreak
-## 2. Metodología 
 
 
-```{r Fig7,warning=F, include=T, message=F,eval=F, echo=T,fig.height=3,fig.width=6,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+
+```{r Fig7,warning=F, include=T, message=F,eval=F, echo=F,fig.height=3,fig.width=6,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 dirb<-paste(dir.0,"/cba_septiembre2021",sep="")
 setwd(dirb)
@@ -313,7 +315,7 @@ text(2010,c(exp(8.6053e+000),
 
 ```
 
-\pagebreak
+
 
 ## 3. RESULTADOS OBJETIVO 1
 
@@ -333,6 +335,8 @@ lines(year,comun_austral,type="h",lwd=15,col="dimgray")
 lines(year,supuesto,type="h",lwd=15,col="goldenrod3")
 lines(year,cuota,type="l",lwd=2,col=1)
 legend(2011,60000,c("datos oficiales","supuesto s.comun/s.austral","supuesto de captura 2021","Cuota"),lwd=c(10,10,10, 2),col=c("cadetblue4","dimgray","goldenrod3",1),bty="n",cex=0.8)
+
+kable(data.frame(year,desemb,cuota,comun_austral,supuesto))
 ```
 
 
@@ -364,6 +368,8 @@ lines(seq(1,12,1),d2020,type="o",col=2,lwd=2)
 lines(seq(1,12,1),d2021,type="o",col=1,lwd=2)
 legend(6,5000,c(2017,2018,2019,2020,2021),col=c(5,4,3,2,1),lwd=2,bty="n")
 
+kable(data.frame(rbind(d2006,d2007,d2008,d2009,d2010,d2011,d2012,d2013,d2014,d2015,d2016,d2017,d2018,d2019,d2020,d2021)))
+
 ```
 
 
@@ -378,6 +384,8 @@ par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
 plot(year,tweedie,type="o",lwd=1,ylab="CPUE Estandarizada (t/viaje)",xlab="Año",ylim=c(0,55),xaxp=c(2000,2021,21),col=4,pch=19)
 lines(year,tweedie_inter,type="o",lwd=1,col=1,pch=19)
 legend(2011,55,c("Tweedie interacciones","Tweedie"),lwd=c(1,1),pch=19,col=c(1,4),bty="n")
+
+kable(data.frame(year,tweedie,tweedie_inter))
 ```
 
 
@@ -394,14 +402,16 @@ cruceroX[cruceroX==0] <- NA
 par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
 plot(year,cruceroX,type="p",ylab="Biomasa (miles t.)",xlab="Año",ylim=c(0,250),xaxp=c(2000,2022,22),col="black",bg="gray",pch=21,cex=1.5,main="Biomasa Crucero")
 points(years0[nyears0],cruceroX[nyears0-4],bg="red",pch=21,cex=2)
+
+kable(data.frame(Año=year,BioCrucero=cruceroX))
 ```
 
 
-
+\pagebreak
 
 #### ESTRUCTURA DE TALLAS DE LA FLOTA
 \quad
-```{r Fig12,warning=F, include=T, message=F, echo=T,fig.height=6,fig.width=6,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig12,warning=F, include=T, message=F, echo=F,fig.height=6,fig.width=6,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
 
 #######################################################################################
 # AREGLOS DE DATOS
@@ -436,11 +446,12 @@ nyearf  <- length(yearf)
   
 ```
 
+\pagebreak
 
 #### ESTRUCTURA DE TALLAS DEL CRUCERO
 \quad
 
-```{r Fig13,warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=7,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig13,warning=F, include=T, message=F, echo=F,fig.height=7,fig.width=7,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
 
 #######################################################################################
 # AREGLOS DE DATOS
@@ -474,7 +485,7 @@ nyearc      <- length(yearc)
 
 ### 3.2. Ajustes del modelo a los datos de índices
 
-```{r Fig19,warning=F, include=T, message=F, echo=T,fig.height=6.5,fig.width=5.5,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig19,warning=F, include=T, message=F, echo=F,fig.height=6.5,fig.width=5.5,fig.align="center",fig.path="Figuras/",dev=fig}
 
 #######################################################################################
 # AREGLOS DE DATOS
@@ -568,12 +579,22 @@ f3 <- ggplot(base1 %>% filter(Asesoría!='observado', variable=='Desembarques'),
 f1/f2/f3 + plot_layout(guides="collect")
 
 
+
+```
+
+
+\pagebreak
+
+```{r echo=F,warning=F, include=T, message=F}
+kable(ind_obs)
+
+kable(round(ind_sept,0))
 ```
 
 \pagebreak
 ### 3.2. Análisis de Residuales de los índices
 
-```{r Fig20,warning=F, include=T, message=F, echo=T,eval=TRUE,fig.height=11,fig.width=9,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+```{r Fig20,warning=F, include=T, message=F, echo=F,eval=TRUE,fig.height=11,fig.width=9,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 #######################################################################################
 # AREGLOS DE DATOS
@@ -635,7 +656,7 @@ r4 <- ggplot(Res, aes(sample = value, colour = Asesoría)) +
 
 #### FLOTA
 \quad
-```{r Fig21,warning=F, include=T, message=F, echo=T,fig.height=6,fig.width=6,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig21,warning=F, include=T, message=F, echo=F,fig.height=6,fig.width=6,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
 
 #######################################################################################
 # AREGLOS DE DATOS
@@ -684,7 +705,7 @@ nyearf  <- length(yearf)
 #### CRUCERO
 \quad
 
-```{r Fig22,warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=7,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig22,warning=F, include=T, message=F, echo=F,fig.height=7,fig.width=7,fig.asp=1,fig.align="center",fig.path="Figuras/",dev=fig}
 
 #######################################################################################
 # AREGLOS DE DATOS
@@ -730,7 +751,7 @@ nyearc  <-length(yearc)
 \pagebreak
 ### 3.4. Análisis de Residuales de Composiciones de tallas
 
-```{r Fig23, warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=8,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig23, warning=F, include=T, message=F, echo=F,fig.height=7,fig.width=8,fig.align="center",fig.path="Figuras/",dev=fig}
 par(mfcol=c(1,2))
 #Flota
 cx<-0.7
@@ -1016,7 +1037,7 @@ Rt/BD/Ft |Rtrel/BDrel/Ftrel
 
 \pagebreak
 ### 3.7. Perfil de verosimilitud
-```{r Fig26, eval=T, echo=T, message=FALSE, warning=FALSE, include=T, fig.align="center", fig.height=4, fig.width=5,fig.path=dir.Fig,dev=fig}
+```{r Fig26, eval=T, echo=F, message=FALSE, warning=FALSE, include=T, fig.align="center", fig.height=4, fig.width=5,fig.path=dir.Fig,dev=fig}
 ######################################################################################
 # AREGLOS DE DATOS
 #######################################################################################
@@ -1068,11 +1089,12 @@ setwd(dir)
 
 
 
-\pagebreak
-### 3.8. Sensibilidad a la actualización de datos
 
 \pagebreak
 ## 4. RESULTADOS OBJETIVO 2
+
+*"Establecer el estatus actualizado de sardina austral, sobre la base de sus principales indicadores estandarizados de estado y flujo, propagando para estos efectos todas las fuentes de incertidumbre subyacente a la pesquería."* \vspace{0.5cm}
+
 ### 4.1. Indicadores del stock
 
 ```{r Variables_sept, echo=F,message=FALSE, warning=FALSE, include=T}
@@ -1105,7 +1127,6 @@ VarPobSep<- data.frame(x=years0,
          upperFt0 = exp(Ft0 +1.96*Ft0std))
 ```
 
-\pagebreak
 
 ```{r Fig27, echo=FALSE, message=FALSE, warning=FALSE, include=T, fig.align="center", fig.height=6, fig.width=8,fig.path=dir.Fig,dev=fig}
 
@@ -1166,7 +1187,7 @@ Rt/BT | (BD/Ft)
 
 ```
 
-```{r}
+```{r ,warning=F, include=T, message=F, echo=F}
 Rt0_mean<-mean(VarPobSep$Rt0)
 BT0_mean<-mean(VarPobSep$BT0)
 BD0_mean<-mean(VarPobSep$BD0)
@@ -1175,13 +1196,13 @@ R15_18 <-mean(VarPobSep$Rt0[14:17])
 BT16_18 <-mean(VarPobSep$BT0[15:17])
 BT19_20 <-mean(VarPobSep$BT0[18:19])
 
-rbind(Rt0_mean,BT0_mean,BD0_mean,R15_18,BT16_18,BT19_20)
+kable(rbind(Rt0_mean,BT0_mean,BD0_mean,R15_18,BT16_18,BT19_20))
 
 ```
 
 \pagebreak
 
-```{r Fig28,warning=F, include=T, message=F, echo=T,fig.height=5,fig.width=10,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+```{r Fig28,warning=F, include=T, message=F, echo=F,fig.height=5,fig.width=10,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 par(mfrow=c(1,2),mar=c(4,4,1,1)+0.5)
 
@@ -1199,6 +1220,15 @@ lines(data.0$Edades,rep0$Scru_age[nyears0,],type="l",col=2)
 legend(4,0.3,c("sel_2002-2012","sel_2013-2020"),
        col=c(4,2),lwd=c(1,1),cex=0.8,bty="n")
 
+kable(data.frame(Edades=data.0$Edades,
+                 Selbloque1=rep0$Sflo_age[1,],
+                 Selbloque2=rep0$Sflo_age[9,],
+                 Selbloque3=rep0$Sflo_age[nyears0,]))
+
+kable(data.frame(Edades=data.0$Edades,
+                 SelCrubloque1=rep0$Scru_age[1,],
+                 SelCrubloque2=rep0$Scru_age[nyears0,]))
+
 ```
 
 \pagebreak
@@ -1212,7 +1242,7 @@ legend(4,0.3,c("sel_2002-2012","sel_2013-2020"),
 \vspace{-0.2cm} Indicadores poblacionales de sardina austral en aguas interiores de Chiloé. Tabla comparativa entre los resultados de la evaluación de septiembre (primer hito) y junio (segundo hito).
 \end{center}
 ```
-```{r VariablesPoblacionales,warning=F, include=T, message=F, echo=T}
+```{r VariablesPoblacionales,warning=F, include=T, message=F, echo=F}
 
 VarPobl0<- cbind(anos=rep0$YRS,
                  "BD_sep"=c(BD0),
@@ -1233,7 +1263,7 @@ write.csv(VarPobl0, file="Tablas/TablaVarpob.csv")
 
 
 
-```{r Fspr_alternativoS1,warning=F, include=T, message=F, echo=T}
+```{r Fspr_alternativoS1,warning=F, include=T, message=F, echo=F}
 #PBRs Modelo alternativo
 BDo0    <- rep0$Bo
 BRMS0   <- BDo0*0.55
@@ -1241,7 +1271,7 @@ BDlim0  <- BDo0*0.275
 FRMS0   <- exp(subset(std0,name=="log_Fref")$value[3])
 ```
 
-```{r Fig29,warning=F, include=T, message=F,eval=F, echo=T,fig.height=4,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+```{r Fig29,warning=F, include=T, message=F,eval=F, echo=F,fig.height=4,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 par(mfcol=c(1,2),mar=c(4,4,1,1)+0.5)
 plot(rep0$Tallas,rep0$Selflo_talla[1,],type="l",las=1,col=4,
@@ -1262,7 +1292,7 @@ abline(v=c(FRMSb1,FRMSb2,FRMSb3),col=c(4,3,2),lty=2)
 ```
 
 
-```{r estatus,warning=F, include=T, message=F, echo=T,fig.height=7,fig.width=9,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+```{r estatus,warning=F, include=T, message=F, echo=F,fig.height=7,fig.width=9,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 
 yrs     <- rep0$YRS
@@ -1383,7 +1413,7 @@ pe0<-1-pnorm(1.1,Frpr0[length(years0)],
 
 
 
-```{r tabla PBRs, echo=T,eval=TRUE}
+```{r tabla PBRs, echo=F,eval=TRUE}
 
 PBRs<-round(rbind("BD~0~"=c(BDo0)/1000,
                   "BD~RMS~"=c(BRMS0)/1000,
@@ -1395,7 +1425,7 @@ PBRs<-round(rbind("BD~0~"=c(BDo0)/1000,
                   "*p(agotado/colapsado)*"=round(c(pd0),2),
                   "*p(sobrepesca)*"=round(c(pe0),2)),3)
 
-colnames(PBRs)<-c("Septiembre")
+colnames(PBRs)<-c("Septiembre 2021")
 kable(PBRs)
 
 write.csv(PBRs, file="Tablas/PBRs.csv")
@@ -1443,16 +1473,18 @@ legend(0.1,1.85,c(paste("Sept2021_IC95% = [",round(icfs[1],3),"-",round(icfs[2],
 box()
 ```
 
+\pagebreak
+
 ```{=tex}
 \small
 \begin{center} 
 \textbf{Tabla 15.}
 \end{center}
 \begin{center} 
-\vspace{-0.2cm} Variación interanual de F respecto de FRMS (F/F~RMS~), BD respecto de BDRMS (BD/BD~RMS~), y de las tasas de explotación referidos a la biomasa total (Y/BT) en la pesquería de sardina austral. Comparación entre las Estimaciones de la evaluación de stock actual (sept 2018) y anterior (jun 2018).
+\vspace{-0.2cm} Variación interanual de F respecto de FRMS (F/F~RMS~), BD respecto de BDRMS (BD/BD~RMS~), y de las tasas de explotación referidos a la biomasa total (Y/BT) en la pesquería de sardina austral.
 \end{center}
 ```
-```{r IndicadoresStock,warning=F, include=T, message=F, echo=T}
+```{r IndicadoresStock,warning=F, include=T, message=F, echo=F}
 
 VarPobl0<- cbind(anos=rep0$YRS,
                  "F/F~RMS~**S**"=c(round(exp(Ft0)/FRMS0,3)),
@@ -1468,7 +1500,7 @@ write.csv(VarPobl0, file="Tablas/Estatus.csv")
 
 ### Diagramas de Fase
 
-```{r Fig31, warning=F, include=T, message=F,eval=T, echo=T,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
+```{r Fig31, warning=F, include=T, message=F,eval=T, echo=F,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
 
 source(paste(getwd(),"/funciones/Fn_DiagramaFase.R",sep="")) 
 name0<-"Asesoría Septiembre 2021"
@@ -1522,33 +1554,113 @@ text(lastB0,lastF-0.1,years0[nyears0-1],cex=0.8)
 
 
 ### 1. Escenarios de reclutamiento para proyección
-```{r Fig23_anexoIII,warning=F, include=T, message=F, echo=F,fig.height=4,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
-##########################################################
+
+```{r proyecciona,warning=F, include=T, message=F,eval=T, echo=F}
+
 dira<-paste(dir.0,"/cba_septiembre2021",sep="")
 setwd(dira)
 reps1a     <- reptoRlist("MAT0921s1.rep")  
 reps2a     <- reptoRlist("MAT0921s2.rep") 
 reps3a     <- reptoRlist("MAT0921s3.rep") 
 
-# modelo alternativo
-plot(reps1a$YRS,reps1a$Reclutas,type="l",ylab="Reclutamientos",xlab="Años",main="Escenarios de reclutamiento - CBA 2022",cex.axis=0.7,cex.main=0.7,cex.lab=0.7)
+carpeta<-"/cba_septiembre2021/"
+stds1     <- read.table(paste(dir.0,carpeta,"MAT0921s1.std", sep=''),header=T,sep="",na="NA",fill=T) 
+stds2     <- read.table(paste(dir.0,carpeta,"MAT0921s2.std", sep=''),header=T,sep="",na="NA",fill=T) 
+stds3     <- read.table(paste(dir.0,carpeta,"MAT0921s3.std", sep=''),header=T,sep="",na="NA",fill=T) 
+
+bds1     <- subset(stds1,name=="SSBp")$value[3] ; bds1std  <- subset(stds1,name=="SSBp")$std[3] #reclutamiento medios
+bds2     <- subset(stds2,name=="SSBp")$value[3] ; bds2std  <- subset(stds2,name=="SSBp")$std[3] #reclutamiento 2018
+bds3     <- subset(stds3,name=="SSBp")$value[3] ; bds3std  <- subset(stds3,name=="SSBp")$std[3] #reclutamiento 2012
+
+cs1     <- subset(stds1,name=="CBAp")$value[3] ; cs1std  <- subset(stds1,name=="CBAp")$std[3] #reclutamiento medios
+cs2     <- subset(stds2,name=="CBAp")$value[3] ; cs2std  <- subset(stds2,name=="CBAp")$std[3] #reclutamiento 2018
+cs3     <- subset(stds3,name=="CBAp")$value[3] ; cs3std  <- subset(stds3,name=="CBAp")$std[3] #reclutamiento 2012
+
+
+```
+
+
+```{r Fig34a, warning=F, include=T, message=F,eval=T, echo=F,fig.height=7,fig.width=9,fig.align="center",fig.path="Figuras/",dev=fig}
+par(mfrow=c(2,2),mar=c(4,4,1,1)+0.5)
+yearProy<-2022
+
+#=======================================================
+# plot reclutamientos 
+plot(c(reps1a$YRS,2022),c(reps1a$Reclutas,NA),type="o",
+     ylab="Reclutamientos",xlab="Años",main="",
+     cex.axis=1,cex.main=1,cex.lab=1,xlim=c(2000,2023),pch=19)
+
+abline(v=yearProy-1,h=1,lty=2)
+
+lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
+      c(reps1a$Reclutas,reps2a$Rproy),type="o",col=2,pch=19)
+
+lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
+      c(reps1a$Reclutas,reps3a$Rproy),type="o",col=3,pch=19)
+
+lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
+      c(reps1a$Reclutas,reps1a$Rproy),type="o",col=1,pch=19)
 
 abline(h=c(reps1a$Rproy,
            reps2a$Rproy,
            reps3a$Rproy),
        col=c(1,2,3))
 
-text(2010,c(reps1a$Rproy,
+text(2022,c(reps1a$Rproy,
             reps2a$Rproy,
             reps3a$Rproy)+1000,
      round(c(reps1a$Rproy,
              reps2a$Rproy,
              reps3a$Rproy),0),cex=0.7)
 
+#=======================================================
+# plot Biomasa desovante
+plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
+     c(rep0$BD,bds3),
+     type="o",ylab="Biomasa desovante (t)",xlab="Años",col=3,
+     ylim=c(0,95000),xlim=c(2000,2023),pch=19,main="")
 
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(rep0$BD,bds2),
+      type="o",col=2,pch=19)
 
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(rep0$BD,bds1),type="o",col=1,pch=19)
+
+abline(v=yearProy-1,lty=2)
+legend(2011,95000,c("R_alto (2012)","R_Med","R_bajo (2018)"),pch=19,lwd=1,col=c(2,1,3),bty="n")
+
+#=======================================================
+# plot bd/BDrms
+plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
+     c(rep0$BD,bds3)/BRMS0,
+     type="o",ylab="BD/BDrms",col=3,xlab="Años",pch=19,xlim=c(2000,2023),)
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(rep0$BD,bds2)/BRMS0,
+      type="o",col=2,pch=19)
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(rep0$BD,bds1)/BRMS0,
+      type="o",col=1,pch=19)
+
+abline(v=yearProy-1,h=1,lty=2)
+abline(h=0.5,lty=2,col=2)
+#=======================================================
+# plot capturas proyectadas
+plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
+     c(rep0$desemb_pred,cs3),type="o",
+     ylab="Capturas (t)",col=3,ylim=c(0,55000),xlab="Años",pch=19,xlim=c(2000,2023),)
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(rep0$desemb_pred,cs2),
+      type="o",col=2,pch=19)
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(rep0$desemb_pred,cs1),
+      type="o",col=1,pch=19)
+abline(v=yearProy-1,lty=2)
 ```
+
 
 
 ```{r Fig26_anexoIII,warning=F, include=T, message=F,eval=F, echo=F,fig.height=3.5,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
@@ -1740,3 +1852,8 @@ plot(seq(10,50,10),buffer1a,type="o",ylim=c(0,0.35), ylab="Resguardo = (1-CBA/Cr
 lines(seq(10,50,10),buffer2a,type="o",col='red2')
 lines(seq(10,50,10),buffer3a,type="o",col='green2')
 ```
+
+\pagebreak
+
+## ESCENARIOS DE CAPTURA 2021 Y ESTRUCTURA DE TALLAS 2021 ALTERNATIVOS PARA EVALUAR EL EFECTO EN EL ESTATUS 2021, SOBREVIVENCIA 2022 Y CBA 2022.
+
