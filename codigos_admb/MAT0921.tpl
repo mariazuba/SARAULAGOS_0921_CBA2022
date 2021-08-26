@@ -423,6 +423,7 @@ PARAMETER_SECTION
  
  
  sdreport_matrix SSBp(1,ntime_sim,1,npbr)// Biomasa desovante proyectada 
+ sdreport_matrix RpRp(1,ntime_sim,1,npbr)// Biomasa desovante proyectada 
  matrix BTp(1,ntime_sim,1,npbr)
  
  number nm1
@@ -982,6 +983,7 @@ FUNCTION Eval_CTP
   BDp  = sum(elem_prod(elem_prod(NMDp,msex),Wmed));
   
   SSBp(i,j) = BDp;
+  RpRp(i,j) = SSBp(i,j)/Brms(j);
   BTp(i,j)  = Bp;
 
  }

@@ -249,6 +249,7 @@ private:
   param_matrix YTPp;
   param_stddev_vector CBAp;
   param_stddev_matrix SSBp;
+  param_stddev_matrix RpRp;
   param_matrix BTp;
   param_number nm1;
   param_number cuenta1;

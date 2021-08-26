@@ -576,6 +576,7 @@ model_parameters::model_parameters(int sz,int argc,char * argv[]) :
   #endif
   CBAp.allocate(1,npbr,"CBAp");
   SSBp.allocate(1,ntime_sim,1,npbr,"SSBp");
+  RpRp.allocate(1,ntime_sim,1,npbr,"RpRp");
   BTp.allocate(1,ntime_sim,1,npbr,"BTp");
   #ifndef NO_AD_INITIALIZE
     BTp.initialize();
@@ -996,6 +997,7 @@ void model_parameters::Eval_CTP(void)
   NMDp = elem_prod(Np,mfexp(-dt(1)*(Zpbr)))*Prob_talla;
   BDp  = sum(elem_prod(elem_prod(NMDp,msex),Wmed));
   SSBp(i,j) = BDp;
+  RpRp(i,j) = SSBp(i,j)/Brms(j);
   BTp(i,j)  = Bp;
  }
   CBA(j) = YTP(j);
