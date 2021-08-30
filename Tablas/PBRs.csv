@@ -1,10 +1,10 @@
 "","Septiembre 2021"
-"BD~0~",58.529
-"BD~RMS~",32.191
-"BD~LIM~",16.096
-"F~RMS~",0.3
-"p(BD~2021~<BD~RMS)~",0.37
-"p(F~2021~>F~RMS~)",0.74
-"*p(sobreexplotación)*",0.19
+"BD~0~",61.48
+"BD~RMS~",33.814
+"BD~LIM~",16.907
+"F~RMS~",0.299
+"p(BD~2021~<BD~RMS)~",0.25
+"p(F~2021~>F~RMS~)",0.61
+"*p(sobreexplotación)*",0.12
 "*p(agotado/colapsado)*",0
-"*p(sobrepesca)*",0.62
+"*p(sobrepesca)*",0.47
