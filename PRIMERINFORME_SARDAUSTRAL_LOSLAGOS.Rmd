@@ -467,7 +467,7 @@ El modelamiento de la dinámica de sardina austral es en año calendario (enero 
 +--------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                |             |                                                                                                                                                                                                  |
 +--------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Proporción                     | $p_{l,t}^f$ | Representa la distribución de los ejemplares que están presentes en la captura total por intervalo de longitud. Tamaño de muestra efectivo supuesto como parte del error de observación $n^f=25$ |
+| Proporción                     | $p_{l,t}^f$ | Representa la distribución de los ejemplares que están presentes en la captura total por intervalo de longitud. Tamaño de muestra efectivo supuesto como parte del error de observación $n^f=20$ |
 |                                |             |                                                                                                                                                                                                  |
 | de la abundancia               |             |                                                                                                                                                                                                  |
 |                                |             |                                                                                                                                                                                                  |
@@ -494,39 +494,49 @@ El modelamiento de la dinámica de sardina austral es en año calendario (enero 
 
 \quad
 
-El crecimiento medio es descrito por el modelo von Bertalanffy (VB) puede ser expresado según:
+Dado que el modelo alternativo está basado en una dinámica edad-estructurada, es necesario transformar las estructuras de tallas a edades a través de una clave talla-edad simulada. Esta clave describe la probabilidad de que un individuo de talla $l$ pertenece a una cierta edad $a$. De acuerdo a lo anterior, la proporción de ejemplares de edad $a$ en un intervalo de longitud, $P_{l,a}$ es una función de la longitud promedio ($l_a$) a la edad (predicha por los parámetros de crecimiento) y la varianza ($\sigma_a$) de las longitudes a una edad determinada, según:
 
 ```{=tex}
 \begin{equation}
-\bar{\Delta_l}=(L\infty-l^*)(1-e^{-k})
+l_a = l_{\infty} \left(1-e^k \right) + e^{-k}l_{a-1}
 \end{equation}
 ```
-Donde, $L\infty$ y $k$ son parámetros de la función VB, $l^*$ corresponde al punto medio del intervalo de talla $l$.
-
-La distribución gamma es utilizada para representar la variación en el crecimiento, ya que permite describir de mejor forma los patrones de crecimiento para peces de tallas muy pequeñas y muy grandes. La distribución gamma puede ser expresada en términos de dos parámetros $\alpha_l$ y $\beta_p$, los cuales se relacionan entre si según:
+```{=tex}
+\begin{equation}
+\sigma_a = cv l_a
+\end{equation}
+```
+```{=tex}
+\begin{equation}
+P_{l,a}(l_a,\sigma_a)=\frac{1}{\sqrt{2\pi\sigma^2_a}}e^{-\frac{\left(l-l_a\right)^2}{2\sigma^2_a}}
+\end{equation}
+```
+donde $P_{l,a}$ representa la matriz de distribución de probabilidad por talla $l$ a la edad $a$. Y $\sigma_a$ corresponde a la desviación estándar de la talla media para la edad $a$. La \textbf{Figura \ref{Fig4x}} muestra la clave talla-edad simulada por el modelo alternativo para obtener las capturas en número estimadas a la talla "l" y año "t".
 
 ```{=tex}
 \begin{equation}
-\alpha_l=\frac{\bar\Delta_l}{\beta_p},
+\hat{C}_{l,t}=P_{l,a}C_{a,t}
 \end{equation}
 ```
-Donde, $\alpha_l$ corresponde a la varianza (es función de $L\infty$ y $k$) proporcional a la media, $\beta_p$ corresponde al coeficiente de variación el que permite incorporar la variabilidad de los individuos en la población. Con ello la proporción de ejemplares que crecen o se mueven de un intervalo a otro queda descrito por:
+Donde $C_{a,t}$ corresponde a las capturas en número observadas a la talla provenientes de los monitoreos de la pesquería y cruceros acústicos. La \textbf{Figura \ref{Fig5x}} muestra las capturas estimadas a la talla utilizando la clave talla-edad antes descrita. Se observan dos modas principales, una en torno a los 9 cm correspondiente al grupo de edad 0 y una segunda moda en torno a los 14 cm. Se observa una bimodalidad más marcada que la captura a la talla estimada por el modelo base (\textbf{Figura \ref{Fig3}}).
 
 ```{=tex}
-\begin{equation}
-T_{ll'}=\int^{l'}_l\frac{(l'-l)^a exp(-(l'-l)/\beta_p)}{\beta_p}dl
-\end{equation}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{Figuras/Fig4_anexoIII-1.pdf}
+\caption{Probabilidad de que un individuo de talla "l" pertenece a una cierta edad "a" estimada en el modelo alternativo. Los números sobre cada curva corresponden a la longitud promedio de cada grupo de edad (edades de 0 a 5 años).}
+\label{Fig4x}
+\end{figure}
 ```
-Donde, $T_{ll'}$ corresponde a la matriz de transición que modela el crecimiento entre $l$ y $l´$ (Sullivan *et al*.,1990).
-
-El reclutamiento se plantea separable en un componente anual y uno talla-específico que se expresa según:
-
 ```{=tex}
-\begin{equation}
-Pr_l=R\int_l^{l+1}\frac{1}{2\pi\sigma^2}exp[-\frac{(l-\mu)^2}{\sigma^2}dl,
-\end{equation}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{Figuras/Fig5_anexoIII-1.pdf}
+\caption{Captura en número estimada por el modelo alternativo utilizando clave talla-edad simulada.}
+\label{Fig5x}
+\end{figure}
 ```
-Donde, $\mu$ y $\sigma$ corresponden a la media y desviación de una distribución normal constante entre años.
+
 
 La abundancia $N_{l,t}$ de los ejemplares de talla $l$, a comienzos del año $t$, queda entonces representada por:
 
@@ -745,23 +755,23 @@ El modelo de evaluación de stock actualmente en uso consiste en estimar princip
 | 2002 |    38.974   | 0,2 |            |      |          |      |              |                |             |
 | 2003 |    32.843   | 0,2 |            |      |          |      |              |                |             |
 | 2004 |    36.545   | 0,2 |            |      |          |      |              |                |             |
-| 2005 |    52.569   | 0,2 |            |      |          |      |   25/Sel\_1  |                |             |
-| 2006 |    39.146   | 0,1 |            |      |  194.719 | 0,26 |   25/Sel\_1  |       15       |     0,92    |
-| 2007 |    50.506   | 0,1 |    23,9    | 0,22 |          |      |   25/Sel\_1  |                |             |
-| 2008 |    45.078   | 0,1 |    21,6    | 0,22 |  114.640 | 0,26 |   25/Sel\_1  |       15       |     0,33    |
-| 2009 |    49.225   | 0,1 |    28,1    | 0,22 |          |      |   25/Sel\_1  |                |             |
-| 2010 |    20.123   | 0,1 |    19,1    | 0,22 |          |      |   25/Sel\_2  |                |             |
-| 2011 |    16.429   | 0,1 |    16,3    | 0,22 |  88.116  | 0,26 |   25/Sel\_2  |       15       |     0,08    |
-| 2012 |    19.763   | 0,1 |    13,7    | 0,22 |          |      |   25/Sel\_2  |                |             |
-| 2013 |    21.888   | 0,1 |    35,6    | 0,26 |  124.729 | 0,22 |   25/Sel\_3  |       15       |     0,42    |
-| 2014 |    22.951   | 0,1 |    27,7    | 0,26 |  113.855 | 0,22 |   25/Sel\_3  |       15       |     0,42    |
-| 2015 |    23.643   | 0,1 |    23,1    | 0,26 |  60.498  | 0,22 |   25/Sel\_3  |       15       |     0,33    |
-| 2016 |    18.495   | 0,1 |    24,0    | 0,26 |  106.245 | 0,22 |   25/Sel\_3  |       15       |     0,33    |
-| 2017 |    14.134   | 0,1 |    10,8    | 0,26 |  66.882  | 0,22 |   25/Sel\_3  |       15       |     0,33    |
-| 2018 |    8.355    | 0,1 |    10,2    | 0,26 |  20.361  | 0,22 |   25/Sel\_3  |       15       |     0,33    |
-| 2019 |    11.278   | 0,1 |     8,6    | 0,26 |  43.788  | 0,22 |   25/Sel\_3  |       15       |     0,33    |
-| 2020 |    14.194   | 0,1 |    41,6    | 0,26 |  160.742 | 0,22 |   25/Sel\_3  |       15       |     0,33    |
-| 2021 |    16.136   | 0,1 |            | 0,26 |  70.260  | 0,22 |   25/Sel\_3  |       15       |     0,33    |
+| 2005 |    52.569   | 0,2 |            |      |          |      |   20/Sel\_1  |                |             |
+| 2006 |    39.146   | 0,1 |            |      |  194.719 | 0,26 |   20/Sel\_1  | 15/Sel\_1      |     0,92    |
+| 2007 |    50.506   | 0,1 |    23,9    | 0,22 |          |      |   20/Sel\_1  |                |             |
+| 2008 |    45.078   | 0,1 |    21,6    | 0,22 |  114.640 | 0,26 |   20/Sel\_1  | 15/Sel\_1      |     0,33    |
+| 2009 |    49.225   | 0,1 |    28,1    | 0,22 |          |      |   20/Sel\_1  |                |             |
+| 2010 |    20.123   | 0,1 |    19,1    | 0,22 |          |      |   20/Sel\_1  |                |             |
+| 2011 |    16.429   | 0,1 |    16,3    | 0,22 |  88.116  | 0,26 |   20/Sel\_1  | 15/Sel\_1      |     0,08    |
+| 2012 |    19.763   | 0,1 |    13,7    | 0,22 |          |      |   20/Sel\_1  |                |             |
+| 2013 |    21.888   | 0,1 |    35,6    | 0,26 |  124.729 | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,42    |
+| 2014 |    22.951   | 0,1 |    27,7    | 0,26 |  113.855 | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,42    |
+| 2015 |    23.643   | 0,1 |    23,1    | 0,26 |  60.498  | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
+| 2016 |    18.495   | 0,1 |    24,0    | 0,26 |  106.245 | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
+| 2017 |    14.134   | 0,1 |    10,8    | 0,26 |  66.882  | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
+| 2018 |    8.355    | 0,1 |    10,2    | 0,26 |  20.361  | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
+| 2019 |    11.278   | 0,1 |     8,6    | 0,26 |  43.788  | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
+| 2020 |    14.194   | 0,1 |    41,6    | 0,26 |  160.742 | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
+| 2021 |    16.136   | 0,1 |            | 0,26 |  70.260  | 0,22 |   20/Sel\_1  | 15/Sel\_2      |     0,33    |
 
 : \label{Tab8} Captura, CPUE y biomasa del crucero junto a sus respectivos coeficientes de variación (cv). Tamaños de muestra para la multinomial de la flota (nm\_flota) y cruceros (nm\_cru) y los respectivos bloques de selectividad (Sel). $\Delta tC$ representa el valor del periodo del año en que se realizó el crucero de evaluación directa.
 
@@ -1351,6 +1361,16 @@ En términos de la bondad de ajuste se entrega el cuadro de residuales por longi
 
 Se comparan los resultados de los principales indicadores de la asesoría actual (junio 2021) con asesorías anteriores (septiembre 2020, junio 2020, septiembre 2019, junio 2019) para evaluar la consistencia de la evaluación presente. Al respecto, el desempeño retrospectivo empírico ilustra mayor incertidumbre en los tres últimos años de las series (\textbf{Figura \ref{Fig24}}), con una tendencia a subestimar los niveles de reclutamiento y biomasa desovante y sobre-estimar los niveles de mortalidad por pesca, con excepción del año 2020, donde el nivel de mortalidad por pesca fue subestimado producto del supuesto de captura utilizado en la asesoría de junio 2020.
 
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.8\textwidth]{Figuras/Fig24_comparaAsesorias-1.pdf}
+\caption{}
+\label{Fig24}
+\end{figure}
+```
+
 \pagebreak
 
 #### Análisis retrospectivo
@@ -1450,26 +1470,26 @@ El último bloque de selectividad de la flota indica que el recurso está próxi
     \begin{tabular}{ccccc}
     \hline
 Años &	$BD_{sept}$	& $BT_{sept}$	& $R_{sept}$	& $F_{sept}$ \\ \hline
-2002 & 	50.601	      & 190.360	  & 8.640	      & 0,42 \\
-2003 &	48.577	      & 184.050	  & 10.340	    & 0,42 \\
-2004 & 	48.928	      & 250.890	  & 21.144	    & 0,43 \\
-2005 &	78.464	      & 314.560	  & 17.443	    & 0,38 \\
-2006 &	93.433	      & 261.370	  & 6.109	      & 0,28 \\
-2007 &	56.697	      & 207.580	  & 9.841	      & 0,62 \\
-2008 &	39.044	      & 180.350	  & 10.611	    & 0,68 \\
-2009 &	33.769	      & 143.800	  & 4.942	      & 0,82 \\
-2010 &	24.923	      & 97.913	  & 5.256	      & 0,52 \\
-2011 &	23.855	      & 90.444	  & 4.602	      & 0,44 \\
-2012 &	22.261	      & 143.960	  & 14.439	    & 0,52 \\
-2013 &	49.736	      & 146.610	  & 2.583	      & 0,28 \\
-2014 &	35.706	      & 145.810	  & 10.685	    & 0,45 \\
-2015 &	41.806	      & 128.490	  & 2.952	      & 0,36 \\
-2016 &	28.767	      & 83.865	  & 2.322	      & 0,47 \\
-2017 &	15.499	      & 68.675	  & 4.535	      & 0,63 \\
-2018 &	18.422	      & 65.570	  & 3.237	      & 0,29 \\
-2019 &	19.679	      & 121.050	  & 12.751	    & 0,33 \\
-2020 &	47.528	      & 127.870	  & 1.465	      & 0,19 \\
-2021 &	34.123	      & 91.946	  & 3.040	      & 0,36 \\ \hline
+2002	&55.152	&201.970	&9.055	&0,39 \\
+2003	&53.179	&192.010	&10.303	&0,39 \\
+2004	&51.321	&255.450	&21.500	&0,42\\
+2005	&80.232	&326.810	&19.139	&0,37\\
+2006	&99.869	&276.750	&6.226	&0,26\\
+2007	&62.607	&218.600	&10.112	&0,57\\
+2008	&42.930	&189.970	&11.155	&0,63\\
+2009	&37.663	&152.740	&5.150	&0,75\\
+2010	&28.169	&105.360	&5.565	&0,47\\
+2011	&26.766	&97.339	&4.873	&0,4\\
+2012	&24.980	&153.960	&15.503	&0,47\\
+2013	&54.598	&158.470	&2.735	&0,25\\
+2014	&40.289	&154.170	&10.885	&0,41\\
+2015	&44.786	&135.440	&3.191	&0,34\\
+2016	&31.542	&90.428	&2.601	&0,43\\
+2017	&18.053	&72.424	&4.392	&0,55\\
+2018	&19.482	&67.811	&3.384	&0,28\\
+2019	&20.535	&127.120	&13.723	&0,32\\
+2020	&50.792	&137.300	&1.693	&0,17\\
+2021	&38.029	&101.400	&3.494	&0,32\\ \hline
   \end{tabular}}
         \end{table}
 ```
@@ -1488,20 +1508,30 @@ Se estimaron los valores de F que generan niveles de reducción de la Biomasa De
 
 \pagebreak
 
-|                         | Septiembre 2021 |
-|-------------------------|:---------------:|
-| Estatus                 |     año 2021    |
-| $BD_0$                  |      58.529     |
-| $BD_{RMS}$              |      32.191     |
-| $BD_{LIM}$              |      16.096     |
-| $F_{RMS}$               |       0,30     |
-| $p(BD_{last}<BD_{RMS})$ |       0,37      |
-| $p(F_{last}>F_{RMS})$   |       0,74      |
-| $p(sobre-explotación)$  |       0,19      |
-| $p(agotado/colapsado)$  |        0        |
-| $p(sobrepesca)$         |       0,62      |
 
-: \label{Tab16} Puntos biológicos de referencia (PBRs) y probabilidad de estar bajo $BD_{RMS}$ y sobre $F_{RMS}$ y la probabilidad de sobre-explotación, colapso o sobrepesca calculados en la asesoría septiembre 2021.
+```{=tex}
+\begin{table}[h!]
+\caption{Puntos biológicos de referencia (PBRs) y probabilidad de estar bajo $BD_{RMS}$ y sobre $F_{RMS}$ y la probabilidad de sobre-explotación, colapso o sobrepesca calculados en la asesoría septiembre 2021.}
+ \label{Tab16}
+ \small
+    \centering
+    \resizebox{8cm}{!} {
+    \begin{tabular}{lc}
+    \hline
+                         &   Septiembre 2021   \\ \hline 
+ $Estatus$               & año 2021 \\
+  $BD_0$    mil t        &      61,48     \\
+ $BD_{RMS}$  mil t       &      33,81     \\
+ $BD_{LIM}$ mil t        &      16,91     \\
+ $F_{RMS}$               &       0,30     \\ \hline
+ $p(BD_{last}<BD_{RMS})$ &       0,25      \\
+ $p(F_{last}>F_{RMS})$   &       0,61      \\
+ $p(sobre-explotación)$  &       0,12      \\
+ $p(agotado/colapsado)$  &        0        \\
+ $p(sobrepesca)$         &       0,47      \\ \hline
+  \end{tabular}}
+        \end{table}
+```
 
 \scriptsize
 
@@ -1564,28 +1594,28 @@ En la presente versión del modelo, los resultados muestran que el stock se enco
     \begin{tabular}{cccc}
     \hline
 Año  & $F/F_{RMS_{sept}}$ & $BD/BD_{RMS_{sept}}$ & $Y/BT_{sept}$ \\ \hline 
-2002	& 1,403	& 1,572	& 0,186 \\
-2003	& 1,403	& 1,509	& 0,172 \\ 
-2004	& 1,435	& 1,52	& 0,141 \\
-2005	& 1,279	& 2,437	& 0,16 \\
-2006	& 0,928	& 2,902	& 0,148 \\
-2007	& 2,078	& 1,761	& 0,251 \\
-2008	& 2,28	& 1,213	& 0,25 \\
-2009	& 2,734	& 1,049	& 0,334 \\
-2010	& 1,736	& 0,774	& 0,209 \\
-2011	& 1,484	& 0,741	& 0,187 \\
-2012	& 1,727	& 0,692	& 0,142 \\
-2013	& 0,919	& 1,545	& 0,152 \\
-2014	& 1,51	& 1,109	& 0,162 \\
-2015	& 1,217	& 1,299	& 0,188 \\
-2016	& 1,56	& 0,894	& 0,226 \\
-2017	& 2,108	& 0,481	& 0,224 \\
-2018	& 0,972	& 0,572	& 0,132 \\
-2019	& 1,115	& 0,611	& 0,093 \\
-2020	& 0,625	& 1,476	& 0,111 \\
-2021	& 1,194	& 1,06	& 0,175 \\ \hline
+2002	&1,3	  &1,631	&0,175\\
+2003	&1,299	&1,573	&0,165\\
+2004	&1,395	&1,518	&0,139\\
+2005	&1,252	&2,373	&0,155\\
+2006	&0,867	&2,953	&0,14\\
+2007	&1,912	&1,852	&0,238\\
+2008	&2,115	&1,27	  &0,237\\
+2009	&2,509	&1,114	&0,315\\
+2010	&1,566	&0,833	&0,194\\
+2011	&1,339	&0,792	&0,173\\
+2012	&1,565	&0,739	&0,132\\
+2013	&0,838	&1,615	&0,14\\
+2014	&1,361	&1,191	&0,152\\
+2015	&1,145	&1,324	&0,178\\
+2016	&1,43	  &0,933	&0,209\\
+2017	&1,85	  &0,534	&0,211\\
+2018	&0,935	&0,576	&0,127\\
+2019	&1,072	&0,607	&0,089\\
+2020	&0,586	&1,502	&0,104\\
+2021	&1,079	&1,125	&0,159\\ \hline
   \end{tabular}}
-        \end{table}2
+        \end{table}
 ```
 
 
@@ -1609,6 +1639,55 @@ Año  & $F/F_{RMS_{sept}}$ & $BD/BD_{RMS_{sept}}$ & $Y/BT_{sept}$ \\ \hline
 
 *"Determinar niveles de Captura Biológicamente Aceptable (CBA) que lleven y/o mantenga la pesquería en torno al Rendimiento Máximo Sostenible (RMS), a partir de un análisis de riesgo en condiciones de incertidumbre de no alcanzar los objetivos de conservación y sostenibilidad conforme lo establece la LGPA y contenidos en el Plan de Manejo y/o en el Programa de Recuperación respectivo, según corresponda."* \vspace{-0.2cm}
 
+
+### 4.3.3. Proyección del stock
+
+La comparación de la estructura de tallas proyectada al 2021 en la asesoría de septiembre 2020 junto a la estructura de tallas estimada en la asesoría actual (junio 2021) con información actualizada de la flota año 2020 y crucero año 2021, evidencia un incremento de la Captura actualizada al año 2021, generada principalmente por la estimación de un mayor aporte de la fracción adulta (\>14 cm LT). La distribución de probabilidad de la Captura al RMS proyectada al 2021 bajo tres escenarios de reclutamiento proyectado en el hito 1 y actualizada en el hito 2 con información de los años 2020 y 2021, se muestran en la \textbf{Figura \ref{Fig33}}, al respecto, el rango de captura fue mayor al estimado por los escenarios de reclutamiento medio y bajo y menor al reclutamiento alto. Dado que la distrubición de probabilidad es más estrecha en la estimación del hito 2, se generan niveles levemente menores de resguardo.
+
+En relación a los indicadores poblacionales, la \textbf{Figura \ref{Fig34}} y \textbf{\ref{Fig35}} muestran las series de la biomasa desovante, la reducción del stock (BD/BD~MRS~) y capturas proyectadas al año 2021 (asesoría de septiembre 2020) y al año 2022 (asesoría de junio 2021), bajo tres escenarios de reclutamiento promedio (alto, medio y bajo). En la asesoría actual se corrobora la tendencia a disminuir los niveles de biomasa desovante y BD/BD~RMS~ hacia el 2021. Para el año 2022 se mantiene la tendencia a disminuir los niveles poblacionales, no obstante, la biomasa desovante se mantendría en torno al objetivo de manejo. Cabe recordar que el modelo tiene una patrón retrospectivo que genera subestimaciones en los niveles de biomasa desovente, lo que podría re-escalar los niveles sobre el objetivo de manejo.
+
+
+
+
+```{=tex}
+\begin{table}[h!]
+\caption{xx}
+ \label{Tab17x}
+ \small
+    \centering
+    \resizebox{8cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+ & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+ $Estatus Proyectado_{2022}$ & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
+$BD_{RMS}$ mil t	& 33,81	& 33,81	& 33,81 \\ 
+$BD_{2022}$ mil t & 26,0 & 26,0 & 26,0 \\ 
+$BD_{2022}/BD_{RMS}$ & 0,76 & 0,77 & 0,76 \\ \hline
+$p(BD_{2022}<BD_{RMS})$ & 0,96 & 0,95 & 0,96 \\ 
+$p(sobreexplotación)$ & 0,84 & 0,82 & 0,85 \\
+$p(agotado/colapsado)$ & 0,03 & 0,03 & 0,03 \\\hline
+$F_{2022}$ = $F_{RMS}$ & 0,30 & 0,30 & 0,30 \\
+$C_{RMS}$ mil t & 11,39 & 12,62 & 10,98 \\ 
+$p(sobrepesca)$ & 0,5 & 0,5 &0,5 \\\hline
+  \end{tabular}}
+        \end{table}
+```
+
+
+\pagebreak
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=1\textwidth]{Figuras/Fig34a-1.pdf}
+\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base tres escenarios de reclutamiento proyectado. Asesoría de septiembre 2021}
+\label{Fig34}
+\end{figure}
+```
+
+
+\pagebreak
+
 ### 4.3.1. CBA inicial 2022 (Asesoría de Septiembre 2021 - Hito 1)
 
 A partir del modelo conceptual de la dinámica del stock de sardina austral en aguas interiores de la Región de Los Lagos , se desarrolló el enfoque y modelo de evaluación que permite asesorar al Comité Científico Técnico de Pesquerías de Pelágicos Pequeños (CCT-PP) en el análisis de las posibilidades de explotación del stock, considerando los parámetros e indicadores estimados por el modelo de evaluación y su incertidumbre asociada.
@@ -1621,78 +1700,69 @@ Considerando un escenario con supuesto de captura 2020 equivalente al 80% de la 
 
 \vspace{0.5cm}
 
-\small
 
-+-----------------+----------+----------+-----------+
-| Percentiles de  | R\_bajo  | R\_med   | R\_alto   |
-|                 |          |          |           |
-| $C_{RMS}$       | (2018)   |          | (2012)    |
-+:===============:+:========:+:========:+:=========:+
-| 10%             | 10.005   | 10.899   | 14.253    |
-+-----------------+----------+----------+-----------+
-| 20%             | 11.300   | 12.213   | 15.766    |
-+-----------------+----------+----------+-----------+
-| 30%             | 12.234   | 13.161   | 16.857    |
-+-----------------+----------+----------+-----------+
-| 40%             | 13.032   | 13.971   | 17.789    |
-+-----------------+----------+----------+-----------+
-| 50%             | 13.778   | 14.728   | 18.660    |
-+-----------------+----------+----------+-----------+
 
-: \label{Tab18} CBA inicial 2022 (asesoría septiembre 2021) para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura al RMS.
+```{=tex}
+\begin{table}[h!]
+\caption{CBA inicial 2022 (asesoría septiembre 2021) para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura al RMS.}
+ \label{Tab18}
+ \small
+    \centering
+    \resizebox{7cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+  Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+  de $C_{RMS}$  & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
+  10\% & 7.698  & 8.750  & 7.338 \\
+  20\% & 8.965  & 10.079 & 8.588 \\
+  30\% & 9.878  & 11.037 & 9.489 \\
+  40\% & 10.659 & 11.856 & 10.259 \\
+  50\% & 11.388 & 12.621 & 10.979 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
 
-\small
 
-+----------------+---------+--------+---------+
-| Percentiles de | R\_bajo | R\_med | R\_alto |
-|                |         |        |         |
-| $C_{RMS}$      | (2018)  |        | (2012)  |
-+:==============:+:=======:+:======:+:=======:+
-| 10%            | 0,26    | 0,24   | 0,27    |
-+----------------+---------+--------+---------+
-| 20%            | 0,17    | 0,16   | 0,18    |
-+----------------+---------+--------+---------+
-| 30%            | 0,11    | 0,10   | 0,11    |
-+----------------+---------+--------+---------+
-| 40%            | 0,05    | 0,05   | 0,05    |
-+----------------+---------+--------+---------+
-| 50%            | 0       | 0      | 0       |
-+----------------+---------+--------+---------+
 
-: \label{Tab19} Niveles de resguardo para la CBA inicial 2022 para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de Captura al RMS. \normalsize
 
-\pagebreak
+```{=tex}
+\begin{table}[h!]
+\caption{Niveles de resguardo para la CBA inicial 2022 para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de Captura al RMS.}
+ \label{Tab19}
+ \small
+    \centering
+    \resizebox{7cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+  Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+  de $C_{RMS}$  & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
+  10\% & 0,32  & 0,31  & 0,33 \\
+  20\% & 0,21  & 0,20  & 0,22 \\
+  30\% & 0,13  & 0,13  & 0,14 \\
+  40\% & 0,06  & 0,06  & 0,07 \\
+  50\% & 0,00  & 0,00  & 0,00 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
 
-### 4.3.3. Proyección del stock
 
-La comparación de la estructura de tallas proyectada al 2021 en la asesoría de septiembre 2020 junto a la estructura de tallas estimada en la asesoría actual (junio 2021) con información actualizada de la flota año 2020 y crucero año 2021, evidencia un incremento de la Captura actualizada al año 2021, generada principalmente por la estimación de un mayor aporte de la fracción adulta (\>14 cm LT). La distribución de probabilidad de la Captura al RMS proyectada al 2021 bajo tres escenarios de reclutamiento proyectado en el hito 1 y actualizada en el hito 2 con información de los años 2020 y 2021, se muestran en la \textbf{Figura \ref{Fig33}}, al respecto, el rango de captura fue mayor al estimado por los escenarios de reclutamiento medio y bajo y menor al reclutamiento alto. Dado que la distrubición de probabilidad es más estrecha en la estimación del hito 2, se generan niveles levemente menores de resguardo.
-
-En relación a los indicadores poblacionales, la \textbf{Figura \ref{Fig34}} y \textbf{\ref{Fig35}} muestran las series de la biomasa desovante, la reducción del stock (BD/BD~MRS~) y capturas proyectadas al año 2021 (asesoría de septiembre 2020) y al año 2022 (asesoría de junio 2021), bajo tres escenarios de reclutamiento promedio (alto, medio y bajo). En la asesoría actual se corrobora la tendencia a disminuir los niveles de biomasa desovante y BD/BD~RMS~ hacia el 2021. Para el año 2022 se mantiene la tendencia a disminuir los niveles poblacionales, no obstante, la biomasa desovante se mantendría en torno al objetivo de manejo. Cabe recordar que el modelo tiene una patrón retrospectivo que genera subestimaciones en los niveles de biomasa desovente, lo que podría re-escalar los niveles sobre el objetivo de manejo.
 
 \pagebreak
 
 ```{=tex}
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.9\textwidth]{Figuras/Fig33-1.pdf}
+\includegraphics[width=0.9\textwidth]{Figuras/Fig27_CBA-1.pdf}
 \caption{Captura 2022 a la talla, distribución de probabilidad de la Captura al RMS proyectada al 2022  bajo tres escenarios de reclutamiento proyectado en el hito 1 (panel superior). La zona sombreada corresponde a la zona de percentiles de probabilidad de captura (*P) entre el 10\% - 50\%. En el panel inferior izquierdo se encuentra la CBA estimada para cada *P y en el panel inferior derecho los niveles de resguardo correspondiente a cada *P.}
 \label{Fig33}
 \end{figure}
 ```
+
 \pagebreak
 
-```{=tex}
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=0.85\textwidth]{Figuras/Fig34a-1.pdf}
-\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base tres escenarios de reclutamiento proyectado. Asesoría de septiembre 2021}
-\label{Fig34}
-\end{figure}
-```
-```{=tex}
-\pagebreak
-\normalsize
-```
+### 4.3.1. Escenarios alternativos de captura y estructura de
+
+
 ## 4.4. Objetivo específico 4:
 
 *"Informar el avance del Programa de Mejoramiento Continuo de la Calidad en la Asesoría Científica (PMCCAC) realizado durante el presente estudio, respecto al cumplimiento de recomendaciones formuladas en procesos de RPEI y priorizadas por el CCT, cuando corresponda."* \vspace{0.5cm}
