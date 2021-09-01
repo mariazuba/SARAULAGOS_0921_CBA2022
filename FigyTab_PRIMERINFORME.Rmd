@@ -1800,7 +1800,7 @@ text(2022,c(reps1a$Rproy,
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
      c(rep0$BD,bds3),
      type="o",ylab="Biomasa desovante (t)",xlab="Años",col=3,
-     ylim=c(0,95000),xlim=c(2000,2023),pch=19,main="")
+     ylim=c(0,99000),xlim=c(2000,2023),pch=19,main="")
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(rep0$BD,bds2),
@@ -1816,7 +1816,7 @@ legend(2011,95000,c("R_alto (2012)","R_Med","R_bajo (2018)"),pch=19,lwd=1,col=c(
 # plot bd/BDrms
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
      c(rep0$BD,bds3)/BRMS0,
-     type="o",ylab="BD/BDrms",col=3,xlab="Años",pch=19,xlim=c(2000,2023),)
+     type="o",ylab="BD/BDrms",col=3,xlab="Años",pch=19,xlim=c(2000,2023),ylim=c(0,3.1))
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(rep0$BD,bds2)/BRMS0,
@@ -2058,9 +2058,9 @@ En promedio entre los meses de septiembre a diciembre se capturan x% de los dese
 - Caso 1 = Captura 2021 igual a CRMS
 - Caso 2 = Captura 2021 igual a 10000 (según cálculo de Doris)
 
+\small
 
-
-```{r Fig9Escenarios,warning=F, include=T, message=F, echo=FALSE,fig.height=4,fig.width=6,fig.align="center"}
+```{r Fig9EscenariosCaptura,warning=F, include=T, message=F, echo=FALSE,fig.height=5.5,fig.width=7,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 d2006<-c(0,	 8384,	7485,	2008,	 3410,	2760,	3286,	723,	367,	2885,	2822,	1831)
 d2007<-c(5740, 5101,	4181,	4651,	 7430,	4694,	3027,	3718,	17,	  1822,	4093, 0)
@@ -2081,8 +2081,8 @@ d2021<-c(705,  3446,	1959,	93,    222,   631,  327,  123,   0,   0,   0,   0)
 
 datades<-data.frame(years=seq(2006,2021,1),matrix(rbind(d2006,d2007,d2008,d2009,d2010,d2011,d2012,d2013,d2014,d2015,d2016,d2017,d2018,d2019,d2020,d2021),ncol=12))
 colnames(datades)<-c("Años",seq(1,12,1))
-kable(datades)
-
+kable(t(datades))
+write.csv(t(datades), file="Tablas/Desembarquesmensuales.csv")
 
 capt2sem<-rep(NA,15)
 capttotal<-rep(NA,15)
@@ -2091,23 +2091,27 @@ for(i in 1:15){
 capt2sem[i]<-sum(datades[i,10:13])
 capttotal[i]<-sum(datades[i,2:13])
 }
+
+
+
 propCapt<-round(capt2sem/capttotal,2)
 
 
-plot(seq(2006,2020,1),propCapt,type="o",xlim=c(2006,2021),xlab="Años",ylab="Proporción de captura sept a dic")
+
+totales<-cbind(capt2sem,capttotal,propCapt)
+totales
+
+plot(seq(2006,2020,1),propCapt,type="o",xlim=c(2006,2021),xlab="Años",ylab="Proporción de captura septiembre a diciembre")
 
 abline(h=c(mean(propCapt),
-           mean(propCapt)+sd(propCapt),
            mean(propCapt)-sd(propCapt),
            (15765-sum(d2021[1:9]))/15765),
        col=c(1,2,3,4),lwd=1)
 
 text(2021,c(mean(propCapt),
-            mean(propCapt)+sd(propCapt),
            mean(propCapt)-sd(propCapt),
            (15765-sum(d2021[1:9]))/15765)+0.01,
      round(c(mean(propCapt),
-             mean(propCapt)+sd(propCapt),
            mean(propCapt)-sd(propCapt),
        (15765-sum(d2021[1:9]))/15765),2))
 
@@ -2131,6 +2135,7 @@ kable(data.frame(escenarios=seq(1,4,1),
                  Condescarte=round(SupuestoCapt2021*1.0232,0)))
 ```
 
+\normalsize
 
 Escenarios alternativo Captura en torno al RMS = 14900
 
@@ -2159,13 +2164,13 @@ Escenarios alternativo Captura en torno al RMS = 14900
   #==========================================================================
   setwd(dir)
   #--------------
-  # escenario 1: Caso 1 Igual al caso base de septiembre 2020 (MTT2020)
+  # escenario 1: caso base
   #--------------
   # caso base
   dat<- data
   writeData(paste(admb,"s",1,".dat",sep=""), dat, append=FALSE)
   #--------------
-  # escenario 2: S1 +	Desembarque 2020
+  # escenario 2: 0,25 segundo semestre
   #--------------
   dat<- data
   dat$Ind[20,2] <- 12582
@@ -2173,15 +2178,23 @@ Escenarios alternativo Captura en torno al RMS = 14900
   dat<- data
   
   #--------------
-  # escenario 4: S1 +	Desembarque 2020
+  # escenario 3: 0,09 segundo semestre
   #--------------
   dat<- data
   dat$Ind[20,2] <- 9794
   writeData(paste(admb,"s",3,".dat",sep=""), dat, append=FALSE)
   dat<- data
   
+  #--------------
+  # escenario 4: Crms
+  #--------------
+  dat<- data
+  dat$Ind[20,2] <- 14900
+  writeData(paste(admb,"s",4,".dat",sep=""), dat, append=FALSE)
+  dat<- data
   
-  for(i in 1:3){
+  
+  for(i in 1:4){
   setwd(dir.1);  file.copy(c(paste(admb,".tpl",sep="")),dir)
   setwd(dir);  file.rename(paste(admb,".tpl",sep=""),paste(admb,"s",i,".tpl",sep=""))
   
@@ -2237,33 +2250,40 @@ setwd(dira)
 reps1a     <- reptoRlist("MAT0921s1.rep")  
 reps2a     <- reptoRlist("MAT0921s2.rep") 
 reps3a     <- reptoRlist("MAT0921s3.rep") 
+reps4a     <- reptoRlist("MAT0921s4.rep") 
 
 carpeta<-"/Sensibilidad_Captura2021/"
 stds1     <- read.table(paste(dir.0,carpeta,"MAT0921s1.std", sep=''),header=T,sep="",na="NA",fill=T) 
 stds2     <- read.table(paste(dir.0,carpeta,"MAT0921s2.std", sep=''),header=T,sep="",na="NA",fill=T) 
 stds3     <- read.table(paste(dir.0,carpeta,"MAT0921s3.std", sep=''),header=T,sep="",na="NA",fill=T) 
+stds4     <- read.table(paste(dir.0,carpeta,"MAT0921s4.std", sep=''),header=T,sep="",na="NA",fill=T) 
 
 bds1     <- subset(stds1,name=="SSBp")$value[3] ; 
-bds1std  <- subset(stds1,name=="SSBp")$std[3] #reclutamiento medios
+bds1std  <- subset(stds1,name=="SSBp")$std[3] 
 bds2     <- subset(stds2,name=="SSBp")$value[3] ; 
-bds2std  <- subset(stds2,name=="SSBp")$std[3] #reclutamiento 2018
+bds2std  <- subset(stds2,name=="SSBp")$std[3] 
 bds3     <- subset(stds3,name=="SSBp")$value[3] ; 
-bds3std  <- subset(stds3,name=="SSBp")$std[3] #reclutamiento 2012
+bds3std  <- subset(stds3,name=="SSBp")$std[3]
+bds4     <- subset(stds4,name=="SSBp")$value[3] ; 
+bds4std  <- subset(stds4,name=="SSBp")$std[3] 
 
 RpRps1     <- subset(stds1,name=="RpRp")$value[3] ; 
-RpRps1std  <- subset(stds1,name=="RpRp")$std[3] #reclutamiento medios
+RpRps1std  <- subset(stds1,name=="RpRp")$std[3] 
 RpRps2     <- subset(stds2,name=="RpRp")$value[3] ; 
-RpRps2std  <- subset(stds2,name=="RpRp")$std[3] #reclutamiento 2018
+RpRps2std  <- subset(stds2,name=="RpRp")$std[3] 
 RpRps3     <- subset(stds3,name=="RpRp")$value[3] ; 
-RpRps3std  <- subset(stds3,name=="RpRp")$std[3] #reclutamiento 2012
+RpRps3std  <- subset(stds3,name=="RpRp")$std[3] 
+RpRps4     <- subset(stds4,name=="RpRp")$value[3] ; 
+RpRps4std  <- subset(stds4,name=="RpRp")$std[3] 
 
 cs1     <- subset(stds1,name=="CBAp")$value[3] ; 
-cs1std  <- subset(stds1,name=="CBAp")$std[3] #reclutamiento medios
+cs1std  <- subset(stds1,name=="CBAp")$std[3] 
 cs2     <- subset(stds2,name=="CBAp")$value[3] ; 
-cs2std  <- subset(stds2,name=="CBAp")$std[3] #reclutamiento 2018
+cs2std  <- subset(stds2,name=="CBAp")$std[3] 
 cs3     <- subset(stds3,name=="CBAp")$value[3] ; 
-cs3std  <- subset(stds3,name=="CBAp")$std[3] #reclutamiento 2012
-
+cs3std  <- subset(stds3,name=="CBAp")$std[3] 
+cs4     <- subset(stds4,name=="CBAp")$value[3] ; 
+cs4std  <- subset(stds4,name=="CBAp")$std[3] 
 
 ```
 
@@ -2275,28 +2295,30 @@ cs3std  <- subset(stds3,name=="CBAp")$std[3] #reclutamiento 2012
 pa1<-pnorm(1,RpRps1,RpRps1std,lower.tail = TRUE,log.p = F)
 pa2<-pnorm(1,RpRps2,RpRps2std,lower.tail = TRUE,log.p = F)
 pa3<-pnorm(1,RpRps3,RpRps3std,lower.tail = TRUE,log.p = F)
+pa4<-pnorm(1,RpRps4,RpRps4std,lower.tail = TRUE,log.p = F)
 #######################################################################################
 ### *Probabilidad de estar en zona de sobreexplotacion*
 #######################################################################################
 pc1<-pnorm(0.9,RpRps1,RpRps1std,lower.tail = TRUE,log.p = F)
 pc2<-pnorm(0.9,RpRps2,RpRps2std,lower.tail = TRUE,log.p = F)
 pc3<-pnorm(0.9,RpRps3,RpRps3std,lower.tail = TRUE,log.p = F)
+pc4<-pnorm(0.9,RpRps4,RpRps4std,lower.tail = TRUE,log.p = F)
 #######################################################################################
 ### *Probabilidad de estar en zona de colapso*
 #######################################################################################
 pd1<-pnorm(0.5,RpRps1,RpRps1std,lower.tail = TRUE,log.p = F)
 pd2<-pnorm(0.5,RpRps2,RpRps2std,lower.tail = TRUE,log.p = F)
 pd3<-pnorm(0.5,RpRps3,RpRps3std,lower.tail = TRUE,log.p = F)
-
+pd4<-pnorm(0.5,RpRps4,RpRps4std,lower.tail = TRUE,log.p = F)
 #######################################################################################
 probEstatus<-round(rbind("BD~RMS~ (mil t)"=c(BRMS0)/1000,
-                   'BD~2022~ (mil t)'=round(c(bds1,bds2,bds3)/1000,0),
-                   'BD~2022~/BD~RMS~'=round(c(RpRps1,RpRps2,RpRps3),2),
-                   "*p(BD~2022~<BD~RMS~)*"=round(c(pa1,pa2,pa3),2),
-                  "*p(sobreexplotación)*"=round(c(pc1,pc2,pc3),2),
-                  "*p(agotado/colapsado)*"=round(c(pd1,pd2,pd3),2)),2)
+                   'BD~2022~ (mil t)'=round(c(bds1,bds2,bds3,bds4)/1000,0),
+                   'BD~2022~/BD~RMS~'=round(c(RpRps1,RpRps2,RpRps3,RpRps4),2),
+                   "*p(BD~2022~<BD~RMS~)*"=round(c(pa1,pa2,pa3,pa4),2),
+                  "*p(sobreexplotación)*"=round(c(pc1,pc2,pc3,pc4),2),
+                  "*p(agotado/colapsado)*"=round(c(pd1,pd2,pd3,pd4),2)),2)
 
-colnames(probEstatus)<-c("Captura_1",'Captura_2','Captura_3')
+colnames(probEstatus)<-c("Captura_1",'Captura_2','Captura_3','Captura_4')
 kable(probEstatus)
 #######################################################################################
 
@@ -2322,29 +2344,39 @@ lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
       c(reps2a$Reclutas,reps2a$Rproy),type="o",col=2,pch=19)
 
 lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
-      c(reps2a$Reclutas,reps3a$Rproy),type="o",col=3,pch=19)
+      c(reps3a$Reclutas,reps3a$Rproy),type="o",col=3,pch=19)
 
 lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
-      c(reps2a$Reclutas,reps1a$Rproy),type="o",col=1,pch=19)
+      c(reps4a$Reclutas,reps4a$Rproy),type="o",col=4,pch=19)
+
+lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
+      c(reps1a$Reclutas,reps1a$Rproy),type="o",col=1,pch=19)
 
 abline(h=c(reps1a$Rproy,
            reps2a$Rproy,
-           reps3a$Rproy),
-       col=c(1,2,3))
+           reps3a$Rproy,
+           reps4a$Rproy),
+       col=c(1,2,3,4))
 
 text(2022,c(reps1a$Rproy,
             reps2a$Rproy,
-            reps3a$Rproy)+1000,
+            reps3a$Rproy,
+            reps4a$Rproy)+1000,
      round(c(reps1a$Rproy,
              reps2a$Rproy,
-             reps3a$Rproy),0),cex=0.7)
+             reps3a$Rproy,
+             reps4a$Rproy),0),cex=0.7)
 
 #=======================================================
 # plot Biomasa desovante
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
-     c(reps3a$BD,bds3),
-     type="o",ylab="Biomasa desovante (t)",xlab="Años",col=3,
-     ylim=c(0,95000),xlim=c(2000,2023),pch=19,main="")
+     c(reps4a$BD,bds4),
+     type="o",ylab="Biomasa desovante (t)",xlab="Años",col=4,
+     ylim=c(0,99000),xlim=c(2000,2023),pch=19,main="")
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(reps3a$BD,bds3),
+      type="o",col=3,pch=19)
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps2a$BD,bds2),
@@ -2354,13 +2386,17 @@ lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps1a$BD,bds1),type="o",col=1,pch=19)
 
 abline(v=yearProy-1,lty=2)
-legend(2011,95000,c("Captura_1","Captura_2","Captura_3"),pch=19,lwd=1,col=c(2,1,3),bty="n")
+legend(2011,95000,c("S0_casobase","S1","S2","S3"),pch=19,lwd=1,col=c(1,2,3,4),bty="n")
 
 #=======================================================
 # plot bd/BDrms
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
-     c(reps3a$BD,bds3)/BRMS0,
-     type="o",ylab="BD/BDrms",col=3,xlab="Años",pch=19,xlim=c(2000,2023),)
+     c(reps4a$BD,bds4)/BRMS0,
+     type="o",ylab="BD/BDrms",col=4,xlab="Años",pch=19,xlim=c(2000,2023),ylim=c(0,3.5))
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(reps3a$BD,bds3)/BRMS0,
+      type="o",col=3,pch=19)
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps2a$BD,bds2)/BRMS0,
@@ -2375,14 +2411,21 @@ abline(h=0.5,lty=2,col=2)
 #=======================================================
 # plot capturas proyectadas
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
-     c(reps3a$desemb_pred,cs3),type="o",
-     ylab="Capturas (t)",col=3,ylim=c(0,55000),xlab="Años",pch=19,xlim=c(2000,2023),)
+     c(reps4a$desemb_pred,cs4),type="o",
+     ylab="Capturas (t)",col=4,ylim=c(0,55000),xlab="Años",pch=19,xlim=c(2000,2023))
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(reps3a$desemb_pred,cs3),
+      type="o",col=3,pch=19)
+
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps2a$desemb_pred,cs2),
       type="o",col=2,pch=19)
+
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps1a$desemb_pred,cs1),
       type="o",col=1,pch=19)
+
 abline(v=yearProy-1,lty=2)
 ```
 
@@ -2395,13 +2438,17 @@ admb<-"/MAT0921"
 stds1a     <- read.table(paste(dir,admb,"s1.std", sep=''),header=T,sep="",na="NA",fill=T)
 stds2a     <- read.table(paste(dir,admb,"s2.std", sep=''),header=T,sep="",na="NA",fill=T)
 stds3a     <- read.table(paste(dir,admb,"s3.std", sep=''),header=T,sep="",na="NA",fill=T) 
+stds4a     <- read.table(paste(dir,admb,"s4.std", sep=''),header=T,sep="",na="NA",fill=T) 
 
 cbas1a     <- subset(stds1a ,name=="CBAp")$value[3] 
-cbas1astd  <- subset(stds1a ,name=="CBAp")$std[3] #reclutamiento medios
+cbas1astd  <- subset(stds1a ,name=="CBAp")$std[3] 
 cbas2a     <- subset(stds2a ,name=="CBAp")$value[3] 
-cbas2astd  <- subset(stds2a ,name=="CBAp")$std[3] #reclutamiento medios
+cbas2astd  <- subset(stds2a ,name=="CBAp")$std[3] 
 cbas3a     <- subset(stds3a ,name=="CBAp")$value[3] 
-cbas3astd  <- subset(stds3a ,name=="CBAp")$std[3] #reclutamiento medios
+cbas3astd  <- subset(stds3a ,name=="CBAp")$std[3] 
+cbas4a     <- subset(stds4a ,name=="CBAp")$value[3] 
+cbas4astd  <- subset(stds4a ,name=="CBAp")$std[3] 
+
 
 q       <- seq(0.1,0.5,0.1)  # niveles de riesgo (cuantiles)                            
 nq      <- length(q)    
@@ -2410,20 +2457,25 @@ nq      <- length(q)
 CBAs1a     <- rep(0,nq)
 CBAs2a     <- rep(0,nq)
 CBAs3a   <- rep(0,nq)
+CBAs4a   <- rep(0,nq)
+
 buffer1a   <- rep(0,nq)
 buffer2a   <- rep(0,nq)
 buffer3a   <- rep(0,nq)
+buffer4a   <- rep(0,nq)
 
 for(j in 1:nq){
   CBAs1a[j]<-qnorm(q[j],cbas1a,cbas1astd )
   CBAs2a[j]<-qnorm(q[j],cbas2a,cbas2astd )
   CBAs3a[j]<-qnorm(q[j],cbas3a,cbas3astd )
+  CBAs4a[j]<-qnorm(q[j],cbas4a,cbas4astd )
   }
 
 tCBA1<-cbind(percentil=c(seq(10,50,10)),
              CBA_Captura1=round(CBAs1a,0),
              CBA_Captura2=round(CBAs2a,0),
-             CBA_Captura3=round(CBAs3a,0))
+             CBA_Captura3=round(CBAs3a,0),
+             CBA_Captura4=round(CBAs4a,0))
 kable((tCBA1))
 
 
@@ -2438,6 +2490,7 @@ setwd(dira)
 reps1a     <- reptoRlist("MAT0921s1.rep")  
 reps2a     <- reptoRlist("MAT0921s2.rep") 
 reps3a     <- reptoRlist("MAT0921s3.rep") 
+reps4a     <- reptoRlist("MAT0921s4.rep") 
 
 #================================================================
 # escenario 1
@@ -2492,15 +2545,36 @@ yycc <-c(ycc[xcc>=iccc[1]&xcc<=iccc[2]],
          rep(0,length(ycc[xcc>=iccc[1]&xcc<=iccc[2]])))
 #================================================================
 
+#================================================================
+# escenario 4
+#================================================================
+xcd1 <-rnorm(1000, mean = cbas4a, 
+                   sd   = cbas4astd)
+
+xcd  <-seq(min(xcd1),max(xcd1),0.5)
+
+ycd  <-dnorm(xcd, mean = cbas4a, 
+                  sd   = cbas4astd)
+
+iccd <-qnorm(c(0.1,0.5,0.5),cbas4a,cbas4astd)
+
+xxcd <-c(xcd[xcd>=iccd[1]&xcd<=iccd[2]],
+         rev(xcd[xcd>=iccd[1]&xcd<=iccd[2]]))
+
+yycd <-c(ycd[xcd>=iccd[1]&xcd<=iccd[2]],
+         rep(0,length(ycd[xcd>=iccd[1]&xcd<=iccd[2]])))
+#================================================================
+
 
 par(mfrow=c(2,2),mar=c(4,4,1,1)+0.5)
 #===============================================================================================================
 # plot captura a la talla
-plot(tallas,reps1a$CTPp,type="l",ylim=c(0,900),main="",
+plot(tallas,reps1a$CTPp,type="l",ylim=c(0,1000),main="",
      ylab="Captura 2022 a la talla (t)",xlab="Tallas (cm)",
-     cex.axis=1,cex.main=1,cex.lab=1,col='blue2')
-lines(tallas,reps2a$CTPp,col='red2')
-lines(tallas,reps3a$CTPp,col='green2')
+     cex.axis=1,cex.main=1,cex.lab=1,col=1)
+lines(tallas,reps2a$CTPp,col=2)
+lines(tallas,reps3a$CTPp,col=3)
+lines(tallas,reps4a$CTPp,col=4)
 #text(rep(9.5,3),c(reps1a$CTPp[10],reps2a$CTPp[10],reps3a$CTPp[10])+10,c('8%','18%','5%'))
 #===============================================================================================================
 # plot densidad de probabilidad CBA
@@ -2508,28 +2582,34 @@ plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(
      main="", cex.axis=1,cex.main=1,cex.lab=1)
 
 polygon(xxca,yyca,col=gray(0.8,0.7),border="gray80")
-lines(xca,yca,lwd=1,col="blue2",lty=1)
+lines(xca,yca,lwd=1,col=1,lty=1)
 
 polygon(xxcb,yycb,col=gray(0.8,0.7),border="gray80")
-lines(xcb,ycb,lwd=1,col="red2",lty=1)
+lines(xcb,ycb,lwd=1,col=2,lty=1)
 
 polygon(xxcc,yycc,col=gray(0.8,0.7),border="gray80")
-lines(xcc,ycc,lwd=1,col="green2",lty=1)
+lines(xcc,ycc,lwd=1,col=3,lty=1)
+
+polygon(xxcd,yycd,col=gray(0.8,0.7),border="gray80")
+lines(xcd,ycd,lwd=1,col=4,lty=1)
 
 legend(2000,0.00021,
-       c(paste("CBA2022_Hito1_Capt1 = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" "),
-         paste("CBA2022_Hito1_Capt2 = [",round(iccb[1],0),"-",round(iccb[2],0),"]",sep=" "),
-         paste("CBA2022_Hito1_Capt3 = [",round(iccc[1],0),"-",round(iccc[2],0),"]",sep=" ")), lty=c(1,1,1),col=c('blue2',"red2","green2"),bty="n",lwd=1,cex=0.8)
+       c(paste("CBA2022_Hito1_S0 = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_S1 = [",round(iccb[1],0),"-",round(iccb[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_S2 = [",round(iccc[1],0),"-",round(iccc[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_S3 = [",round(iccd[1],0),"-",round(iccd[2],0),"]",sep=" ")), lty=c(1,1,1),col=c(1,2,3,4),bty="n",lwd=1,cex=0.8)
 box()
 
 #===============================================================================================================
 # plot percentiles de captura
-plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,13000),cex.axis=1,cex.main=1,cex.lab=1,col="blue2")
-lines(seq(10,50,10),CBAs2a,type="o",col="red2")
-lines(seq(10,50,10),CBAs3a,type="o",col="green2")
+plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,13000),cex.axis=1,cex.main=1,cex.lab=1,col=1)
 
-legend(12,13000,c("Capt1","Capt2","Capt3"),
-       col=c(4,2,3),pch=c(19,19,19),lwd=1,bty="n",cex=0.8)
+lines(seq(10,50,10),CBAs2a,type="o",col=2)
+lines(seq(10,50,10),CBAs3a,type="o",col=3)
+lines(seq(10,50,10),CBAs4a,type="o",col=4)
+
+legend(12,13000,c("S0_casobase","S1","S2",'S3'),
+       col=c(1,2,3,4),pch=c(19,19,19,19),lwd=1,bty="n",cex=0.8)
 
 
 ```
@@ -2603,11 +2683,12 @@ S2<-c(0,	0,	0.0002,	0.0019,	0.0047,	0.0098,	0.0145,	0.0268,	0.0254,	0.0355,	0.03
 
 S3<-c(0,	0,	0.0000,	0.0000,	0.0001,	0.0007,	0.0020,	0.0026,	0.0020,	0.0010,	0.0001,	0.0000,	0.0002,	0.0005,	0.0027,	0.0113,	0.0267,	0.0481,	0.0718,	0.0964,	0.1388,	0.1735,	0.1665,	0.1327,	0.0809,	0.0335,	0.0073,	0.0007,	0.0000,	0)
 
-
-plot(tallas,S1,type="l",col=1)
+S4<-rep(0,30)
+plot(tallas,S1,type="l",col=1,xlab='Tallas (cm)',ylab='Proporción')
 lines(tallas,S2,col=2)
 lines(tallas,S3,col=3)
-
+lines(tallas,S4,col=4)
+legend(5,0.20,c('S0_casobase','S1','S2','S3'),col=1:4,lwd=1,bty='n')
 ```
 
 
@@ -2825,10 +2906,12 @@ lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
       c(reps3a$Reclutas,reps3a$Rproy),type="o",col=3,pch=19)
 
 lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
-      c(reps1a$Reclutas,reps1a$Rproy),type="o",col=1,pch=19)
+      c(reps4a$Reclutas,reps4a$Rproy),type="o",col=4,pch=19)
 
 lines(c(reps1a$YRS,seq(yearProy,yearProy,1)),
-      c(reps4a$Reclutas,reps4a$Rproy),type="o",col=4,pch=19)
+      c(reps1a$Reclutas,reps1a$Rproy),type="o",col=1,pch=19)
+
+
 
 abline(h=c(reps1a$Rproy,
            reps2a$Rproy,
@@ -2848,40 +2931,44 @@ text(2022,c(reps1a$Rproy,
 #=======================================================
 # plot Biomasa desovante
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
-     c(reps3a$BD,bds3),
-     type="o",ylab="Biomasa desovante (t)",xlab="Años",col=3,
-     ylim=c(0,95000),xlim=c(2000,2023),pch=19,main="")
+     c(reps4a$BD,bds4),
+     type="o",ylab="Biomasa desovante (t)",xlab="Años",col=4,
+     ylim=c(0,99000),xlim=c(2000,2023),pch=19,main="")
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps2a$BD,bds2),
       type="o",col=2,pch=19)
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
-      c(reps1a$BD,bds1),type="o",col=1,pch=19)
+      c(reps3a$BD,bds3),type="o",col=3,pch=19)
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
-      c(reps4a$BD,bds4),type="o",col=4,pch=19)
+      c(reps1a$BD,bds1),type="o",col=1,pch=19)
+
+
 
 abline(v=yearProy-1,lty=2)
-legend(2011,95000,c("Captura_1","Captura_2","Captura_3","Captura_4"),pch=19,lwd=1,col=c(2,1,3,4),bty="n")
+legend(2011,95000,c("S0","S1","S2","S3"),pch=19,lwd=1,col=c(1,2,3,4),bty="n")
 
 #=======================================================
 # plot bd/BDrms
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
      c(reps3a$BD,bds3)/BRMS0,
-     type="o",ylab="BD/BDrms",col=3,xlab="Años",pch=19,xlim=c(2000,2023),)
+     type="o",ylab="BD/BDrms",col=3,xlab="Años",pch=19,xlim=c(2000,2023),ylim=c(0,3.5))
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps2a$BD,bds2)/BRMS0,
       type="o",col=2,pch=19)
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(reps4a$BD,bds4)/BRMS0,
+      type="o",col=4,pch=19)
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps1a$BD,bds1)/BRMS0,
       type="o",col=1,pch=19)
 
-lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
-      c(reps4a$BD,bds4)/BRMS0,
-      type="o",col=4,pch=19)
+
 
 abline(v=yearProy-1,h=1,lty=2)
 abline(h=0.5,lty=2,col=2)
@@ -2896,12 +2983,14 @@ lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       type="o",col=2,pch=19)
 
 lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
+      c(reps4a$desemb_pred,cs4),
+      type="o",col=4,pch=19)
+
+lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(reps1a$desemb_pred,cs1),
       type="o",col=1,pch=19)
 
-lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
-      c(reps4a$desemb_pred,cs4),
-      type="o",col=4,pch=19)
+
 
 abline(v=yearProy-1,lty=2)
 
@@ -3042,44 +3131,48 @@ par(mfrow=c(2,2),mar=c(4,4,1,1)+0.5)
 # plot captura a la talla
 plot(tallas,reps1a$CTPp,type="l",ylim=c(0,1200),main="",
      ylab="Captura 2022 a la talla (t)",xlab="Tallas (cm)",
-     cex.axis=1,cex.main=1,cex.lab=1,col='blue2')
-lines(tallas,reps2a$CTPp,col='red2')
-lines(tallas,reps3a$CTPp,col='green2')
-lines(tallas,reps4a$CTPp,col=1)
+     cex.axis=1,cex.main=1,cex.lab=1,col=1)
+lines(tallas,reps2a$CTPp,col=2)
+lines(tallas,reps3a$CTPp,col=3)
+lines(tallas,reps4a$CTPp,col=4)
 #text(rep(9.5,3),c(reps1a$CTPp[10],reps2a$CTPp[10],reps3a$CTPp[10])+10,c('8%','18%','5%'))
 #===============================================================================================================
 # plot densidad de probabilidad CBA
-plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(0,0.00022),xlim=c(1000,21000),xlab="CBA 2022 (toneladas)",
+plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(0,0.00022),xlim=c(1000,25000),xlab="CBA 2022 (toneladas)",
      main="", cex.axis=1,cex.main=1,cex.lab=1)
 
 polygon(xxca,yyca,col=gray(0.8,0.7),border="gray80")
-lines(xca,yca,lwd=1,col="blue2",lty=1)
+lines(xca,yca,lwd=1,col=1,lty=1)
 
 polygon(xxcb,yycb,col=gray(0.8,0.7),border="gray80")
-lines(xcb,ycb,lwd=1,col="red2",lty=1)
+lines(xcb,ycb,lwd=1,col=2,lty=1)
 
 polygon(xxcc,yycc,col=gray(0.8,0.7),border="gray80")
-lines(xcc,ycc,lwd=1,col="green2",lty=1)
+lines(xcc,ycc,lwd=1,col=3,lty=1)
 
 polygon(xxcd,yycd,col=gray(0.8,0.7),border="gray80")
-lines(xcd,ycd,lwd=1,col=1,lty=1)
+lines(xcd,ycd,lwd=1,col=4,lty=1)
 
 legend(2000,0.00021,
-       c(paste("CBA2022_Hito1_Tallas1 = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" "),
-         paste("CBA2022_Hito1_Tallas2 = [",round(iccb[1],0),"-",round(iccb[2],0),"]",sep=" "),
-         paste("CBA2022_Hito1_Tallas3 = [",round(iccc[1],0),"-",round(iccc[2],0),"]",sep=" "),
-         paste("CBA2022_Hito1_Tallas4 = [",round(iccd[1],0),"-",round(iccd[2],0),"]",sep=" ")), lty=c(1,1,1),col=c('blue2',"red2","green2",'black'),bty="n",lwd=1,cex=0.8)
+       c(paste("CBA2022_Hito1_S0 = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_S1 = [",round(iccb[1],0),"-",round(iccb[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_S2 = [",round(iccc[1],0),"-",round(iccc[2],0),"]",sep=" "),
+         paste("CBA2022_Hito1_S3 = [",round(iccd[1],0),"-",round(iccd[2],0),"]",sep=" ")), lty=c(1,1,1),col=c(1,2,3,4),bty="n",lwd=1,cex=0.8)
 box()
 
 #===============================================================================================================
 # plot percentiles de captura
-plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,13000),cex.axis=1,cex.main=1,cex.lab=1,col="blue2")
-lines(seq(10,50,10),CBAs2a,type="o",col="red2")
-lines(seq(10,50,10),CBAs3a,type="o",col="green2")
-lines(seq(10,50,10),CBAs4a,type="o",col="black")
+plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,15000),cex.axis=1,cex.main=1,cex.lab=1,col=1)
+lines(seq(10,50,10),CBAs2a,type="o",col=2)
+lines(seq(10,50,10),CBAs3a,type="o",col=3)
+lines(seq(10,50,10),CBAs4a,type="o",col=4)
 
-legend(12,13000,c("Tallas1","Tallas2","Tallas3","Tallas4"),
-       col=c(4,2,3,1),pch=c(19,19,19,19),lwd=1,bty="n",cex=0.8)
+legend(12,14500,c("S0","S1","S2","S3"),
+       col=c(1,2,3,4),pch=c(19,19,19,19),lwd=1,bty="n",cex=0.8)
 
 
 ```
+
+
+
+
