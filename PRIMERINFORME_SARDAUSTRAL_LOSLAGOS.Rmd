@@ -30,7 +30,7 @@ header-includes:
 - \fancyhead[LO,LE]{ }
 - \fancyhead[RO,RE]{ }
 - \renewcommand{\headrulewidth}{0.5pt}
-- \fancyfoot[C]{\cincopuntos \thepage \\ \vspace{-0.2cm} ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ \\ \vspace{-0.2cm} \cincopuntos CONVENIO DE DESEMPEÑO 2021 IFOP/SUBSECRETARÍA DE ECONOMíA Y EMT \\ \vspace{-0.1cm} SEGUNDO INFORME. SARDINA AUSTRAL, REGIÓN DE LOS LAGOS, AÑO 2021}
+- \fancyfoot[C]{\cincopuntos \thepage \\ \vspace{-0.2cm} ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ \\ \vspace{-0.2cm} \cincopuntos CONVENIO DE DESEMPEÑO 2021 IFOP/SUBSECRETARÍA DE ECONOMíA Y EMT \\ \vspace{-0.1cm} PRIMER INFORME. SARDINA AUSTRAL, REGIÓN DE LOS LAGOS, AÑO 2022}
 ---
 
 **7. ANEXOS**
@@ -41,15 +41,19 @@ header-includes:
 
 # RESUMEN EJECUTIVO
 
-El presente documento corresponde al informe final técnico de estatus y Captura Biológicamente Aceptable (CBA) para el año 2021 en la pesquería de sardina austral (\textit{Sprattus fuegensis}) en aguas interiores de la Región de Los Lagos. Se utiliza la información más reciente a nivel nacional año 2020, incluyendo el crucero de evaluación directa realizado en abril/mayo de 2021.
+El presente documento corresponde al informe final técnico de estatus y Captura Biológicamente Aceptable (CBA) para el año 2022 en la pesquería de sardina austral (\textit{Sprattus fuegensis}) en aguas interiores de la Región de Los Lagos. Se utiliza la información más reciente a nivel nacional año 2020, incluyendo el crucero de evaluación directa realizado en abril/mayo de 2021 y estructura de tallas de la flota actualizada a junio 2021.
 
-Para realizar la evaluación de stock, se utilizó una aproximación talla-estructurada con información de los desembarques totales (2002-2020), estructura de longitudes de la flota desde el año 2005 hasta el mes de diciembre del año 2020, el índice de CPUE estandarizado (2007-2020) y la estructura de tallas y biomasa del crucero de evaluación directa (2006-2021). El desembarque del año 2021 es supuesto en un valor de 12.347 toneladas, correspondiente a la CBA recomendada por el Comité Científico Técnico de Pequeños Pelágicos (CCTPP).
+Para realizar la evaluación de stock, se utilizó una aproximación edad-estructurada con información de los desembarques totales (2002-2020), estructura de longitudes de la flota desde el año 2005 hasta el mes de junio del año 2021, el índice de CPUE estandarizado (2007-2020) y la estructura de tallas y biomasa del crucero de evaluación directa (2006-2021). El desembarque del año 2021 es supuesto en un valor de 15.765 toneladas, correspondiente a la CBA recomendada por el Comité Científico Técnico de Pequeños Pelágicos (CCTPP).
 
-De acuerdo al actual escenario de modelación, los resultados de la evaluación de stock indican que la Biomasa total (BT) de sardina austral en la Región de Los Lagos, evidenció una importante reducción a partir del año 2005 (269,7 mil t), alcanzando un nivel de 98,2 mil t el 2011. Entre el 2012 al 2014 las biomasas se estabilizan en torno al promedio histórico (152,7 mil t). A partir del año 2015 comienzan a reducirse nuevamente, alcanzando los niveles más bajos entre el 2016 al 2018 (82,2 mil t, promedio), producto de los bajos niveles de reclutamiento registrados durante ese período. Los años 2019 y 2020 muestra una recuperación hasta niveles en torno a las 126,5 mil t en promedio. Para el año 2021 la Biomasa total se reduce un 14% respecto al promedio de los últimos dos años, pero es un 32% mayor al promedio de los años más bajo. La biomasa desovante (BD) en tanto, sigue la misma tendencia de la BT y disminuyó desde 78,4 mil t, en 2006 hasta 20 mil t los años 2017 y 2018. Para el año 2020 se observa un incremento del 59% respecto al 2019, no obstante, para el año 2021, la BD se reduce un 12% respecto al 2020. Al principio de la serie, el intervalo de confianza es más amplio debido a que el modelo solo utiliza los desembarques para estimar las variables poblacionales.
+De acuerdo al actual escenario de modelación, los resultados de la evaluación de stock indican que la Biomasa total (BT) de sardina austral en la Región de Los Lagos, evidenció una importante reducción a partir del año 2005 (**269,7 mil t**), alcanzando un nivel de **98,2** mil t el 2011. Entre el 2012 al 2014 las biomasas se estabilizan en torno al promedio histórico (**152,7** mil t). A partir del año 2015 comienzan a reducirse nuevamente, alcanzando los niveles más bajos entre el 2016 al 2018 (**82,2** mil t, promedio), producto de los bajos niveles de reclutamiento registrados durante ese período. Los años 2019 y 2020 muestra una recuperación hasta niveles en torno a las **126,5** mil t en promedio. Para el año 2021 la Biomasa total se reduce un **14%** respecto al promedio de los últimos dos años, pero es un **32%** mayor al promedio de los años más bajo. 
 
-El diagrama de fase, los resultados muestran que el stock se encontraría, durante el año 2020 y 2021 en una condición de plena-explotación. No obstante, la condición estimada para el año 2021 es incierta debido al supuesto de captura del último año. Si se considera el año 2020 (información completa), el stock se encuentra en plena explotación.
+La biomasa desovante (BD) en tanto, sigue la misma tendencia de la BT y disminuyó desde **78,4** mil t, en 2006 hasta **20** mil t los años 2017 y 2018. Para el año 2020 se observa un incremento del **59%** respecto al 2019, no obstante, para el año 2021, la BD se reduce un **12%** respecto al 2020. Al principio de la serie, el intervalo de confianza es más amplio debido a que el modelo solo utiliza los desembarques para estimar las variables poblacionales.
 
-El rango de captura actualizada para la pesquería de sardina austral durante el año 2021 en la Región de Los Lagos, podría situarse entre 12,99 mil t y 16,9 mil t. Considerando el descuento del 2,3 % de descarte, el rango se encuentra entre 12,69 mil t y 16,52 mil t.
+El diagrama de fase, los resultados muestran que el stock se encontraría, durante el año 2020 y 2021 en una condición de plena-explotación. 
+
+No obstante, la condición estimada para el año 2021 es incierta debido al supuesto de captura del último año. Si se considera el año 2020 (información completa), el stock se encuentra en plena explotación.
+
+El rango de captura actualizada para la pesquería de sardina austral durante el año 2021 en la Región de Los Lagos, podría situarse entre **12,99** mil t y **16,9** mil t. Considerando el descuento del **2,3** % de descarte, el rango se encuentra entre **12,69** mil t y **16,52** mil t.
 
 \pagebreak
 
@@ -135,9 +139,9 @@ Cerna *et al*., (2007), reportan los parámetros de crecimiento (\textbf{Tabla \
 
 | Parámetro | Cerna *et al*., (2007) |
 |:---------:|:----------------------:|
-|     k     |          0.78          |
-|    Loo    |          17.71         |
-|     M     |          0.83          |
+|     k     |          0,78          |
+|    Loo    |          17,71         |
+|     M     |          0,83          |
 
 : \label{Tab1} Parámetros de crecimiento y mortalidad natural reportados para sardina austral de la Región de Los Lagos.
 
@@ -528,14 +532,8 @@ Donde $C_{a,t}$ corresponde a las capturas en número observadas a la talla prov
 \label{Fig4x}
 \end{figure}
 ```
-```{=tex}
-\begin{figure}
-\centering
-\includegraphics[width=1\textwidth]{Figuras/Fig5_anexoIII-1.pdf}
-\caption{Captura en número estimada por el modelo alternativo utilizando clave talla-edad simulada.}
-\label{Fig5x}
-\end{figure}
-```
+
+
 La abundancia $N_{l,t}$ de los ejemplares de talla $l$, a comienzos del año $t$, queda entonces representada por:
 
 ```{=tex}
@@ -772,7 +770,7 @@ El modelo de evaluación de stock actualmente en uso consiste en estimar princip
 
 : \label{Tab8} Captura, CPUE y biomasa del crucero junto a sus respectivos coeficientes de variación (cv). Tamaños de muestra para la multinomial de la flota (nm\_flota) y cruceros (nm\_cru) y los respectivos bloques de selectividad (Sel). $\Delta tC$ representa el valor del periodo del año en que se realizó el crucero de evaluación directa.
 
-\pagebreak
+
 
 ### 3.1.4. Ajuste consistencia y error del modelo base
 
@@ -1461,7 +1459,7 @@ El último bloque de selectividad de la flota indica que el recurso está próxi
  \label{Tab15}
  \small
     \centering
-    \resizebox{8cm}{!} {
+    \resizebox{6cm}{!} {
     \begin{tabular}{ccccc}
     \hline
 Años &  $BD_{sept}$ & $BT_{sept}$   & $R_{sept}$    & $F_{sept}$ \\ \hline
@@ -1488,7 +1486,7 @@ Años &  $BD_{sept}$ & $BT_{sept}$   & $R_{sept}$    & $F_{sept}$ \\ \hline
   \end{tabular}}
         \end{table}
 ```
-\vspace{0.7cm}
+
 
 ### 4.2.2. Estado de explotación
 
@@ -1498,9 +1496,8 @@ Años &  $BD_{sept}$ & $BT_{sept}$   & $R_{sept}$    & $F_{sept}$ \\ \hline
 
 Los Puntos Biológicos de Referencia (PBR) para la pesquería de sardina austral, se estimaron a través de un modelo de Biomasa Desovante Por Recluta (BDPR) que utiliza el vector de pesos promedios históricos, la selectividad de la flota estimada en la evaluación de stock (considerando los bloques de selectividad) y la ojiva de madurez sexual para el reclutamiento virginal $R_0$=1. La distribución de tallas del reclutamiento (estimada en el modelo) es proyectada en el tiempo a valores constantes de mortalidad total y considerando el crecimiento contenido en la matriz de transición.
 
-Se estimaron los valores de F que generan niveles de reducción de la Biomasa Desovante Virginal del 55% (60%BDPR). El F~60%~ corresponde al proxy del RMS (F~60%~ = F~RMS~) y es utilizado para el análisis de recomendación de la CBA y las proyecciones del stock. La \textbf{Tabla \ref{Tab16}}, resume los resultados de los PBRs y la probabilidad del estatus estimados en la asesoría de septiembre 2020 y junio 2021. En la asesoría actual, el valor de F del año 2021 depende del nivel de desembarque supuesto, por lo tanto, debería variar en relación al valor oficial que será reportado a final de año. La \textbf{Figura \ref{Fig29}} muestra la curva de Biomasa Desovante Por Recluta (BDPR) calculada junto al valor de F~RMS~ y su correspondiente %BDPR.
+Se estimaron los valores de F que generan niveles de reducción de la Biomasa Desovante Virginal del 55% (60%BDPR). El F~60%~ corresponde al proxy del RMS (F~60%~ = F~RMS~) y es utilizado para el análisis de recomendación de la CBA y las proyecciones del stock. La \textbf{Tabla \ref{Tab16}}, resume los resultados de los PBRs y la probabilidad del estatus estimados en la asesoría de septiembre 2020 y junio 2021. En la asesoría actual, el valor de F del año 2021 depende del nivel de desembarque supuesto, por lo tanto, debería variar en relación al valor oficial que será reportado a final de año. 
 
-\pagebreak
 
 ```{=tex}
 \begin{table}[h!]
@@ -1508,7 +1505,7 @@ Se estimaron los valores de F que generan niveles de reducción de la Biomasa De
  \label{Tab16}
  \small
     \centering
-    \resizebox{8cm}{!} {
+    \resizebox{6cm}{!} {
     \begin{tabular}{lc}
     \hline
                          &   Septiembre 2021   \\ \hline 
@@ -1535,17 +1532,6 @@ Se estimaron los valores de F que generan niveles de reducción de la Biomasa De
 
 \normalsize
 
-\vspace{0.7cm}
-
-```{=tex}
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=1\textwidth]{Figuras/Fig29-1.pdf}
-\caption{Madurez, selectividad por bloques (Panel izquierdo) y Curva de Biomasa Desovante por Recluta (\% BDPR) de sardina austral  de la Región de Los Lagos, para distintas curvas de selectividad utilizados para estimar $F_{RMS}$.}
-\label{Fig29}
-\end{figure}
-```
-\pagebreak
 
 #### Indicadores del estado del stock
 
@@ -1557,13 +1543,13 @@ La \textbf{Tabla \ref{Tab17}}, resume la variación interanual de los indicadore
 
 Los resultados indican que, el estatus de sardina austral, en aguas interiores de la Región de Los Lagos, se desplazó desde la zona de sobreexplotación el año 2018 a la plena explotación durante el año 2019. La actual asesoría estima un incremento en los niveles de biomasa desovante 2020 y 2021, situándose por sobre el objetivo de manejo. La probabilidad que la mortalidad por pesca del año 2021 sea mayor a F~RMS~ (p(F~2021~\>F~RMS~)) es del 4%. Sin embargo, se debe recordar que la información para el año 2021 es parcial y basada en supuestos de captura, por lo tanto, es más precautorio considerar el "estatus completo" hasta el año 2020, cuya estimación se basa en información observada.
 
+
 #### Diagrama de fases de explotación
 
 \quad
 
 En la presente versión del modelo, los resultados muestran que el stock se encontraría, durante el año 2020 y 2021 en una condición de plena-explotación. Mostrando un cambio importante respecto del año 2018-2019 (\textbf{Figura \ref{Fig30}}), con niveles de biomasa por sobre del objetivo y con F por debajo del valor de referencia (F~RMS~= 0,32 año^-1^). Si se considera el año 2020 (información completa), el stock se encuentra en plena explotación, mientras que la condición estimada para el año 2021 es incierta debido al supuesto de captura del último año. Las fuertes variaciones en el estatus, son frecuentes en las pesquerías de peces pelágicos pequeños, donde los cambios interanuales en la fuerza de la clase anual reclutada tienen efectos significativos en la condición del recurso.
 
-\pagebreak
 
 ```{=tex}
 \begin{figure}[htb!]
