@@ -1939,6 +1939,56 @@ kable((tCBA3))
 ```
 
 
+```{r cba2021_ModeloNuevo,warning=F, include=T, message=F, echo=F,eval=F }
+
+dir<-paste(dir.0,"/cba_septiembre2021",sep="")
+admb<-"/MAT0921"
+
+stds0a     <- read.table(paste(dir,admb,"s0.std", sep=''),header=T,sep="",na="NA",fill=T)
+stds1a     <- read.table(paste(dir,admb,"s1.std", sep=''),header=T,sep="",na="NA",fill=T)
+stds2a     <- read.table(paste(dir,admb,"s2.std", sep=''),header=T,sep="",na="NA",fill=T)
+stds3a     <- read.table(paste(dir,admb,"s3.std", sep=''),header=T,sep="",na="NA",fill=T) 
+
+#cbas0a     <- subset(stds0a ,name=="CBAp")$value[3] 
+#cbas0astd  <- subset(stds0a ,name=="CBAp")$std[3] 
+#cbas1a     <- subset(stds1a ,name=="CBAp")$value[3] 
+#cbas1astd  <- subset(stds1a ,name=="CBAp")$std[3] 
+#cbas2a     <- subset(stds2a ,name=="CBAp")$value[3] 
+#cbas2astd  <- subset(stds2a ,name=="CBAp")$std[3] 
+cbas3a     <- subset(stds3a ,name=="CBA")$value[3] 
+cbas3astd  <- subset(stds3a ,name=="CBA")$std[3] 
+
+
+q       <- seq(0.1,0.5,0.1)  # niveles de riesgo (cuantiles)                            
+nq      <- length(q)    
+
+CBAs0a     <- rep(0,nq)
+CBAs1a     <- rep(0,nq)
+CBAs2a     <- rep(0,nq)
+CBAs3a   <- rep(0,nq)
+buffer1a   <- rep(0,nq)
+buffer2a   <- rep(0,nq)
+buffer3a   <- rep(0,nq)
+
+aporteR1a <- rep(0,nq)
+aporteR2a <- rep(0,nq)
+aporteR3a <- rep(0,nq)
+
+for(j in 1:nq){
+  CBAs3a[j]<-qnorm(q[j],cbas3a,cbas3astd )
+  }
+
+
+
+tCBA1<-cbind(percentil=c(seq(10,50,10)),
+             CBA=round(CBAs3a,0))
+kable((tCBA1))
+
+
+```
+
+
+
 ```{r Fig27_CBA,warning=F, include=T, message=F, echo=F,fig.height=8,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
 
 dira<-paste(dir.0,"/cba_septiembre2021",sep="")
