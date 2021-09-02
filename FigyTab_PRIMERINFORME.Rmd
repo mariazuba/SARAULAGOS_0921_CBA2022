@@ -1305,7 +1305,7 @@ Ft <- ggplot() +
     geom_line(data=VarPobSep,aes(y=Ft0, x=x, colour = "septiembre 2021"), size=0.5)+
     geom_ribbon(data=VarPobSep,aes(ymin=lowerFt0, ymax=upperFt0, x=x, fill = ""), alpha = 0.2)+
      geom_hline(yintercept = median(VarPobSep$Ft0),colour='black',lty=2) +
-     annotate("text", x=2012, y=median(VarPobSep$Ft0),label=expression("F"[mediana])) +
+     annotate("text", x=2007, y=median(VarPobSep$Ft0),label=expression("F"[mediana])) +
     labs(x = '', y = 'Mortalidad por pesca (F)',colour='Asesorías')  +
     scale_x_continuous(breaks = seq(from = 1960, to = 2021, by = 2)) +
     scale_colour_manual("",values=c("black"))+
@@ -1337,26 +1337,26 @@ kable(rbind(Rt0_mean,BT0_mean,BD0_mean,R15_18,BT16_18,BT19_20))
 
 par(mfrow=c(1,2),mar=c(4,4,1,1)+0.5)
 
-plot(data.0$Edades,rep0$Sflo_age[1,],type="l",las=1,col=4,ylim=c(0,1.1),
+plot(seq(0,5,1),rep0$Sflo_age[1,],type="l",las=1,col=4,ylim=c(0,1.1),
      ylab="Selectividad Flota",xlab="Edades",main="FLOTA")
-lines(data.0$Edades,rep0$Sflo_age[9,],type="l",col=3)
-lines(data.0$Edades,rep0$Sflo_age[nyears0,],type="l",col=2)
-legend(4,0.3,c("sel_2002-2009","sel_2010-2012","sel_2013-2020"),
+lines(seq(0,5,1),rep0$Sflo_age[9,],type="l",col=3)
+lines(seq(0,5,1),rep0$Sflo_age[nyears0,],type="l",col=2)
+legend(2,0.3,c("sel_2002-2009","sel_2010-2012","sel_2013-2020"),
        col=c(4,3,2),lwd=c(1,1,1),cex=0.8,bty="n")
 
 
-plot(data.0$Edades,rep0$Scru_age[1,],type="l",las=1,col=4,ylim=c(0,1.1),
+plot(seq(0,5,1),rep0$Scru_age[1,],type="l",las=1,col=4,ylim=c(0,1.1),
      ylab="Selectividad Crucero",xlab="Edades",main="CRUCEROS")
-lines(data.0$Edades,rep0$Scru_age[nyears0,],type="l",col=2)
-legend(4,0.3,c("sel_2002-2012","sel_2013-2020"),
+lines(seq(0,5,1),rep0$Scru_age[nyears0,],type="l",col=2)
+legend(2,0.3,c("sel_2002-2012","sel_2013-2020"),
        col=c(4,2),lwd=c(1,1),cex=0.8,bty="n")
 
-kable(data.frame(Edades=data.0$Edades,
+kable(data.frame(Edades=seq(0,5,1),
                  Selbloque1=rep0$Sflo_age[1,],
                  Selbloque2=rep0$Sflo_age[9,],
                  Selbloque3=rep0$Sflo_age[nyears0,]))
 
-kable(data.frame(Edades=data.0$Edades,
+kable(data.frame(Edades=seq(0,5,1),
                  SelCrubloque1=rep0$Scru_age[1,],
                  SelCrubloque2=rep0$Scru_age[nyears0,]))
 
