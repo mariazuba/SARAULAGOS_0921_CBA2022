@@ -1460,7 +1460,7 @@ La selectividad de la flota indica que el recurso está próximo a su completo r
  \label{Tab15}
  \small
     \centering
-    \resizebox{6cm}{!} {
+    \resizebox{7.5cm}{!} {
     \begin{tabular}{ccccc}
     \hline
 Años &  $BD_{sept}$ & $BT_{sept}$   & $R_{sept}$    & $F_{sept}$ \\ \hline
@@ -1488,6 +1488,7 @@ Años &  $BD_{sept}$ & $BT_{sept}$   & $R_{sept}$    & $F_{sept}$ \\ \hline
         \end{table}
 ```
 
+\vspace{0.7cm}
 
 ### 4.2.2. Estado de explotación
 
@@ -1495,7 +1496,22 @@ Años &  $BD_{sept}$ & $BT_{sept}$   & $R_{sept}$    & $F_{sept}$ \\ \hline
 
 \quad
 
-Los PBRs fueron estimados a partir de un análisis de rendimiento y biomasa por recluta, dado el patrón de selectividad de la flota, pesos medios y madurez sexual a la edad, se estima el nivel de mortalidad por pesca ($F_{RMS}$) asociado a la proporción de la Biomasa Desovante virginal ($BD_0$) considerada objetivo o un proxy basado en la literatura (Clark, 1993; Mace y Sissenwine, 1993). Cabe señalar que la biomasa desovante se calcula al mes de agosto y considera el efecto edad específico de la mortalidad (natural y por pesca). En este análisis se identifica el nivel de referencia biológico 60%BDPR que se supone debería minimizar el impacto de la pesca sobre el stock, permitiendo el escape en torno al 55% de $BD_0$, valor que existiría en ausencia de explotación pesquera (\textbf{Tabla \ref{Tab16}}). En la asesoría actual, el valor de F del año 2021 depende del nivel de desembarque supuesto, por lo tanto, debería variar en relación al valor oficial que será reportado a final de año. Respecto a la Biomasa desovante, para el año 2021 se encuentra sobre el objetivo de manejo ($BD_{RMS}$), con un 12% de probabilidad de sobreexplotación y 0% de probabilidad de colapso.
+Los PBRs fueron estimados a partir de un análisis de rendimiento y biomasa por recluta, dado el patrón de selectividad de la flota, pesos medios y madurez sexual a la edad, se estima el nivel de mortalidad por pesca ($F_{RMS}$) asociado a la proporción de la Biomasa Desovante virginal ($BD_0$) considerada objetivo o un proxy basado en la literatura (Clark, 1993; Mace y Sissenwine, 1993). Cabe señalar que la biomasa desovante se calcula al mes de agosto y considera el efecto edad específico de la mortalidad (natural y por pesca). En este análisis se identifica el nivel de referencia biológico 60%BDPR que se supone debería minimizar el impacto de la pesca sobre el stock, permitiendo el escape en torno al 55% de $BD_0$, valor que existiría en ausencia de explotación pesquera (\textbf{Tabla \ref{Tab16}}). Considerando el actual escenario de modelación y la base de datos hasta el presente informe, la biomasa desovante virginal (BD~0~) es estimada en un valor de 61 mil t. Así, la biomasa desovante objetivo (BD~RMS~), se estima en 33,8 mil t. Esto, considerando como objetivo de manejo 0,55$\times$BD~0~.
+
+ 
+#### Indicadores del estado del stock
+
+\quad
+
+El índice de reducción del stock desovante (\textbf{Figura \ref{Fig30}}), muestra una alta probabilidad  (75%) de encontrarse, durante el año en curso, por sobre del objetivo de manejo, un 12% de probabilidad de sobreexplotación y 0% de probabilidad de colapso. La biomasa desovante del año 2021 alcanzó un valor de 38 mil t, representando un 1,125$\times$BD~RMS~ (34 mil t). Esto indica una condición positiva del stock, ya que se encuentra fuera de la zona de riesgo para la sustentabilidad de la pesquería. Los niveles de captura del recurso, habrían excedido el PBR F~RMS~ desde el inicio de la serie, alcanzando un valor máximo de 2,5 veces el F~RMS~(0,30 año^-1^) el año 2009 (0,75 año^-1^). Entre los años 2010 y 2015, considerando la disminución en los niveles de desembarque, la mortalidad por pesca disminuyó hasta alcanzar valores más cercanos al objetivo. De acuerdo al valor de F del año 2021, el stock presentaría una probabilidad de 0,47 de encontrarse sobre el F~RMS~ p(F\>F~RMS~). No obstante, el valor de F del año 2021 depende del nivel de desembarque supuesto, por lo tanto, debería variar en relación al valor oficial que será reportado a final de año. La \textbf{Tabla \ref{Tab17}}, resume la variación interanual de los indicadores de la condición del stock en términos de biomasa (BD/BD~RMS~). Esto mismo se muestra en relación a la mortalidad por pesca (F/F~RMS~). Además, se indican los niveles de tasa explotación anual referidos a la biomasa (textit{Y/BT}). 
+
+#### Diagrama de fases de explotación
+
+\quad
+
+En la presente versión del modelo, los resultados muestran que el stock se encontraría, durante el año 2020 y 2021 en una condición de plena-explotación. Mostrando un cambio importante respecto del año 2017-2019 (\textbf{Figura \ref{Fig31}}), con niveles de biomasa por sobre del objetivo. La probabilidad que la mortalidad por pesca del año 2021 sea mayor a F~RMS~ (p(F~2021~\>F~RMS~)) es del 61%. Sin embargo, se debe recordar que la información para el año 2021 es parcial y basada en supuestos de captura, por lo tanto, es más precautorio considerar el "estatus completo" hasta el año 2020, cuya estimación se basa en información observada. Si se considera el año 2020 (información completa), el stock se encuentra en plena explotación. Las fuertes variaciones en el estatus, son frecuentes en las pesquerías de peces pelágicos pequeños, donde los cambios interanuales en la fuerza de la clase anual reclutada tienen efectos significativos en la condición del recurso.
+
+\vspace{0.5cm}
 
 
 ```{=tex}
@@ -1504,20 +1520,20 @@ Los PBRs fueron estimados a partir de un análisis de rendimiento y biomasa por 
  \label{Tab16}
  \small
     \centering
-    \resizebox{6cm}{!} {
+    \resizebox{8cm}{!} {
     \begin{tabular}{lc}
     \hline
-                         &   Septiembre 2021   \\ \hline 
+                         & Septiembre 2021   \\ \hline 
  $Estatus$               & año 2021 \\
-  $BD_0$    mil t        &      61,48     \\
- $BD_{RMS}$  mil t       &      33,81     \\
- $BD_{LIM}$ mil t        &      16,91     \\
- $F_{RMS}$               &       0,30     \\ \hline
- $p(BD_{2021}<BD_{RMS})$ &       0,25      \\
- $p(F_{2021}>F_{RMS})$   &       0,61      \\
- $p(sobre-explotación)$  &       0,12      \\
- $p(agotado/colapsado)$  &        0        \\
- $p(sobrepesca)$         &       0,47      \\ \hline
+ $BD_0$    mil t         & 61,48     \\
+ $BD_{RMS}$  mil t       & 33,81     \\
+ $BD_{LIM}$ mil t        & 16,91     \\
+ $F_{RMS}$               & 0,30     \\ \hline
+ $p(BD_{2021}<BD_{RMS})$ & 0,25      \\
+ $p(F_{2021}>F_{RMS})$   & 0,61      \\
+ $p(sobre-explotación)$  & 0,12      \\
+ $p(agotado/colapsado)$  & 0        \\
+ $p(sobrepesca)$         & 0,47      \\ \hline
   \end{tabular}}
         \end{table}
 ```
@@ -1532,32 +1548,13 @@ Los PBRs fueron estimados a partir de un análisis de rendimiento y biomasa por 
 \normalsize
 
 
-#### Indicadores del estado del stock
-
-\quad
-
-El índice de reducción del stock desovante (\textbf{Figura \ref{Fig30}}), muestra una alta probabilidad (1,0) de encontrarse, durante el año en curso, por sobre del objetivo de manejo p(BD\<BD~RMS~). La biomasa desovante del año 2021 alcanzó un valor de 39,7 mil t, representando un 1,3$\times$BD~RMS~ (30 mil t). Esto indica una condición positiva del stock, ya que se encuentra fuera de la zona de riesgo para la sustentabilidad de la pesquería. Los niveles de captura del recurso, habrían excedido el PBR F~RMS~ desde el inicio de la serie, alcanzando un valor máximo de 2,9 veces el F~RMS~(0,32 año^-1^) el año 2009 (0,92 año^-1^). Entre los años 2010 y 2015, considerando la disminución en los niveles de desembarque, la mortalidad por pesca disminuyó hasta alcanzar valores más cercanos al objetivo. De acuerdo al valor de F del año 2021, el stock presentaría una probabilidad de 0,04 de encontrarse sobre el F~RMS~ p(F\>F~RMS~).
-
-La \textbf{Tabla \ref{Tab17}}, resume la variación interanual de los indicadores de la condición del stock en términos de biomasa (BD/BD~RMS~). Esto mismo se muestra en relación a la mortalidad por pesca (F/F~RMS~). Además, se indican los niveles de tasa explotación anual referidos a la biomasa (textit{Y/BT}). Considerando el actual escenario de modelación y la base de datos hasta el presente informe, la biomasa desovante virginal (BD~0~) es estimada en un valor de 54,6 mil t. Así, la biomasa desovante objetivo (BD~RMS~), se estima en 30 mil t. Esto, considerando como objetivo de manejo 0,55$\times$BD~0~.
-
-Los resultados indican que, el estatus de sardina austral, en aguas interiores de la Región de Los Lagos, se desplazó desde la zona de sobreexplotación el año 2018 a la plena explotación durante el año 2019. La actual asesoría estima un incremento en los niveles de biomasa desovante 2020 y 2021, situándose por sobre el objetivo de manejo. La probabilidad que la mortalidad por pesca del año 2021 sea mayor a F~RMS~ (p(F~2021~\>F~RMS~)) es del 4%. Sin embargo, se debe recordar que la información para el año 2021 es parcial y basada en supuestos de captura, por lo tanto, es más precautorio considerar el "estatus completo" hasta el año 2020, cuya estimación se basa en información observada.
-
-
-```{=tex}
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=0.9\textwidth]{Figuras/Fig30-1.pdf}
-\caption{a) Razón $BD/BD_{RMS}$, b) la distribución de probabilidad de $BD_{2021}/BD_{RMS}$, c) razón $F/F_{RMS}$ y d) la distribución de probabilidad $F_{2021}/F_{RMS}$.}
-\label{Fig30}
-\end{figure}
-```
 ```{=tex}
 \begin{table}[h!]
 \caption{Variación interanual de F respecto de $F_{RMS}$ ($F/F_{RMS}$), BD respecto de $BD_{RMS}$ ($BD/BD_{RMS}$), y de las tasas de explotación referidos a la biomasa total ($Y/BT$) en la pesquería de sardina austral. Evaluación de stock de septiembre 2021.}
  \label{Tab17}
  \small
     \centering
-    \resizebox{6cm}{!} {
+    \resizebox{7.5cm}{!} {
     \begin{tabular}{cccc}
     \hline
 Año  & $F/F_{RMS_{sept}}$ & $BD/BD_{RMS_{sept}}$ & $Y/BT_{sept}$ \\ \hline 
@@ -1567,7 +1564,7 @@ Año  & $F/F_{RMS_{sept}}$ & $BD/BD_{RMS_{sept}}$ & $Y/BT_{sept}$ \\ \hline
 2005    &1,252  &2,373  &0,155\\
 2006    &0,867  &2,953  &0,14\\
 2007    &1,912  &1,852  &0,238\\
-2008    &2,115  &1,27     &0,237\\
+2008    &2,115  &1,27   &0,237\\
 2009    &2,509  &1,114  &0,315\\
 2010    &1,566  &0,833  &0,194\\
 2011    &1,339  &0,792  &0,173\\
@@ -1585,21 +1582,29 @@ Año  & $F/F_{RMS_{sept}}$ & $BD/BD_{RMS_{sept}}$ & $Y/BT_{sept}$ \\ \hline
         \end{table}
 ```
 
-#### Diagrama de fases de explotación
 
-\quad
-
-En la presente versión del modelo, los resultados muestran que el stock se encontraría, durante el año 2020 y 2021 en una condición de plena-explotación. Mostrando un cambio importante respecto del año 2018-2019 (\textbf{Figura \ref{Fig31}}), con niveles de biomasa por sobre del objetivo y con F por debajo del valor de referencia (F~RMS~= 0,32 año^-1^). Si se considera el año 2020 (información completa), el stock se encuentra en plena explotación, mientras que la condición estimada para el año 2021 es incierta debido al supuesto de captura del último año. Las fuertes variaciones en el estatus, son frecuentes en las pesquerías de peces pelágicos pequeños, donde los cambios interanuales en la fuerza de la clase anual reclutada tienen efectos significativos en la condición del recurso.
-\vspace{-0.3cm}
 
 ```{=tex}
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.5\textwidth]{Figuras/Fig31-1.pdf}
+\includegraphics[width=0.9\textwidth]{Figuras/Fig30-1.pdf}
+\caption{a) Razón $BD/BD_{RMS}$, b) la distribución de probabilidad de $BD_{2021}/BD_{RMS}$, c) razón $F/F_{RMS}$ y d) la distribución de probabilidad $F_{2021}/F_{RMS}$.}
+\label{Fig30}
+\end{figure}
+```
+
+\pagebreak
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.9\textwidth]{Figuras/Fig31-1.pdf}
 \caption{Diagrama de fases de explotación de la biomasa desovante respecto de la mortalidad por pesca de la evaluación de septiembre 2021. Los ejes están estandarizados a los valores que generan el RMS proxy. Cruz azul corresponde a los intervalos de confianza de la razón $BD/BD_{RMS}$ y $F/F_{RMS}$. El año con cruz segmentada corresponde a “Estatus preliminar”, la cruz continua a “Estatus completo”.}
 \label{Fig31}
 \end{figure}
 ```
+
+
 \pagebreak
 
 \normalsize
@@ -1608,33 +1613,59 @@ En la presente versión del modelo, los resultados muestran que el stock se enco
 
 *"Determinar niveles de Captura Biológicamente Aceptable (CBA) que lleven y/o mantenga la pesquería en torno al Rendimiento Máximo Sostenible (RMS), a partir de un análisis de riesgo en condiciones de incertidumbre de no alcanzar los objetivos de conservación y sostenibilidad conforme lo establece la LGPA y contenidos en el Plan de Manejo y/o en el Programa de Recuperación respectivo, según corresponda."* \vspace{-0.2cm}
 
-### 4.3.1. Proyección del stock
+### 4.3.1. Proyección del stock (Asesoría de Septiembre 2021 - Hito 1)
 
-A partir del modelo conceptual de la dinámica del stock de sardina austral en aguas interiores de la Región de Los Lagos, se desarrolló el enfoque y modelo de evaluación que permite asesorar al Comité Científico Técnico de Pesquerías de Pelágicos Pequeños (CCT-PP) en el análisis de las posibilidades de explotación del stock, considerando los parámetros e indicadores estimados por el modelo de evaluación y su incertidumbre asociada. Se utiliza la estrategia de explotación referencial de mortalidad por pesca constantes F=F~RMS~ para la cual se presentaron las capturas asociadas. La mortalidad por pesca de referencia es aquella que permite alcanzar el rendimiento máximo sostenido, consistente con los puntos biológicos de referencia (F=F~RMS~). En relación a los indicadores poblacionales, la \textbf{\ref{Fig35}} muestran las series de la biomasa desovante, la reducción del stock (BD/BD~RMS~) y capturas proyectadas al año 2022 (asesoría de septiembre 2021), bajo tres escenarios de reclutamiento promedio (alto, medio y bajo). En la asesoría actual se corrobora la tendencia a disminuir los niveles de biomasa desovante y BD/BD~RMS~ hacia el 2021. Para el año 2022 se mantiene la tendencia a disminuir los niveles poblacionales, posicionando al stock en una condición de sobreexplotación (sobre el 80% de probabilidad de estar sobreexplotado). **Cabe recordar que el modelo tiene una patrón retrospectivo que genera subestimaciones en los niveles de biomasa desovente, lo que podría re-escalar los niveles sobre el objetivo de manejo.** Las captura proyectadas que permiten alcanzar el RMS se encuentran entre las 11,00 mil t y las 12,6 mil t según el supuesto de reclutamiento 2022 (**Tabla xx**).
+A partir del modelo conceptual de la dinámica del stock de sardina austral en aguas interiores de la Región de Los Lagos, se desarrolló el enfoque y modelo de evaluación que permite asesorar al Comité Científico Técnico de Pesquerías de Pelágicos Pequeños (CCT-PP) en el análisis de las posibilidades de explotación del stock, considerando los parámetros e indicadores estimados por el modelo de evaluación y su incertidumbre asociada. Para la proyección se considera las consecuencias de los probables estados de la naturaleza (i.e. pesimista, neutro y/o optimista). Los probables estados de la naturaleza se generan a partir de proyecciones del reclutamiento considerando un valor bajo, promedio y alto (\textbf{Figura \ref{Fig34}}a). A partir de estos escenarios, se proyecta la población para la estimación de la biomasa desovante, la reducción del stock (BD/BD~RMS~) y capturas proyectadas al año 2022, con una estrategia de explotación que consiste en aplicar una mortalidad por pesca constante equivalente a la mortalidad por pesca objetivo $F_{RMS}$.
+
+Los resultados muestran una tendencia a disminuir los niveles poblacionales hacia el 2022, independiente del escenario de reclutamiento (\textbf{Figura \ref{Fig34}}a, b y c), producto de los bajos niveles de reclutamiento registrados los años previos (2020 y 2021), proyectando una probabilidad del 80% de sobreexplotación de sardina austral de la Región de Los Lagos para el año 2022 (\textbf{Figura \ref{Fig35}} y \textbf{Tabla \ref{Tab18}}). Las capturas proyectadas en torno al $F_{RMS}$ se encuentran entre las 11,00 mil t y las 12,6 mil t según el supuesto de reclutamiento 2022 (\textbf{Tabla \ref{Tab18}}). 
+
+Cabe recordar que la asesoría actual se basa en información incompleta para el año 2021 (CPUE actualizada al 2020, estructura de tallas de la flota preliminar a junio 2021 y supuesto de captura 2021 igual a cuota asignada)  que podría estar generando sobre o subestimaciones en los niveles de biomasa desovante y capturas proyectadas. 
+
+### 4.3.1. CBA inicial 2022 (Asesoría de Septiembre 2021 - Hito 1)
+
+Los rangos de  Capturas Biológicamente Aceptable (CBA) proyectada para el año 2022, consideran la probabilidad de sobrepasar el objetivo de manejo ($F_{RMS}$) del 10% al 50% para cada escenario de reclutamiento. Al respecto, para un escenario de reclutamiento bajo el rango de captura se encuentra entre los 7 mil t y los 10,98 mil t. Para un escenario de reclutamiento medio un rango entre las 7,7 mil t y los 11,4 mil t, y para un escenario de reclutamiento alto capturas entre las 8,7 mil t y 12,6 mil t (\textbf{Tabla \ref{Tab19}}). El aporte de cada escenario de reclutamiento en la CBA es de un 4% para R_bajo, 8% para R_med y 17% para R_alto respectivamente (\textbf{Figura \ref{Fig36}}a). Cada percentil de probabilidad y CBA representan un nivel de resguardo (\textbf{Tabla \ref{Tab20}}) respecto del valor de CBA al RMS, que van entre 32%  y 6% de resguardo para percentiles entre 10% y 40%. Descontando el porcentaje de descarte supuesto para el año 2022 de un 2,3 %, los rangos de captura para un escenario de reclutamiento bajo el rango de captura se encuentra entre los 7 mil t y los 10,7 mil t. Para un escenario de reclutamiento medio un rango entre las 7,5 mil t y los 11,1 mil t, y para un escenario de reclutamiento alto capturas entre las 8,5 mil t y 12,3 mil t (\textbf{Tabla \ref{Tab21}})
+
+
+\pagebreak
 
 ```{=tex}
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.8\textwidth]{Figuras/Fig34a-1.pdf}
-\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base tres escenarios de reclutamiento proyectado. Asesoría de septiembre 2021}
+\includegraphics[width=0.95\textwidth]{Figuras/Fig34a-1.pdf}
+\caption{Proyección 2022 de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base tres escenarios de reclutamiento proyectado. Asesoría de septiembre 2021}
 \label{Fig34}
 \end{figure}
 ```
+
+
+\vspace{0.5cm}
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.32\textwidth]{Figuras/Fig31EstatusProyectado-1.pdf}
+\includegraphics[width=0.32\textwidth]{Figuras/Fig31EstatusProyectado-2.pdf}
+\includegraphics[width=0.32\textwidth]{Figuras/Fig31EstatusProyectado-3.pdf}
+\caption{Estatus proyectado un año calendario (año 2022) en base a tres escenarios de reclutamiento.}
+\label{Fig35}
+\end{figure}
+```
+
 \pagebreak
 
 ```{=tex}
 \begin{table}[h!]
 \caption{Proyección de la biomasa desovante y captura hacia el 2022 considerando tres escenarios de reclutamientos y mortalidad por pesca igual al $F_{RMS}$. Probabilidad de estar bajo $BD_{RMS}$ y sobre $F_{RMS}$ y la probabilidad de sobre-explotación y colapso.}
- \label{Tab18x}
+ \label{Tab18}
  \small
     \centering
-    \resizebox{8cm}{!} {
+    \resizebox{9cm}{!} {
     \begin{tabular}{lccc}
     \hline
  & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
  $Estatus Proyectado_{2022}$ & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline
 $F_{2022}$ = $F_{RMS}$       & 0,30   & 0,30   & 0,30 \\
-$BD_{RMS}$ mil t               & 33,81  & 33,81  & 33,81 \\ \hline
+$BD_{RMS}$ mil t             & 33,81  & 33,81  & 33,81 \\ \hline
 $BD_{2022}$ mil t            & 26,0   & 26,0   & 26,0 \\ 
 $C_{2022}$ mil t ($C_{RMS}$) & 11,39  & 12,62  & 10,98 \\
 $BD_{2022}/BD_{RMS}$         & 0,76   & 0,77   & 0,76 \\ \hline
@@ -1654,21 +1685,15 @@ $p(agotado/colapsado)$       & 0,03   & 0,03   & 0,03 \\\hline
 
 \normalsize
 
-### 4.3.1. CBA inicial 2022 (Asesoría de Septiembre 2021 - Hito 1)
 
-La CBA inicial para el año 2021, se estimó bajo tres escenarios de posibles estados de la naturaleza (reclutamiento alto, medio y bajo) y para distintos percentiles de probabilidad (\textbf{Tabla \ref{Tab18}}). Cada percentil de probabilidad y CBA representan un nivel de resguardo (\textbf{Tabla \ref{Tab19}}) respecto del valor de CBA al RMS.
-
-La comparación de la estructura de tallas proyectada al 2021 en la asesoría de septiembre 2020 junto a la estructura de tallas estimada en la asesoría actual (junio 2021) con información actualizada de la flota año 2020 y crucero año 2021, evidencia un incremento de la Captura actualizada al año 2021, generada principalmente por la estimación de un mayor aporte de la fracción adulta (\>14 cm LT). La distribución de probabilidad de la Captura al RMS proyectada al 2021 bajo tres escenarios de reclutamiento proyectado en el hito 1 y actualizada en el hito 2 con información de los años 2020 y 2021, se muestran en la \textbf{Figura \ref{Fig33}}, al respecto, el rango de captura fue mayor al estimado por los escenarios de reclutamiento medio y bajo y menor al reclutamiento alto. Dado que la distrubición de probabilidad es más estrecha en la estimación del hito 2, se generan niveles levemente menores de resguardo.
-
-\vspace{0.5cm}
 
 ```{=tex}
 \begin{table}[h!]
-\caption{CBA inicial 2022 (asesoría septiembre 2021) para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura al RMS.}
- \label{Tab18}
+\caption{CBA inicial 2022 (asesoría septiembre 2021) para la pesquería de sardina austral de la Región de Los Lagos, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura.}
+ \label{Tab19}
  \small
     \centering
-    \resizebox{7cm}{!} {
+    \resizebox{8cm}{!} {
     \begin{tabular}{lccc}
     \hline
   Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
@@ -1681,13 +1706,15 @@ La comparación de la estructura de tallas proyectada al 2021 en la asesoría de
   \end{tabular}}
         \end{table}
 ```
+
+
 ```{=tex}
 \begin{table}[h!]
-\caption{Niveles de resguardo para la CBA inicial 2022 para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de Captura al RMS.}
- \label{Tab19}
+\caption{Niveles de resguardo.}
+ \label{Tab20}
  \small
     \centering
-    \resizebox{7cm}{!} {
+    \resizebox{8cm}{!} {
     \begin{tabular}{lccc}
     \hline
   Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
@@ -1700,25 +1727,27 @@ La comparación de la estructura de tallas proyectada al 2021 en la asesoría de
   \end{tabular}}
         \end{table}
 ```
+
 ```{=tex}
 \begin{table}[h!]
-\caption{Descuento del descarte. CBA inicial 2022 (asesoría septiembre 2021) para la pesquería de sardina austral, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura al RMS.}
- \label{Tab20}
+\caption{Descuento del descarte.}
+ \label{Tab21}
  \small
     \centering
-    \resizebox{7cm}{!} {
+    \resizebox{8cm}{!} {
     \begin{tabular}{lccc}
     \hline
   Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
   de $C_{RMS}$  & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
-  10\%          & 7.698       & 8.750       & 7.338 \\
-  20\%          & 8.965       & 10.079      & 8.588 \\
-  30\%          & 9.878       & 11.037      & 9.489 \\
-  40\%          & 10.659      & 11.856      & 10.259 \\
-  50\%          & 11.388      & 12.621      & 10.979 \\ \hline
+  10\%          & 7.521       & 8.549       & 7.170 \\
+  20\%          & 8.759       & 9.847       & 8.391 \\
+  30\%          & 9.651       & 10.783      & 9.271 \\
+  40\%          & 10.413      & 11.583      & 10.023 \\
+  50\%          & 11.126      & 12.331      & 10.726 \\ \hline
   \end{tabular}}
         \end{table}
 ```
+
 \pagebreak
 
 ```{=tex}
@@ -1726,10 +1755,11 @@ La comparación de la estructura de tallas proyectada al 2021 en la asesoría de
 \centering
 \includegraphics[width=0.9\textwidth]{Figuras/Fig27_CBA-1.pdf}
 \caption{Captura 2022 a la talla, distribución de probabilidad de la Captura al RMS proyectada al 2022  bajo tres escenarios de reclutamiento proyectado en el hito 1 (panel superior). La zona sombreada corresponde a la zona de percentiles de probabilidad de captura (*P) entre el 10\% - 50\%. En el panel inferior izquierdo se encuentra la CBA estimada para cada *P y en el panel inferior derecho los niveles de resguardo correspondiente a cada *P.}
-\label{Fig35}
+\label{Fig36}
 \end{figure}
 ```
-Considerando un escenario con supuesto de captura 2020 equivalente al 80% de la cuota recomendada para el año, el CCT-PP recomendó una CBA máxima de 12,46 mil toneladas, considerando un escenario de reclutamientos bajos, una probabilidad de sobrepasar el objetivo de manejo (F=F~RMS~) del 30%, equivalente a un 11% de resguardo. Descontando un 0,93% de descarte la CBA máxima inicial recomendada para el año 2021, fue de 12.347 toneladas (Acta de sesión Nº6 del CCT-PP).
+
+
 
 \pagebreak
 
@@ -1777,7 +1807,6 @@ Prop Sept-dic  & 0,22  &  0,13 & 0,40   & 0,09  & 0,09   & 0,33    & 0,03   & 0,
 
 Para abordar este posible error de implementación, se realiza un análisis de sensibilidad respecto de la captura 2021 de sardina austral Los Lagos. Los escenarios supuestos se basan en cuatro hipótesis basada en la proporción de captura supuesta entre los meses de septiembre a diciembre 2021: i) La primera corresponde al caso base en el cual se asume que entre los meses de septiembre a diciembre se capturara un 52% de la cuota final 2021 (captura 2021 = 15.765 t), ii) El segundo supuesto considera que entre los meses de septiembre a diciembre se capturara un 25% de la cuota final 2021 (captura 2021 = 12.582 t), iii) El tercer supuesto considera que entre los meses de septiembre a diciembre se capturara un 9% de la cuota final 2021 (Captura 2021 = 9.572 t) y iv) El cuarto supuesto considera que entre los meses de septiembre a diciembre se capturara un 48% de la cuota final 2021 (captura 2021 = 14.554 t). Este último escenario permite mantener la mortalidad por pesca en torno al $F_{RMS}$. Adicionalmente, se considera el supuesto de descarte para cada escenario (**Tabla xx**).
 
-\vspace{0.5cm}
 
 ```{=tex}
 \begin{table}[h!]
@@ -1798,9 +1827,35 @@ Para abordar este posible error de implementación, se realiza un análisis de s
   \end{tabular}}
         \end{table}
 ```
-\vspace{0.5cm}
+
 
 En general, los resultados nos muestran que si la captura es menor a la cuota asignada se reduce la mortalidad por pesca durante el 2021, generando un leve incremento en la CBA 2022 producto de una mayor sobrevivencia de la fracción adulta. No obstante, se mantiene la tendencia a la disminución de la biomasa desovante, proyectando una condición de sobreexplotado hacia el 2022 en todos los escenarios analizados.
+
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.85\textwidth]{Figuras/Fig34aEscenarioCaptura-1.pdf}
+\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base a cuatro supuestos de captura 2021.}
+\label{Fig37}
+\end{figure}
+```
+
+\pagebreak
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-1.pdf}
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-2.pdf}
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-3.pdf}
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-4.pdf}
+\caption{Comparación del estatus proyectado 2022 en base tres escenarios de reclutamiento.}
+\label{Fig38x}
+\end{figure}
+```
 
 \vspace{0.5cm}
 
@@ -1826,16 +1881,6 @@ $C_{RMS}$ mil t              & 11,39  & 11,79   & 12,11  & 11,52    \\
 $p(F_{2022}>F_{RMS})$        & 0,5    & 0,5     & 0,5    & 0,5 \\\hline
   \end{tabular}}
         \end{table}
-```
-\pagebreak
-
-```{=tex}
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=0.95\textwidth]{Figuras/Fig34aEscenarioCaptura-1.pdf}
-\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base a cuatro supuestos de captura 2021.}
-\label{Fig37}
-\end{figure}
 ```
 \pagebreak
 
@@ -1877,7 +1922,7 @@ De este modo, se evaluaron dos hipótesis relacionadas con la estructura de tall
 ```{=tex}
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.85\textwidth]{Figuras/Fig3_EscenariosTallas-1.pdf}
+\includegraphics[width=0.8\textwidth]{Figuras/Fig3_EscenariosTallas-1.pdf}
 \caption{}
 \label{Fig39}
 \end{figure}
@@ -1887,11 +1932,38 @@ De este modo, se evaluaron dos hipótesis relacionadas con la estructura de tall
 ```{=tex}
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.85\textwidth]{Figuras/Figx_EscenariosTallas-1.pdf}
+\includegraphics[width=0.65\textwidth]{Figuras/Figx_EscenariosTallas-1.pdf}
 \caption{}
 \label{Fig40}
 \end{figure}
 ```
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.95\textwidth]{Figuras/Fig34aEscenarioTallas-1.pdf}
+\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base a cuatro supuestos de estructura de tallas 2021.}
+\label{Fig41}
+\end{figure}
+```
+
+\pagebreak
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-1.pdf}
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-2.pdf}
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-3.pdf}
+\includegraphics[width=0.42\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-4.pdf}
+\caption{Estatus proyectado 2022 en base cuatro escenarios de estructura de tallas 2021.}
+\label{Fig42x}
+\end{figure}
+```
+
+
+
 ```{=tex}
 \begin{table}[h!]
 \caption{xx}
@@ -1915,14 +1987,7 @@ $p(F_{2022}>F_{RMS})$        & 0,5    & 0,5     & 0,5    & 0,5 \\\hline
   \end{tabular}}
         \end{table}
 ```
-```{=tex}
-\begin{figure}[htb!]
-\centering
-\includegraphics[width=0.95\textwidth]{Figuras/Fig34aEscenarioTallas-1.pdf}
-\caption{Comparación de la proyección de un año calendario (2022) de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base a cuatro supuestos de estructura de tallas 2021.}
-\label{Fig41}
-\end{figure}
-```
+
 \pagebreak
 
 ```{=tex}
@@ -1944,14 +2009,14 @@ $p(F_{2022}>F_{RMS})$        & 0,5    & 0,5     & 0,5    & 0,5 \\\hline
   \end{tabular}}
         \end{table}
 ```
-\pagebreak
+
 
 ```{=tex}
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=0.85\textwidth]{Figuras/Fig27EscenarioTallas-1.pdf}
 \caption{Captura 2022 a la talla, distribución de probabilidad de la Captura al RMS proyectada al 2022  bajo cuatro supuestos de estructura de tallas año 2021 (panel superior). La zona sombreada corresponde a la zona de percentiles de probabilidad de captura (*P) entre el 10\% - 50\%. En el panel inferior izquierdo se encuentra la CBA estimada para cada *P y en el panel inferior derecho los niveles de resguardo correspondiente a cada *P.}
-\label{Fig42}
+\label{Fig43}
 \end{figure}
 ```
 \pagebreak
