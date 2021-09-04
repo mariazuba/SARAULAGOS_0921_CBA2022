@@ -308,7 +308,7 @@ par(mfcol=c(1,1),mar=c(2,4,1,1)+0.5)
 # modelo base
 plot(reps1b$Years,reps1b$Reclutamiento,type="l",
      ylab="Reclutamientos",xlab="",
-     main="Modelo base (Asesoría Septiembre 2020)",
+     main="",
      cex.axis=0.6,cex.main=0.7,cex.lab=0.7)
 abline(h=c(exp(8.6053e+000),
            reps2b$Reclutamiento[11],
@@ -1645,7 +1645,7 @@ BDo0    <- rep0$Bo
 BRMS0   <- BDo0*0.55
 FRMS0   <- exp(subset(std0,name=="log_Fref")$value[3])
 
-DiagramaFase(name0,FRMS0,BRMS0,SSBt0,SSBt0std,Ft0,Ft0std,years0)
+DiagramaFase(name0,FRMS0,BRMS0,SSBt0,SSBt0std,Ft0,Ft0std,years0,col_lastyear=4)
 #cruz del año previo
 lastB0    <- SSBt0[nyears0-1]/BRMS0
 lastB    <- SSBt0[nyears0-1]
@@ -1794,7 +1794,7 @@ text(2022,c(reps1a$Rproy,
      round(c(reps1a$Rproy,
              reps2a$Rproy,
              reps3a$Rproy),0),cex=0.7)
-
+text(2022,20000,"a)")
 #=======================================================
 # plot Biomasa desovante
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
@@ -1811,7 +1811,7 @@ lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
 
 abline(v=yearProy-1,lty=2)
 legend(2011,95000,c("R_alto (2012)","R_Med","R_bajo (2018)"),pch=19,lwd=1,col=c(2,1,3),bty="n")
-
+text(2022,95000,"b)")
 #=======================================================
 # plot bd/BDrms
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
@@ -1828,6 +1828,8 @@ lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
 
 abline(v=yearProy-1,h=1,lty=2)
 abline(h=0.5,lty=2,col=2)
+text(2022,3,"c)")
+
 #=======================================================
 # plot capturas proyectadas
 plot(c(rep0$YRS,seq(yearProy,yearProy,1)),
@@ -1840,26 +1842,70 @@ lines(c(rep0$YRS,seq(yearProy,yearProy,1)),
       c(rep0$desemb_pred,cs1),
       type="o",col=1,pch=19)
 abline(v=yearProy-1,lty=2)
+text(2022,52000,"d)")
+
 ```
 
 
+```{r Fig31EstatusProyectado, warning=F, include=T, message=F,eval=T, echo=F,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
 
-```{r Fig26_anexoIII,warning=F, include=T, message=F,eval=F, echo=F,fig.height=3.5,fig.width=8,fig.align="center",fig.path="Figuras/",dev=c('pdf')}
+source(paste(getwd(),"/funciones/Fn_DiagramaFase.R",sep="")) 
+
+
+
+escR<-c('R_med','R_alto','R_bajo')
+
+
+for(i in 1:length(escR)){
 
 dira<-paste(dir.0,"/cba_septiembre2021",sep="")
 setwd(dira)
-reps1a     <- reptoRlist("MAT0921s1.rep")  
-reps2a     <- reptoRlist("MAT0921s2.rep") 
-reps3a     <- reptoRlist("MAT0921s3.rep") 
+carpeta<-"/cba_septiembre2021/"
+stds0p<- read.table(paste(dir.0,carpeta,'MAT0921s',i,'.std', sep=''),header=T,sep="",na="NA",fill=T)
 
-par(mfcol=c(1,1),mar=c(4,4,1,1)+0.5)
+name0p<-paste("Estatus proyectado 2022",escR[i],sep=' ')
 
-plot(tallas,reps1a$CTPp,type="l",ylim=c(0,1000),main="Captura a la talla por escenario de reclutamiento",
-     ylab="Captura 2022 (t)",xlab="Tallas (cm)",cex.axis=0.8,cex.main=0.8,cex.lab=0.8)
-lines(tallas,reps2a$CTPp,col=2)
-lines(tallas,reps3a$CTPp,col=3)
+years0p<-c(rep0$YRS,2022)
+nyears0p<-length(years0p)
+SSBt0p         <- c(subset(stds0p,name=="BD")$value,subset(stds0p,name=="SSBp")$value[3])
+SSBt0stdp      <- c(subset(stds0p,name=="BD")$std,subset(stds0p,name=="SSBp")$std[3])
+Ft0p           <- c(subset(stds0p,name=="log_F")$value,subset(stds0p,name=="log_Fref")$value[3])
+Ft0stdp        <- c(subset(stds0p,name=="log_F")$std,subset(stds0p,name=="log_Fref")$std[3])
+BDo0    <- rep0$Bo
+BRMS0   <- BDo0*0.55
+FRMS0   <- exp(subset(stds0p,name=="log_Fref")$value[3])
+
+DiagramaFase(name0p,FRMS0,BRMS0,SSBt0p,SSBt0stdp,Ft0p,Ft0stdp,years0p,"red2")
+#cruz del año previo
+lastB0    <- SSBt0p[nyears0p-1]/BRMS0
+lastB    <- SSBt0p[nyears0p-1]
+lastF    <- exp(Ft0p[nyears0p-1])/FRMS0
+# Calculate confidence intervals
+Qmult    <- -qnorm((1-(80/100))/2.0)
+sbSE     <- SSBt0stdp[nyears0p-1]
+sb95     <- c(lastB-Qmult*sbSE,lastB+Qmult*sbSE)
+B95      <- sb95/BRMS0
+FvSE     <- Ft0stdp[nyears0p-1]
+F95      <- c(lastF*exp(-Qmult*FvSE),lastF*exp(Qmult*FvSE))
+
+arrows(x0=B95[1],
+       y0=lastF,
+       x1=B95[2],
+       y1=lastF,
+       length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
+arrows(x0=lastB0,
+       y0=F95[1],
+       x1=lastB0,
+       y1=F95[2],
+       length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
+
+points(lastB0,lastF,pch=19,col=4)
+text(lastB0,lastF-0.1,years0p[nyears0p-1],cex=0.8) 
+text(2.5,3.5,escR[i])
+}
 
 ```
+
 
 
 \pagebreak
@@ -1935,6 +1981,13 @@ tCBA3<-cbind(percentil=c(seq(10,50,10)),
              Aporte_Ralto=aporteR2a,
              Aporte_Rbajo=aporteR3a)
 kable((tCBA3))
+
+
+tCBA1d<-cbind(percentil=c(seq(10,50,10)),
+             CBA_Rmed=round(CBAs1a*0.977,0),
+             CBA_Ralto=round(CBAs2a*0.977,0),
+             CBA_Rbajo=round(CBAs3a*0.977,0))
+kable((tCBA1d))
 
 ```
 
@@ -2049,6 +2102,7 @@ plot(tallas,reps1a$CTPp,type="l",ylim=c(0,900),main="",
 lines(tallas,reps2a$CTPp,col='red2')
 lines(tallas,reps3a$CTPp,col='green2')
 text(rep(9.5,3),c(reps1a$CTPp[10],reps2a$CTPp[10],reps3a$CTPp[10])+10,c('8%','17%','4%'))
+text(19,890,'a)')
 #===============================================================================================================
 # plot densidad de probabilidad CBA
 plot(xca,yca,type="l",ylab="Densidad de probabilidad",xaxs="i",yaxs= "i",ylim=c(0,0.00022),xlim=c(1000,21000),xlab="CBA 2022 (toneladas)",main="", cex.axis=1,cex.main=1,cex.lab=1)
@@ -2066,22 +2120,25 @@ legend(2000,0.00021,
        c(paste("CBA2022_Hito1_Rmed = [",round(icca[1],0),"-",round(icca[2],0),"]",sep=" "),
          paste("CBA2022_Hito1_Ralto = [",round(iccb[1],0),"-",round(iccb[2],0),"]",sep=" "),
          paste("CBA2022_Hito1_Rbajo = [",round(iccc[1],0),"-",round(iccc[2],0),"]",sep=" ")), lty=c(1,1,1),col=c('blue2',"red2","green2"),bty="n",lwd=1,cex=0.8)
+text(20000,0.00021,'b)')
 box()
 
 #===============================================================================================================
 # plot percentiles de captura
-plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,13000),cex.axis=1,cex.main=1,cex.lab=1,col="blue2")
+plot(seq(10,50,10),CBAs1a,type="o", ylab="CBA 2022 (toneladas)",xlab="Percentil de Captura (P*)",main="",ylim=c(4000,13500),cex.axis=1,cex.main=1,cex.lab=1,col="blue2")
 lines(seq(10,50,10),CBAs2a,type="o",col="red2")
 lines(seq(10,50,10),CBAs3a,type="o",col="green2")
 
 legend(12,13000,c("Rmed","Ralto","Rbajo"),col=c(4,2,3),pch=c(19,19,19),lwd=1,bty="n",cex=0.8)
-
+text(49,13450,'c)')
 #===============================================================================================================
 # plot resguardo
 
 plot(seq(10,50,10),buffer1a,type="o",ylim=c(0,0.35), ylab="Resguardo = (1-CBA/Crms)",xlab="Percentil de Captura (*P)",main="",lwd=2,lty=1,col='blue2')
 lines(seq(10,50,10),buffer2a,type="o",col='red2')
 lines(seq(10,50,10),buffer3a,type="o",col='green2')
+text(49,0.345,'d)')
+
 ```
 
 \pagebreak
@@ -2480,6 +2537,65 @@ abline(v=yearProy-1,lty=2)
 ```
 
 
+```{r Fig31EstatusProyCapturasupuesta, warning=F, include=T, message=F,eval=T, echo=F,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
+
+source(paste(getwd(),"/funciones/Fn_DiagramaFase.R",sep="")) 
+
+
+
+escR<-c('S_0','S_1','S_2','S_3')
+
+
+for(i in 1:length(escR)){
+
+dira<-paste(dir.0,"/Sensibilidad_Captura2021",sep="")
+setwd(dira)
+carpeta<-"/Sensibilidad_Captura2021/"
+stds0p<- read.table(paste(dir.0,carpeta,'MAT0921s',i,'.std', sep=''),header=T,sep="",na="NA",fill=T)
+
+name0p<-paste("Estatus proyectado 2022",escR[i],sep=' ')
+
+years0p<-c(rep0$YRS,2022)
+nyears0p<-length(years0p)
+SSBt0p         <- c(subset(stds0p,name=="BD")$value,subset(stds0p,name=="SSBp")$value[3])
+SSBt0stdp      <- c(subset(stds0p,name=="BD")$std,subset(stds0p,name=="SSBp")$std[3])
+Ft0p           <- c(subset(stds0p,name=="log_F")$value,subset(stds0p,name=="log_Fref")$value[3])
+Ft0stdp        <- c(subset(stds0p,name=="log_F")$std,subset(stds0p,name=="log_Fref")$std[3])
+BDo0    <- rep0$Bo
+BRMS0   <- BDo0*0.55
+FRMS0   <- exp(subset(stds0p,name=="log_Fref")$value[3])
+
+DiagramaFase(name0p,FRMS0,BRMS0,SSBt0p,SSBt0stdp,Ft0p,Ft0stdp,years0p,"red2")
+#cruz del año previo
+lastB0    <- SSBt0p[nyears0p-1]/BRMS0
+lastB    <- SSBt0p[nyears0p-1]
+lastF    <- exp(Ft0p[nyears0p-1])/FRMS0
+# Calculate confidence intervals
+Qmult    <- -qnorm((1-(80/100))/2.0)
+sbSE     <- SSBt0stdp[nyears0p-1]
+sb95     <- c(lastB-Qmult*sbSE,lastB+Qmult*sbSE)
+B95      <- sb95/BRMS0
+FvSE     <- Ft0stdp[nyears0p-1]
+F95      <- c(lastF*exp(-Qmult*FvSE),lastF*exp(Qmult*FvSE))
+
+arrows(x0=B95[1],
+       y0=lastF,
+       x1=B95[2],
+       y1=lastF,
+       length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
+arrows(x0=lastB0,
+       y0=F95[1],
+       x1=lastB0,
+       y1=F95[2],
+       length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
+
+points(lastB0,lastF,pch=19,col=4)
+text(lastB0,lastF-0.1,years0p[nyears0p-1],cex=0.8) 
+text(2.5,3.5,escR[i])
+}
+
+```
+
 ```{r cba2021_EscenarioCaptura,warning=F, include=T, message=F, echo=F,eval=TRUE }
 
 dir<-paste(dir.0,"/Sensibilidad_Captura2021",sep="")
@@ -2734,6 +2850,8 @@ S2<-c(0,	0,	0.0002,	0.0019,	0.0047,	0.0098,	0.0145,	0.0268,	0.0254,	0.0355,	0.03
 S3<-c(0,	0,	0.0000,	0.0000,	0.0001,	0.0007,	0.0020,	0.0026,	0.0020,	0.0010,	0.0001,	0.0000,	0.0002,	0.0005,	0.0027,	0.0113,	0.0267,	0.0481,	0.0718,	0.0964,	0.1388,	0.1735,	0.1665,	0.1327,	0.0809,	0.0335,	0.0073,	0.0007,	0.0000,	0)
 
 S4<-rep(0,30)
+
+par(mfrow=c(1,1),mar=c(4,4,1,1)+0.5)
 plot(tallas,S1,type="l",col=1,xlab='Tallas (cm)',ylab='Proporción')
 lines(tallas,S2,col=2)
 lines(tallas,S3,col=3)
@@ -3046,6 +3164,65 @@ abline(v=yearProy-1,lty=2)
 
 ```
 
+
+```{r Fig31EstatusProyTallassupuesta, warning=F, include=T, message=F,eval=T, echo=F,fig.height=4,fig.width=4,fig.align="center",fig.path="Figuras/",dev=fig}
+
+source(paste(getwd(),"/funciones/Fn_DiagramaFase.R",sep="")) 
+
+
+
+escR<-c('S_0','S_1','S_2','S_3')
+
+
+for(i in 1:length(escR)){
+
+dira<-paste(dir.0,"/Sensibilidad_TallasFlota2021",sep="")
+setwd(dira)
+carpeta<-"/Sensibilidad_TallasFlota2021/"
+stds0p<- read.table(paste(dir.0,carpeta,'MAT0921s',i,'.std', sep=''),header=T,sep="",na="NA",fill=T)
+
+name0p<-paste("Estatus proyectado 2022",escR[i],sep=' ')
+
+years0p<-c(rep0$YRS,2022)
+nyears0p<-length(years0p)
+SSBt0p         <- c(subset(stds0p,name=="BD")$value,subset(stds0p,name=="SSBp")$value[3])
+SSBt0stdp      <- c(subset(stds0p,name=="BD")$std,subset(stds0p,name=="SSBp")$std[3])
+Ft0p           <- c(subset(stds0p,name=="log_F")$value,subset(stds0p,name=="log_Fref")$value[3])
+Ft0stdp        <- c(subset(stds0p,name=="log_F")$std,subset(stds0p,name=="log_Fref")$std[3])
+BDo0    <- rep0$Bo
+BRMS0   <- BDo0*0.55
+FRMS0   <- exp(subset(stds0p,name=="log_Fref")$value[3])
+
+DiagramaFase(name0p,FRMS0,BRMS0,SSBt0p,SSBt0stdp,Ft0p,Ft0stdp,years0p,"red2")
+#cruz del año previo
+lastB0    <- SSBt0p[nyears0p-1]/BRMS0
+lastB    <- SSBt0p[nyears0p-1]
+lastF    <- exp(Ft0p[nyears0p-1])/FRMS0
+# Calculate confidence intervals
+Qmult    <- -qnorm((1-(80/100))/2.0)
+sbSE     <- SSBt0stdp[nyears0p-1]
+sb95     <- c(lastB-Qmult*sbSE,lastB+Qmult*sbSE)
+B95      <- sb95/BRMS0
+FvSE     <- Ft0stdp[nyears0p-1]
+F95      <- c(lastF*exp(-Qmult*FvSE),lastF*exp(Qmult*FvSE))
+
+arrows(x0=B95[1],
+       y0=lastF,
+       x1=B95[2],
+       y1=lastF,
+       length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
+arrows(x0=lastB0,
+       y0=F95[1],
+       x1=lastB0,
+       y1=F95[2],
+       length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
+
+points(lastB0,lastF,pch=19,col=4)
+text(lastB0,lastF-0.1,years0p[nyears0p-1],cex=0.8) 
+text(2.5,3.5,escR[i])
+}
+
+```
 
 ```{r cba2021_EscenarioTallas,warning=F, include=T, message=F, echo=F,eval=TRUE }
 
