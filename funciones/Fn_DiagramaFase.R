@@ -1,7 +1,7 @@
 #********************************************************
 # DIAGRAMA DE FASE  EQUILIBRIO 
 #********************************************************
-DiagramaFase<-function(name,FRMS,BRMS,SpB,SpBSE,ln_Fyr,ln_FSE,Year){
+DiagramaFase<-function(name,FRMS,BRMS,SpB,SpBSE,ln_Fyr,ln_FSE,Year,col_lastyear){
 
 
 Fval     <- exp(ln_Fyr)/FRMS
@@ -86,10 +86,10 @@ if (upspace > 0) mtext(name,side=3,outer=T,cex=1,font=usefont)
 
   lines(Bval,Fval,lwd=1,col=1)
   points(Bval,Fval,pch=16,cex=1.0)
-  arrows(x0=B95[1],y0=lastF,x1=B95[2],y1=lastF,length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
-  arrows(x0=lastB,y0=F95[1],x1=lastB,y1=F95[2],length=0.05,angle=90,col=4,lwd=1,code=3,lty=2)
-  points(c(tail(Bval,1),tail(Bval[1])),c(tail(Fval,1),tail(Fval[1])),pch=19,cex=1,col=c(4,3))
-  text(c(Bval[1],Bval[maxaxes]),c(Fval[1],Fval[maxaxes])+0.1,c(Year[1],Year[length(Year)]),cex=1)
+  arrows(x0=B95[1],y0=lastF,x1=B95[2],y1=lastF,length=0.05,angle=90,col=col_lastyear,lwd=1,code=3,lty=2)
+  arrows(x0=lastB,y0=F95[1],x1=lastB,y1=F95[2],length=0.05,angle=90,col=col_lastyear,lwd=1,code=3,lty=2)
+  points(c(tail(Bval,1),tail(Bval[1])),c(tail(Fval,1),tail(Fval[1])),pch=19,cex=1,col=c(col_lastyear,3))
+  text(c(Bval[1],Bval[maxaxes]),c(Fval[1],Fval[maxaxes])+0.1,c(Year[1],Year[length(Year)]),cex=1,col=c(1,1))
   
   box()
   
