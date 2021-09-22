@@ -1,0 +1,280 @@
+---
+title: Revisión del Estatus y  Captura Biológicamente Aceptable 2022 de sardina austral de la Región de Los Lagos
+author: "Grupo Pelágico - DER- María José Zúñiga "
+date: 'Sesión N°6: 12-10-2021'
+output:
+   beamer_presentation:
+    colortheme: rose
+    theme: Antibes
+subtitle: Comité Científico de Pesquerías de Pequeños Pelágicos
+institute: INSTITUTO DE FOMENTO PESQUERO
+---
+
+# Procedimiento de Actualización del Estatus y CBA
+
+\tiny
+
+
++--------------------------------+--------------------------+--------------------------+
+| Datos de entrada al modelo     | CBA inicial              | CBA final                |
+|                                | Septiembre 2021          | Junio 2021               |
++================================+:========================:+:========================:+
+| Estructura temporal            | 2002 - 2021              | 2002-2022                |
++--------------------------------+--------------------------+--------------------------+
+| Desembarques                   | 2002 - 2020 +            | 2002 - 2021 +            |
+|                                |                          |                          |
+|                                | supuesto de captura 2021 | supuesto de captura 2022 |
++--------------------------------+--------------------------+--------------------------+
+| CPUE                           | 2006 - 2020              | 2006 - 2021              |
++--------------------------------+--------------------------+--------------------------+
+| Biomasa Crucero hidroacústicos | 2006 - 2021              | 2006 - 2022              |
++--------------------------------+--------------------------+--------------------------+
+| Composición de tallas flota    | 2006 - 2021 (parcial)    | 2006 - 2021              |
++--------------------------------+--------------------------+--------------------------+
+| Composición de tallas cruceros | 2006 - 2021              | 2006 - 2022              |
++--------------------------------+--------------------------+--------------------------+
+| Pesos medios a la talla        | constante                | constante                |
++--------------------------------+--------------------------+--------------------------+
+| Madurez sexual a la talla      | constante                | constante                |
++--------------------------------+--------------------------+--------------------------+
+| Mortalidad natural             | constante                | constante                |
++--------------------------------+--------------------------+--------------------------+
+| Proyección del reclutamiento   | 1 año calendario         | No se proyecta           |
++--------------------------------+--------------------------+--------------------------+
+
+: \label{Tab1} Información relevante para el cálculo de CBA 2022 en las dos etapas de estimación.
+
+# Datos de entrada de sardina austral Los Lagos
+
+Datos actualizados
+
+-   Desembarque 2020
+-   Descarte 2018 y 2019
+-   CPUE 2020
+-   Composición de tallas de la flota a junio 2021
+-   Biomasa del crucero acústico 2021
+-   Composición de edad del crucero acústico 2021
+
+Datos supuestos
+
+-   Captura 2021 = igual a Cuota global anual 2021
+-   Porcentaje de descarte 2020 y 2021 = supuesto 2,3%
+-   CPUE 2021 = NA
+
+
+# Comparación con asesorías previas - sardina austral
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\textwidth]{Figuras/Fig24_comparaAsesorias-1.pdf}
+\label{Fig33}
+\end{figure}
+```
+# Ajustes del modelo a los datos - sardina austral Los Lagos
+
+```{=tex}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{Figuras/Fig19-1.pdf}
+\end{center}
+```
+# Ajuste Flota de sardina austral Los Lagos
+
+```{=tex}
+\begin{center}
+
+\includegraphics[width=0.6\textwidth]{Figuras/Fig21-1.pdf}
+
+\end{center}
+```
+# Ajuste Crucero acústico de sardina austral Los Lagos
+
+```{=tex}
+\begin{center}
+
+\includegraphics[width=0.65\textwidth]{Figuras/Fig22-1.pdf}
+
+\end{center}
+```
+# Indicadores poblacionales de sardina austral Los Lagos
+
+```{=tex}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{Figuras/Fig27-1.pdf}
+\end{center}
+```
+
+# Estatus 2021 de sardina austral Los Lagos
+
+```{=tex}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{Figuras/Fig31-1.pdf}
+\end{center}
+```
+
+# Proyección del stock hacia el año 2022
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.9\textwidth]{Figuras/Fig34a-1.pdf}
+\caption{Proyección 2022 de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base tres escenarios de reclutamiento proyectado. Asesoría de septiembre 2021}
+\label{Fig34}
+\end{figure}
+```
+
+
+# Estatus proyectado 2022
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.32\textwidth]{Figuras/Fig31EstatusProyectado-1.pdf}
+\includegraphics[width=0.32\textwidth]{Figuras/Fig31EstatusProyectado-2.pdf}
+\includegraphics[width=0.32\textwidth]{Figuras/Fig31EstatusProyectado-3.pdf}
+\caption{Estatus proyectado un año calendario (año 2022) en base a tres escenarios de reclutamiento.}
+\label{Fig35}
+\end{figure}
+```
+
+# Estatus proyectado 2022
+
+```{=tex}
+\begin{table}[h!]
+\caption{\scriptsize Proyección de la biomasa desovante y captura hacia el 2022 considerando tres escenarios de reclutamientos y mortalidad por pesca igual al $F_{RMS}$. Probabilidad de estar bajo $BD_{RMS}$ y sobre $F_{RMS}$ y la probabilidad de sobre-explotación y colapso.}
+ \small
+    \centering
+    \resizebox{7cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+ & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+ $Estatus Proyectado_{2022}$ & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline
+$F_{2022}$ = $F_{RMS}$       & 0,30   & 0,30   & 0,30 \\
+$BD_{RMS}$ mil t             & 33,81  & 33,81  & 33,81 \\ \hline
+$BD_{2022}$ mil t            & 26,0   & 26,0   & 26,0 \\ 
+$C_{2022}$ mil t ($C_{RMS}$) & 11,39  & 12,62  & 10,98 \\
+$BD_{2022}/BD_{RMS}$         & 0,76   & 0,77   & 0,76 \\ \hline
+$p(BD_{2022}<BD_{RMS})$      & 0,96   & 0,95   & 0,96 \\ 
+$p(F_{2022}>F_{RMS})$        & 0,5    & 0,5    & 0,5 \\  \hline
+$p(sobreexplotación)$        & 0,84   & 0,82   & 0,85 \\
+$p(agotado/colapsado)$       & 0,03   & 0,03   & 0,03 \\\hline
+  \end{tabular}}
+        \end{table}
+```
+\scriptsize
+-   $p(BD_{2022}<BD_{RMS})$ = Probabilidad de que BD 2022 sea menor a $BD_{RMS}$
+-   $p(F_{2022}>F_{RMS})$ = Probabilidad que la Ft 2022 sea menor a $F_{RMS}$
+-   Probabilidad de estar en sobreexplotación = $p(BD_{2022}<0,9BD_{RMS})$
+-   Probabilidad de estar en colapso = $p(BD_{2022}<BD_{LIM})$
+
+\normalsize
+
+# CBA inicial 2022 (asesoría septiembre 2021)
+
+
+```{=tex}
+\begin{table}[h!]
+\caption{CBA inicial 2022 (asesoría septiembre 2021) para la pesquería de sardina austral de la Región de Los Lagos, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura.}
+ \small
+    \centering
+    \resizebox{5cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+  Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+  de $C_{RMS}$  & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
+  10\%          & 7.698       & 8.750       & 7.338 \\
+  20\%          & 8.965       & 10.079      & 8.588 \\
+  30\%          & 9.878       & 11.037      & 9.489 \\
+  40\%          & 10.659      & 11.856      & 10.259 \\
+  50\%          & 11.388      & 12.621      & 10.979 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+\centering Niveles de resguardo
+
+```{=tex}
+\begin{table}[h!]
+ \small
+    \centering
+    \resizebox{5cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+  Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+  de $C_{RMS}$  & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
+  10\%          & 0,32        & 0,31        & 0,33 \\
+  20\%          & 0,21        & 0,20        & 0,22 \\
+  30\%          & 0,13        & 0,13        & 0,14 \\
+  40\%          & 0,06        & 0,06        & 0,07 \\
+  50\%          & 0,00        & 0,00        & 0,00 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+
+# CBA inicial 2022 menos descarte
+
+
+```{=tex}
+\begin{table}[h!]
+\caption{CBA inicial 2022 menos descarte, considerando distintos estados de la naturaleza y bajo diferentes percentiles de captura.}
+ \small
+    \centering
+    \resizebox{8cm}{!} {
+    \begin{tabular}{lccc}
+    \hline
+  Percentiles   & \multicolumn{3}{c}{Escenarios de reclutamiento} \\
+  de $C_{RMS}$  & $R_{medio}$ & $R_{alto}$  & $R_{bajo}$ \\ \hline 
+  10\%          & 7.521       & 8.549       & 7.170 \\
+  20\%          & 8.759       & 9.847       & 8.391 \\
+  30\%          & 9.651       & 10.783      & 9.271 \\
+  40\%          & 10.413      & 11.583      & 10.023 \\
+  50\%          & 11.126      & 12.331      & 10.726 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+
+
+# CBA 2022 de sardina austral, Región de Los Lagos
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.65\textwidth]{Figuras/Fig27_CBA-1.pdf}
+\caption{Captura 2022 a la talla, distribución de probabilidad de la Captura al RMS proyectada al 2022  bajo tres escenarios de reclutamiento proyectado en el hito 1 (panel superior). La zona sombreada corresponde a la zona de percentiles de probabilidad de captura (*P) entre el 10\% - 50\%. En el panel inferior izquierdo se encuentra la CBA estimada para cada *P y en el panel inferior derecho los niveles de resguardo correspondiente a cada *P.}
+\label{Fig36}
+\end{figure}
+```
+
+
+
+# 
++------+-------------+-----------------+-------------+---------------------+
+| Año  | CBA inicial | CBA actualizada | Desembarque | Diferencia entre el |
+|      |             |                 |             |                     |
+|      | (t)         | (t)             |             | desembarque y la    |
+|      |             |                 |             |                     |
+|      |             |                 |             | Cuota               |
++======+:===========:+:===============:+:===========:+:===================:+
+| 2014 | 18.750      | 22.790          | 22.951      | 1,01                |
++------+-------------+-----------------+-------------+---------------------+
+| 2015 | 24.550      | *statu quo*     | 23.643      | 0,96                |
++------+-------------+-----------------+-------------+---------------------+
+| 2016 | 20.000      | *statu quo*     | 18.495      | 0,92                |
++------+-------------+-----------------+-------------+---------------------+
+| 2017 | 20.000      | *statu quo*     | 14.134      | 0,70                |
++------+-------------+-----------------+-------------+---------------------+
+| 2018 | 17.200      | *statu quo*     | 8.355       | 0,49                |
++------+-------------+-----------------+-------------+---------------------+
+| 2019 | 11.137      | *statu quo*     | 11.278      | 1,01                |
++------+-------------+-----------------+-------------+---------------------+
+| 2020 | 7.883       | 15.471          | 14.213      | 0,92                |
++------+-------------+-----------------+-------------+---------------------+
+| 2021 | 12.347      |                 |             |                     |
++------+-------------+-----------------+-------------+---------------------+
+
+: \label{Tab2} Capturas biológicamente aceptables recomendadas por el CCT-PP en las distintas etapas de establecimiento de CBA, desembarque registrado y sus diferencias de sardina austral de la Región de Los Lagos.
