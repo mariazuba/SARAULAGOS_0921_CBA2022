@@ -234,6 +234,211 @@ Datos supuestos
 + \*7.506 corresponde al desembarque acumulado a agosto 2021
 + \*0,48 corresponde a 7.506/15.765
 
+# 
+
+Evaluando el efecto del supuesto de captura 2021 en la estimación del estatus y CBA 2022.
+
+# Proporción de captura registrada entre los meses de septiembre a diciembre entre el 2006 al 2020.
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\textwidth]{Figuras/Fig9EscenariosCaptura-1.pdf}
+\end{figure}
+```
+
+#  Escenarios de captura 2021
+## \small Basados en la proporción de captura ocurrida entre los meses de septiembre a diciembre. Para el cálculo de captura 2021 se considera la captura registrada por Sernapesca entre enero a agosto 2021, más la captura supuesta entre los meses de septiembre a diciembre y el descarte supuesto.
+```{=tex}
+\begin{table}[h!]
+ \small
+    \centering
+    \resizebox{9cm}{!} {
+    \begin{tabular}{lccccc}
+    \hline
+  Escenarios   & Proporción & Captura      & Captura   & Captura   & Captura \\ 
+               & Captura    & enero-agosto & sept-dic  & 2021      &  2021 \\ 
+               & sept-dic   & toneladas    & toneladas & toneladas & + descarte \\\hline 
+  Caso base S0 & 0,52       & 7.506        & 8.259     & 15.765    & 16.131 \\
+  S1           & 0,25       & 7.506        & 5.076     & 12.582    & 12.874 \\
+  S2           & 0,09       & 7.506        & 2.066     & 9.572     & 9.794 \\ 
+  S3           & 0,48       & 7.506        & 7.048     & 14.554    & 14.900 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+# \small Proyección 2022 de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base a cuatro supuestos de captura 2021.
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.85\textwidth]{Figuras/Fig34aEscenarioCaptura-1.pdf}
+\end{figure}
+```
+
+# \small Estatus proyectado al  año 2022 en base a cuatro supuestos de captura 2021.
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-1.pdf}
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-2.pdf}
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-3.pdf}
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyCapturasupuesta-4.pdf}
+\end{figure}
+```
+
+
+# CBA inicial 2022  considerando cuatro supuestos de captura 2021.
+## Para el año 2022 se asume un reclutamiento medio y  mortalidad por pesca igual a $F_{RMS}$ y bajo diferentes percentiles de captura al RMS.
+
+```{=tex}
+\begin{table}[h!]
+ \small
+    \centering
+    \resizebox{9cm}{!} {
+    \begin{tabular}{lcccc}
+    \hline
+  Percentiles   & \multicolumn{4}{c}{Supuestos de Captura 2021} \\
+  de $C_{RMS}$  & $S_0$  & $S_1$  & $S_2$ & $S_3$ \\ \hline 
+  10\%          & 7.698  & 8.079  & 8.391  & 7.828 \\
+  20\%          & 8.965  & 9.352  & 9.668  & 9.097 \\
+  30\%          & 9.878  & 10.269 & 10.588 & 10.012 \\
+  40\%          & 10.659 & 11.053 & 11.375 & 10.793 \\
+  50\%          & 11.388 & 11.786 & 12.110 & 11.524 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+# \small Captura 2022 a la talla, distribución de probabilidad de la Captura al RMS proyectada al 2022 
+
+\small \textbf{bajo cuatro supuestos de captura 2021}. La zona sombreada corresponde a la zona de percentiles de probabilidad de captura (\*P) entre el 10\% - 50\%. En el panel inferior izquierdo se encuentra la CBA estimada para cada \*P y en el panel inferior derecho los niveles de resguardo correspondiente a cada \*P.
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.85\textwidth]{Figuras/Fig27EscenarioCaptura-1.pdf}
+\end{figure}
+```
+
+
+#
+
+ Evaluando el efecto del supuesto de estructura de tallas 2021 en la estimación del estatus y CBA 2022.
+ 
+# Estructuras de tallas mensuales 
+
+Estructuras de tallas mensuales  de la flota que opera sobre sardina austral de la Región de los Lagos supuestas para el segundo semestre del año 2021. Caso base considera estructura de tallas actualizada a junio 2021 (panel 2021), Caso 1 considera estructura de tallas entre los meses de julio a diciembre igual al 2019 (panel 2021.19). Caso 2 asume estructura de tallas para los meses de julio a diciembre igual al 2020 (panel 2021.2). 
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\textwidth]{Figuras/Fig3_EscenariosTallas-1.pdf}
+\end{figure}
+```
+
+#
+
+Estructuras de tallas anual supuestas para el año 2021, utilizadas en la evaluación de stock actual. Caso base considera estructura de tallas actualizada a junio 2021, Caso 1 considera estructura de tallas entre los meses de julio a diciembre igual al 2019. Caso 2 asume estructura de tallas para los meses de julio a diciembre igual al 2020 . Y Caso 3 no ingresa estructura de tallas para el año 2021.
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\textwidth]{Figuras/Figx_EscenariosTallas-1.pdf}
+\end{figure}
+```
+
+
+
+#
+
+```{=tex}
+\begin{table}[h!]
+\caption{Escenarios alternativos de Estructuras de tallas de la flota de sardina austral de la Región de Los Lagos, supuestas para el año 2021.}
+ \label{Tab26x}
+ \small
+    \centering
+    \resizebox{11cm}{!} {
+    \begin{tabular}{ll}
+    \hline
+Escenarios & Descripción  \\ \hline 
+$S_0$ &  \textbf{Caso base} considera estructura de tallas actualizada a junio 2021. \\ 
+$S_1$ &  \textbf{Caso 1} considera estructura de tallas entre los meses de julio a diciembre igual al 2019. \\ 
+$S_2$ &  \textbf{Caso 2} asume estructura de tallas para los meses de julio a diciembre igual al 2020. \\ 
+$S_3$ &  \textbf{Caso 3} no ingresa estructura de tallas para el año 2021. \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+
+#
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.85\textwidth]{Figuras/Fig34aEscenarioTallas-1.pdf}
+\caption{Proyección 2022 de la biomasa desovante, razón $BD/BD_{RMS}$ y capturas en base a cuatro supuestos de estructura de tallas 2021.}
+\end{figure}
+```
+
+
+#
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-1.pdf}
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-2.pdf}
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-3.pdf}
+\includegraphics[width=0.35\textwidth]{Figuras/Fig31EstatusProyTallassupuesta-4.pdf}
+\caption{Estatus proyectado 2022 en base cuatro escenarios de estructura de tallas 2021.}
+\end{figure}
+```
+
+
+#
+
+
+```{=tex}
+\begin{table}[h!]
+\caption{CBA inicial 2022  considerando supuestos de captura 2021 y bajo diferentes percentiles de captura al RMS.}
+ \small
+    \centering
+    \resizebox{9cm}{!} {
+    \begin{tabular}{lcccc}
+    \hline
+  Percentiles   & \multicolumn{4}{c}{Supuestos de Estructura de tallas 2021} \\
+  de $C_{RMS}$  & $S_0$   & $S_1$  & $S_2$ & $S_3$ \\ \hline 
+  10\% & 7.698  & 8.919   & 7.673  & 8.608 \\
+  20\% & 8.965  & 10.463  & 8.937  & 10.201 \\
+  30\% & 9.878  & 11.576  & 9.848  & 11.349 \\
+  40\% & 10.659 & 12.528  & 10.626 & 12.331 \\
+  50\% & 11.388 & 13.417  & 11.354 & 13.248 \\ \hline
+  \end{tabular}}
+        \end{table}
+```
+
+
+#
+
+
+```{=tex}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.85\textwidth]{Figuras/Fig27EscenarioTallas-1.pdf}
+\caption{Captura 2022 a la talla, distribución de probabilidad de la Captura al RMS proyectada al 2022  bajo cuatro supuestos de estructura de tallas año 2021 (panel superior). La zona sombreada corresponde a la zona de percentiles de probabilidad de captura (*P) entre el 10\% - 50\%. En el panel inferior izquierdo se encuentra la CBA estimada para cada *P y en el panel inferior derecho los niveles de resguardo correspondiente a cada *P.}
+
+\end{figure}
+```
+
+
+#
+
+GRACIAS POR SU ATENCIÓN
+
+
 # CBA inicial 2022 (asesoría septiembre 2021)
 
 
